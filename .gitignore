@@ -1,4 +1,7 @@
 ### macOS ###
+# Tuist 패키지 설치 관련 파일
+Tuist/Package.resolved
+
 # General
 .DS_Store
 .AppleDouble
@@ -68,3 +71,7 @@ Derived/
 
 ### Tuist managed dependencies ###
 Tuist/.build
+*.xcconfig
+
+.vscode/
+buildServer.json
