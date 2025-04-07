@@ -4,15 +4,7 @@ import ProjectDescription
 
 extension TargetDependency {
     public static func core()-> TargetDependency {
-        .project(target: "TDCore", path: .relativeToRoot("Projects/TDCore"))
-    }
-}
-
-// MARK: DesignSystem
-
-extension TargetDependency {
-    public static func design()-> TargetDependency {
-        .project(target: "TDDesign", path: .relativeToRoot("Projects/TDDesign"))
+        .project(target: "Core", path: .relativeToRoot("YABAM/Core"))
     }
 }
 
@@ -20,40 +12,15 @@ extension TargetDependency {
 
 extension TargetDependency {
     public static func network()-> TargetDependency {
-        .project(target: "TDNetwork", path: .relativeToRoot("Projects/TDNetwork"))
-    }
-}
-
-// MARK: Storage
-
-extension TargetDependency {
-    public static func storage()-> TargetDependency {
-        .project(target: "TDStorage", path: .relativeToRoot("Projects/TDStorage"))
-    }
-}
-
-// MARK: Data
-
-extension TargetDependency {
-    public static func data()-> TargetDependency {
-        .project(target: "TDData", path: .relativeToRoot("Projects/TDData"))
-    }
-}
-
-
-// MARK: Domain
-
-extension TargetDependency {
-    public static func domain()-> TargetDependency {
-        .project(target: "TDDomain", path: .relativeToRoot("Projects/TDDomain"))
+        .project(target: "Network", path: .relativeToRoot("YABAM/Network"))
     }
 }
 
 // MARK: Presentation
 
 extension TargetDependency {
-    public static func presentation()-> TargetDependency {
-        .project(target: "TDPresentation", path: .relativeToRoot("Projects/TDPresentation"))
+    public static func feature()-> TargetDependency {
+        .project(target: "Feature", path: .relativeToRoot("YABAM/Feature"))
     }
 }
 

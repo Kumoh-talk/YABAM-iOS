@@ -13,6 +13,9 @@ let appTarget = Target.target(
     ],
     dependencies: [
         // Module
+        .core(),
+        .feature(),
+        .network()
     ],
     settings: .settings(
         base: [
