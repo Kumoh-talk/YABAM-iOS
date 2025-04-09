@@ -1,4 +1,5 @@
 import SwiftUI
+import Feature
 
 @main
 struct YABAMApp: App {
