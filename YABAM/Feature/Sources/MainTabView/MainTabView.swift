@@ -11,7 +11,8 @@ public struct YBTabView: View {
                 switch selectedTab {
                 case 0: HomeView()
                 case 1: OrderView()
-                case 2: MyPageView()
+                case 2: OrderHistoryView()
+                case 3: MyPageView()
                 default: HomeView()
                 }
             }
@@ -20,15 +21,15 @@ public struct YBTabView: View {
                 TabBarItem(
                     icon: .homeStroke,
                     selectedIcon: .homeFill,
-                    title: "위치",
+                    title: "홈",
                     isSelected: selectedTab == 0
                 ) {
                     selectedTab = 0
                 }
                 
                 TabBarItem(
-                    icon: .orderStroke,
-                    selectedIcon: .orderFill,
+                    icon: .cameraStroke,
+                    selectedIcon: .cameraFill,
                     title: "주문",
                     isSelected: selectedTab == 1
                 ) {
@@ -36,12 +37,21 @@ public struct YBTabView: View {
                 }
                 
                 TabBarItem(
-                    icon: .mypageStroke,
-                    selectedIcon: .mypageFill,
-                    title: "프로필",
+                    icon: .orderStroke,
+                    selectedIcon: .orderFill,
+                    title: "주문내역",
                     isSelected: selectedTab == 2
                 ) {
                     selectedTab = 2
+                }
+                
+                TabBarItem(
+                    icon: .mypageStroke,
+                    selectedIcon: .mypageFill,
+                    title: "마이",
+                    isSelected: selectedTab == 3
+                ) {
+                    selectedTab = 3
                 }
             }
             .padding(.vertical, 10)

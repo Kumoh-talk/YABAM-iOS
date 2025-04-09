@@ -1,10 +1,10 @@
 import SwiftUI
 
-struct OrderView: View {
+struct OrderHistoryView: View {
     var body: some View {
         VStack {
             Spacer()
-            Text("🔍 Search View")
+            Text("🔍 OrderHistory View")
                 .font(.largeTitle)
                 .fontWeight(.bold)
             Spacer()
