@@ -8,7 +8,10 @@ struct TabBarItem: View {
     let action: () -> Void
 
     var body: some View {
-        Button(action: action) {
+        Button(action: {
+            generateHapticFeedback()
+            action()
+        }) {
             VStack(spacing: 4) {
                 (isSelected ? Image(selectedIcon) : Image(icon))
                     .font(.system(size: 20))
@@ -21,5 +24,11 @@ struct TabBarItem: View {
             }
             .frame(maxWidth: .infinity)
         }
+    }
+    
+    func generateHapticFeedback() {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.prepare()
+        generator.impactOccurred()
     }
 }
