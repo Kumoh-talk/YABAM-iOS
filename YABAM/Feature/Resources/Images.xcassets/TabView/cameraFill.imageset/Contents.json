@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "homeStroke.png",
+      "filename" : "cameraFill.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "homeStroke@2x.png",
+      "filename" : "cameraFill@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "homeStroke@3x.png",
+      "filename" : "cameraFill@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
