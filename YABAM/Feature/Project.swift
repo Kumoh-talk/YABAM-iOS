@@ -8,7 +8,8 @@ let project = Project(
             name: YBModule.Feature.rawValue,
             product: .framework,
             bundleId: Project.bundleID + ".feature",
-            sources: .sources
+            sources: .sources,
+            resources: .default
         )
     ]
 )
