@@ -30,7 +30,7 @@ public struct YBTabView: View {
                 TabBarItem(
                     icon: .cameraStroke,
                     selectedIcon: .cameraFill,
-                    title: "주문",
+                    title: "주문하기",
                     isSelected: selectedTab == 1
                 ) {
                     selectedTab = 1
