@@ -23,7 +23,11 @@ struct YBCodeScanner: View {
                     checkCameraPermission()
                 }
             }
-            .frame(width: 300, height: 380)
+            .frame(width: UIScreen.main.bounds.width - 80)
+            .frame(
+                minHeight: UIScreen.main.bounds.width - 80,
+                maxHeight: UIScreen.main.bounds.height / 2
+            )
             .background(Color.white)
             .cornerRadius(16)
         }
@@ -38,7 +42,7 @@ struct YBCodeScanner: View {
             }
             Button("취소", role: .cancel) {}
         } message: {
-            Text("QR코드를 스캔하려면 카메라 접근 권한이 필요해요.")
+            Text("QR코드를 스캔하려면 카메라 접근 권한이 필요해요")
         }
     }
 
