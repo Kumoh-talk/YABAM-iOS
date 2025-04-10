@@ -1,4 +1,5 @@
 import SwiftUI
+import Core
 
 struct OrderView: View {
     var body: some View {
@@ -15,7 +16,7 @@ struct OrderView: View {
             .padding(.horizontal, 24)
             
             YBText(
-                "QR코드를 인식하면 주문이 시작됩니다.",
+                "QR코드를 인식하면 주문이 시작됩니다",
                 fontType: .mediumBody1,
                 color: .Neutral.neutral600
             )
@@ -25,7 +26,7 @@ struct OrderView: View {
                 if let url = URL(string: scannedString) {
                     UIApplication.shared.open(url)
                 } else {
-                    print("Invalid URL from scanned string.")
+                    YBLogger.error("Invalid URL from scanned string.")
                 }
             }
             .padding(.top, 50)

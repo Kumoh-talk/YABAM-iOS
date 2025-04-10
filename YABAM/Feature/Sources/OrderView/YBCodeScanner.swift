@@ -1,4 +1,5 @@
 import SwiftUI
+import Core
 import AVFoundation
 import CodeScanner
 
@@ -18,11 +19,11 @@ struct YBCodeScanner: View {
                     onSuccess(scanResult.string)
 
                 case .failure(let error):
-                    print("Scanning failed: \(error.localizedDescription)")
+                    YBLogger.error("Error scanning QR code: \(error.localizedDescription)")
                     checkCameraPermission()
                 }
             }
-            .frame(width: 300, height: 350)
+            .frame(width: 300, height: 380)
             .background(Color.white)
             .cornerRadius(16)
         }
