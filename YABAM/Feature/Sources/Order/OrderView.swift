@@ -9,6 +9,14 @@ struct OrderView: View {
         VStack(spacing: 0) {
             YBCodeScannerTextSection()
             
+            #if DEBUG
+            Button {
+                
+            } label: {
+                Text("메뉴 목록보기 (디버깅 모드)")
+            }
+            #endif
+            
             YBCodeScanner { scannedString in
                 isLoading = true
                 if let url = URL(string: scannedString) {
