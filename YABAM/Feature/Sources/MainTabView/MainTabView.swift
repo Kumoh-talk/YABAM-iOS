@@ -16,7 +16,9 @@ public struct YBTabView: View {
                 default: HomeView()
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             
+            Divider()
             HStack {
                 TabBarItem(
                     icon: .homeStroke,

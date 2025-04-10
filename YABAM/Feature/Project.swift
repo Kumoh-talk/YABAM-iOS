@@ -9,7 +9,11 @@ let project = Project(
             product: .framework,
             bundleId: Project.bundleID + ".feature",
             sources: .sources,
-            resources: .default
+            resources: .default,
+            dependencies: [
+                .core(),
+                .external(dependency: .CodeScanner)
+            ]
         )
     ]
 )
