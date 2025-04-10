@@ -10,6 +10,7 @@ let project = Project(
             bundleId: Project.bundleID + ".network",
             sources: .sources,
             dependencies: [
+                .core(),
                 .external(dependency: .Moya)
             ]
         )

@@ -11,6 +11,7 @@ let project = Project(
             sources: .sources,
             resources: .default,
             dependencies: [
+                .core(),
                 .external(dependency: .CodeScanner)
             ]
         )
