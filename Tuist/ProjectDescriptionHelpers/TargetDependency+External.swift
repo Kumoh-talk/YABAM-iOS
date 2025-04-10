@@ -2,6 +2,7 @@ import ProjectDescription
 
 public enum External: String {
     case Moya
+    case CodeScanner
 }
 
 extension TargetDependency {
