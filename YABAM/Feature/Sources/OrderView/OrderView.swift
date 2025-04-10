@@ -7,23 +7,7 @@ struct OrderView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            YBText(
-                "테이블에 있는 QR코드를 인식해주세요",
-                fontType: .boldHeader1,
-                color: .Neutral.neutral800
-            )
-            .multilineTextAlignment(.center)
-            .padding(.top, 80)
-            .lineLimit(1)
-            .minimumScaleFactor(0.5)
-            .padding(.horizontal, 24)
-            
-            YBText(
-                "QR코드를 인식하면 주문이 시작됩니다",
-                fontType: .mediumBody1,
-                color: .Neutral.neutral600
-            )
-            .multilineTextAlignment(.center)
+            YBCodeScannerTextSection()
             
             YBCodeScanner { scannedString in
                 isLoading = true
@@ -43,18 +27,9 @@ struct OrderView: View {
                     scannerError = "QR 코드가 유효하지 않습니다, 다시 시도해주세요."
                 }
             }
-            .padding(.top, 30)
+            .padding(.top, 40)
             
-            if let error = scannerError {
-                Text(error)
-                    .foregroundColor(.red)
-                    .padding()
-            }
-            
-            if isLoading {
-                ProgressView()
-                    .padding()
-            }
+            YBCodeScannerStatusView(error: scannerError, isLoading: isLoading)
             
             Spacer()
         }
