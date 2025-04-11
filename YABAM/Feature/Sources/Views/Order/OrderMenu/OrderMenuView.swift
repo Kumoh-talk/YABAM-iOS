@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct OrderMenuView: View {
-    let sections: [MenuSection] = SampleData.menuSections
+    let sections: [MenuSection]
     @State private var selectedSectionID: String?
     @State private var isExitAlertPresented = false
     @Environment(\.dismiss) private var dismiss

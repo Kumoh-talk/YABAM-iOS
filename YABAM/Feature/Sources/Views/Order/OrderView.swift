@@ -11,7 +11,7 @@ struct OrderView: View {
             YBCodeScannerTextSection()
             
 #if DEBUG
-            NavigationLink(destination: OrderMenuView(), isActive: $showOrderMenu) {
+            NavigationLink(destination: OrderMenuView(sections: SampleData.menuSections), isActive: $showOrderMenu) {
                 EmptyView()
             }
             Button {
