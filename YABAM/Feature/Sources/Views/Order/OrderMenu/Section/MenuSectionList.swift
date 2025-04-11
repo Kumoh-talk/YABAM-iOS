@@ -12,7 +12,7 @@ struct MenuSectionList: View {
                         MenuSectionView(section: section)
                             .padding(8)
 
-                        Divider().padding(.horizontal, 8)
+                        YBDivider().padding(.horizontal, 8)
                     }
                 }
                 .onChange(of: selectedSectionID) { id in
