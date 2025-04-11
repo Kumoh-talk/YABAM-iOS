@@ -7,11 +7,7 @@ struct MenuChip: View {
     
     var body: some View {
         Button(action: action) {
-            YBText(
-                title,
-                fontType: .mediumBody2,
-                color: isSelected ? Color.white : Color.Neutral.neutral800
-            )
+            YBText(title, fontType: .mediumBody2, color: isSelected ? Color.white : Color.Neutral.neutral800)
                 .padding(.horizontal, 12)
                 .padding(.vertical, 6)
                 .background(isSelected ? Color.Semantic.info : Color.Neutral.neutral200)

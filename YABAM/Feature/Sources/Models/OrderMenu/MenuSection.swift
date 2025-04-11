@@ -34,24 +34,24 @@ struct SampleData {
             ]
         ),
         MenuSection(
-            id: "김치",
-            title: "김치볶음밥",
+            id: "한식",
+            title: "한식ㄱㄱㄱㄱㄱㄱㄱ",
             items: [
                 MenuItem(name: "우삼겹 김치볶음밥", description: "우삼겹 + 김치 조합", price: 9500, imageName: "menu3"),
                 MenuItem(name: "대패삼겹 김치볶음밥", description: "대패삼겹 + 김치", price: 9500, imageName: "menu4")
             ]
         ),
         MenuSection(
-            id: "rrrrr",
-            title: "qweqweqweqw",
+            id: "일식",
+            title: "일식ㄷㄷㄷㄷㄷㄷ",
             items: [
                 MenuItem(name: "우삼겹 김치볶음밥", description: "우삼겹 + 김치 조합", price: 9500, imageName: "menu3"),
                 MenuItem(name: "대패삼겹 김치볶음밥", description: "대패삼겹 + 김치", price: 9500, imageName: "menu4")
             ]
         ),
         MenuSection(
-            id: "tttt",
-            title: "qwe",
+            id: "양식",
+            title: "양식ㄴㄴㄴㄴㄴㄴㄴ",
             items: [
                 MenuItem(name: "우삼겹 김치볶음밥", description: "우삼겹 + 김치 조합", price: 9500, imageName: "menu3"),
                 MenuItem(name: "대패삼겹 김치볶음밥", description: "대패삼겹 + 김치", price: 9500, imageName: "menu4")
