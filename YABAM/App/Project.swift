@@ -21,7 +21,8 @@ let appTarget = Target.target(
     ],
     settings: .settings(
         base: [
-            "DEVELOPMENT_LANGUAGE": "ko"
+            "DEVELOPMENT_LANGUAGE": "ko",
+            "SWIFT_VERSION": "6.0",
         ],
         configurations: [
             .debug(name: "Debug", xcconfig: "SupportingFiles/Debug.xcconfig"),

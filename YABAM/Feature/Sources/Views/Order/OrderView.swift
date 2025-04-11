@@ -4,10 +4,25 @@ import Core
 struct OrderView: View {
     @State private var scannerError: String? = nil
     @State private var isLoading: Bool = false
+    @State private var showOrderMenu = false
     
     var body: some View {
         VStack(spacing: 0) {
             YBCodeScannerTextSection()
+            
+#if DEBUG
+            NavigationLink(destination: OrderMenuView(sections: SampleData.menuSections), isActive: $showOrderMenu) {
+                EmptyView()
+            }
+            Button {
+                showOrderMenu = true
+            } label: {
+                Text("메뉴 목록보기 (디버깅 모드)")
+                    .padding()
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(8)
+            }
+#endif
             
             YBCodeScanner { scannedString in
                 isLoading = true

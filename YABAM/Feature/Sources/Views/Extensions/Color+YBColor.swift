@@ -13,4 +13,9 @@ extension Color {
         static let neutral100 = Color(asset: FeatureAsset.Colors.neutral100)
         static let neutral50 = Color(asset: FeatureAsset.Colors.neutral50)
     }
+    
+    enum Semantic {
+        static let error = Color(asset: FeatureAsset.Colors.error)
+        static let info = Color(asset: FeatureAsset.Colors.info)
+    }
 }
