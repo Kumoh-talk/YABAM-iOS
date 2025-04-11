@@ -5,7 +5,7 @@ struct MenuItemView: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
-            Image(.yabamFillLogo)
+            Image(.yabamFillLogo) // TODO: item.image로 변경
                 .resizable()
                 .frame(width: 110, height: 110)
                 .cornerRadius(8)
@@ -20,6 +20,8 @@ struct MenuItemView: View {
                 
                 YBText(item.name, fontType: .boldHeader3, color: .Neutral.neutral900)
                 YBText(item.description, fontType: .mediumBody2, color: .Neutral.neutral600)
+                    .lineLimit(2)
+                    .truncationMode(.tail)
                 YBText("\(item.price)원", fontType: .mediumBody1, color: .Neutral.neutral900)
             }
         }
