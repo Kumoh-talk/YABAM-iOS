@@ -10,7 +10,16 @@ struct MenuChip: View {
             YBText(title, fontType: .mediumBody2, color: isSelected ? Color.white : Color.Neutral.neutral800)
                 .padding(.horizontal, 12)
                 .padding(.vertical, 6)
-                .background(isSelected ? Color.Semantic.info : Color.Neutral.neutral100)
+                .background(
+                    Group {
+                        if isSelected {
+                            Color.Semantic.info
+                        } else {
+                            Color.Neutral.neutral100
+                        }
+                    }
+                    .animation(.easeInOut(duration: 0.2), value: isSelected)
+                )
                 .cornerRadius(12)
         }
         .buttonStyle(PlainButtonStyle())
