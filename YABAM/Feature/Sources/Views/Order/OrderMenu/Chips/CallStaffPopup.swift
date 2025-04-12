@@ -13,7 +13,7 @@ struct CallStaffPopup: View {
                 .padding(.top)
                 .padding(.bottom, 4)
             
-            YBFlowLayout(spacing: 4, lineSpacing: 6) {
+            YBFlowLayout(spacing: 4, lineSpacing: 10) {
                 ForEach(options, id: \.self) { option in
                     MenuChip(
                         title: option,
@@ -33,9 +33,9 @@ struct CallStaffPopup: View {
                 .padding(.horizontal, 4)
             
             HStack(spacing: 0) {
-                Button(action: {
+                Button {
                     showPopup = false
-                }) {
+                } label: {
                     VStack {
                         YBText("취소", fontType: .mediumBody1, color: .red)
                     }
@@ -43,10 +43,10 @@ struct CallStaffPopup: View {
                     .contentShape(Rectangle())
                 }
 
-                Button(action: {
+                Button {
                     print("요청사항: \(selectedText)")
                     showPopup = false
-                }) {
+                } label: {
                     VStack {
                         YBText("저장", fontType: .mediumBody1, color: .blue)
                     }
@@ -60,7 +60,7 @@ struct CallStaffPopup: View {
         .background(Color.white)
         .cornerRadius(20)
         .shadow(radius: 10)
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 12)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.opacity(0.4))
         .edgesIgnoringSafeArea(.all)
