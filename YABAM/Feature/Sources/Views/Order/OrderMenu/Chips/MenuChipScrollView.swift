@@ -13,7 +13,13 @@ struct MenuChipScrollView: View {
                 } label: {
                     YBText("직원 호출", fontType: .mediumBody2, color: .Neutral.neutral800)
                 }
-                .padding(.leading, 16)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .background(Color.Neutral.neutral100)
+                .cornerRadius(12)
+                
+                Text("|")
+                    .padding(.horizontal, 4)
 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
@@ -23,9 +29,10 @@ struct MenuChipScrollView: View {
                             }
                         }
                     }
-                    .padding()
                 }
             }
         }
+        .padding(.leading, 8)
+        .padding(.bottom, 6)
     }
 }
