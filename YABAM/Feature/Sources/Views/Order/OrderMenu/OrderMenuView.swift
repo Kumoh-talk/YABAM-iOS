@@ -4,19 +4,29 @@ struct OrderMenuView: View {
     let sections: [MenuSection]
     @State private var selectedSectionID: String?
     @State private var isExitAlertPresented = false
+    @State private var showCallStaffPopup = false
     @Environment(\.dismiss) private var dismiss
-
+    
     var body: some View {
-        VStack(spacing: 0) {
-            MenuChipScrollView(
-                sections: sections,
-                selectedSectionID: $selectedSectionID
-            )
-
-            MenuSectionList(
-                sections: sections,
-                selectedSectionID: $selectedSectionID
-            )
+        ZStack {
+            VStack(spacing: 0) {
+                MenuChipScrollView(
+                    sections: sections,
+                    selectedSectionID: $selectedSectionID,
+                    onCallStaffTapped: {
+                        showCallStaffPopup = true
+                    }
+                )
+                
+                MenuSectionList(
+                    sections: sections,
+                    selectedSectionID: $selectedSectionID
+                )
+            }
+            
+            if showCallStaffPopup {
+                CallStaffPopup(showPopup: $showCallStaffPopup)
+            }
         }
         .navigationTitle("테이블 주문")
         .navigationBarBackButtonHidden()
@@ -39,18 +49,18 @@ struct OrderMenuView: View {
             }
         }
     }
-
+    
     @ToolbarContentBuilder
     func orderMenuToolbar(onClose: @escaping () -> Void, onCart: @escaping () -> Void) -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
             Button(action: onClose) {
-                Image(.close)
+                Image(systemName: "close")
             }
         }
-
+        
         ToolbarItem(placement: .navigationBarTrailing) {
             Button(action: onCart) {
-                Image(.basket)
+                Image("123")
             }
         }
     }
