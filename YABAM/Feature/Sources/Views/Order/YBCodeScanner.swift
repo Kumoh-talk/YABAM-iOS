@@ -7,13 +7,12 @@ struct YBCodeScanner: View {
     var onSuccess: (String) -> Void
 
     @State private var showPermissionAlert = false
-    @State private var isScanning: Bool = true
 
     var body: some View {
         VStack {
-            if isScanning {
                 CodeScannerView(
                     codeTypes: [.qr],
+                    scanMode: .continuous,
                     videoCaptureDevice: AVCaptureDevice.zoomedCameraForQRCode(withMinimumCodeSize: 20),
                     completion: handleScan
                 )
@@ -24,7 +23,6 @@ struct YBCodeScanner: View {
                 )
                 .background(Color.white)
                 .cornerRadius(16)
-            }
         }
         .onAppear {
             checkCameraPermission()
@@ -44,12 +42,7 @@ struct YBCodeScanner: View {
     private func handleScan(result: Result<ScanResult, ScanError>) {
         switch result {
         case .success(let scanResult):
-            isScanning = false
             onSuccess(scanResult.string)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                isScanning = true
-            }
 
         case .failure(let error):
             YBLogger.error("QR 인식 에러: \(error.localizedDescription)")
