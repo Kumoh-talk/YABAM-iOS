@@ -55,13 +55,13 @@ struct OrderMenuView: View {
     func orderMenuToolbar(onClose: @escaping () -> Void, onCart: @escaping () -> Void) -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
             Button(action: onClose) {
-                Image(systemName: "chevron.left")
+                Image(.close)
             }
         }
         
         ToolbarItem(placement: .navigationBarTrailing) {
             Button(action: onCart) {
-                Image(systemName: "cart")
+                Image(.basket)
             }
         }
     }
