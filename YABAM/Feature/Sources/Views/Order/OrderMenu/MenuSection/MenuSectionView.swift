@@ -10,7 +10,10 @@ struct MenuSectionView: View {
                 .id(section.id)
 
             ForEach(section.items) { item in
-                MenuItemView(item: item)
+                NavigationLink(destination: MenuDetailView(item: item)) {
+                    MenuItemView(item: item)
+                }
+                .buttonStyle(PlainButtonStyle())
                 
                 if item != section.items.last {
                     YBDivider()
