@@ -1,10 +1,12 @@
 import SwiftUI
+import Core
 
 struct OrderMenuView: View {
     let sections: [MenuSection]
     @State private var selectedSectionID: String?
     @State private var isExitAlertPresented = false
     @State private var showCallStaffPopup = false
+    @StateObject private var cartManager = CartManager()
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -20,8 +22,18 @@ struct OrderMenuView: View {
                 
                 MenuSectionList(
                     sections: sections,
-                    selectedSectionID: $selectedSectionID
+                    selectedSectionID: $selectedSectionID,
+                    cartManager: cartManager
                 )
+                
+                Spacer()
+                
+                YBButton(
+                    title: "주문하기",
+                    backgroundColor: cartManager.hasItems ? Color.Semantic.info : Color.Neutral.neutral200
+                ) {
+                    YBLogger.info("주문하기 버튼 클릭")
+                }
             }
             
             if showCallStaffPopup {
@@ -31,12 +43,14 @@ struct OrderMenuView: View {
         .navigationTitle("테이블 주문")
         .navigationBarBackButtonHidden()
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            orderMenuToolbar(
-                onClose: { isExitAlertPresented = true },
-                onCart: { print("장바구니 tapped") }
-            )
-        }
+        .withNavigationButtons(
+            leading: NavigationButtonConfig(image: Image(.close)) {
+                isExitAlertPresented = true
+            },
+            trailing: NavigationButtonConfig(image: Image(.basket)) {
+                YBLogger.debug("장바구니 버튼 클릭")
+            }
+        )
         .alert("지금 나가기를 누를 시 장바구니 정보가 사라집니다", isPresented: $isExitAlertPresented) {
             Button("나가기", role: .destructive) {
                 dismiss()
@@ -46,22 +60,6 @@ struct OrderMenuView: View {
         .onAppear {
             if selectedSectionID == nil {
                 selectedSectionID = sections.first?.id
-            }
-        }
-    }
-    
-    // TODO: 이미지 교체
-    @ToolbarContentBuilder
-    func orderMenuToolbar(onClose: @escaping () -> Void, onCart: @escaping () -> Void) -> some ToolbarContent {
-        ToolbarItem(placement: .navigationBarLeading) {
-            Button(action: onClose) {
-                Image(systemName: "chevron.left")
-            }
-        }
-        
-        ToolbarItem(placement: .navigationBarTrailing) {
-            Button(action: onCart) {
-                Image(systemName: "cart")
             }
         }
     }

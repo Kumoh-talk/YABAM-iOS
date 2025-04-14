@@ -6,7 +6,7 @@ struct MenuSection: Identifiable {
     let items: [MenuItem]
 }
 
-struct MenuItem: Identifiable {
+struct MenuItem: Hashable, Identifiable {
     let id: UUID = UUID()
     let name: String
     let description: String
