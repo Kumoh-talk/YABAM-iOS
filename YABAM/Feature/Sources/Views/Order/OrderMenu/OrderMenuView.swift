@@ -31,12 +31,14 @@ struct OrderMenuView: View {
         .navigationTitle("테이블 주문")
         .navigationBarBackButtonHidden()
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            orderMenuToolbar(
-                onClose: { isExitAlertPresented = true },
-                onCart: { print("장바구니 tapped") }
-            )
-        }
+        .withNavigationButtons(
+            leading: NavigationButtonConfig(systemName: "chevron.left") {
+                isExitAlertPresented = true
+            },
+            trailing: NavigationButtonConfig(systemName: "cart") {
+                print("장바구니 눌림")
+            }
+        )
         .alert("지금 나가기를 누를 시 장바구니 정보가 사라집니다", isPresented: $isExitAlertPresented) {
             Button("나가기", role: .destructive) {
                 dismiss()
@@ -46,22 +48,6 @@ struct OrderMenuView: View {
         .onAppear {
             if selectedSectionID == nil {
                 selectedSectionID = sections.first?.id
-            }
-        }
-    }
-    
-    // TODO: 이미지 교체
-    @ToolbarContentBuilder
-    func orderMenuToolbar(onClose: @escaping () -> Void, onCart: @escaping () -> Void) -> some ToolbarContent {
-        ToolbarItem(placement: .navigationBarLeading) {
-            Button(action: onClose) {
-                Image(systemName: "chevron.left")
-            }
-        }
-        
-        ToolbarItem(placement: .navigationBarTrailing) {
-            Button(action: onCart) {
-                Image(systemName: "cart")
             }
         }
     }

@@ -38,12 +38,11 @@ struct MenuDetailView: View {
         }
         .ignoresSafeArea(edges: .top)
         .navigationBarBackButtonHidden()
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button(action: dismiss.callAsFunction) {
-                    Image(systemName: "chevron.left")
-                }
-            }
-        }
+        .withNavigationButtons(
+            leading: NavigationButtonConfig(
+                image: Image(systemName: "chevron.left"),
+                action: { dismiss() }
+            )
+        )
     }
 }
