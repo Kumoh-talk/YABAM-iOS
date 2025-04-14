@@ -7,6 +7,10 @@ final class CartManager: ObservableObject {
         !items.isEmpty
     }
     
+    var totalPrice: Int {
+        items.reduce(0) { $0 + $1.price }
+    }
+    
     func add(_ item: MenuItem) {
         items.append(item)
     }
