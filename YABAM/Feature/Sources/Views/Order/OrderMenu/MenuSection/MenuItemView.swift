@@ -12,10 +12,7 @@ struct MenuItemView: View {
             
             VStack(alignment: .leading, spacing: 2) {
                 if item.isRecommended {
-                    YBText("주인장 추천!", fontType: .boldBody3, color: .Neutral.neutral700)
-                        .padding(4)
-                        .background(Color.Neutral.neutral100)
-                        .cornerRadius(4)
+                    YBBadge("주인장 추천!")
                 }
                 
                 YBText(item.name, fontType: .boldHeader3, color: .Neutral.neutral900)
