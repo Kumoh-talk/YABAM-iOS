@@ -8,6 +8,7 @@ struct YBButton: View {
     let cornerRadius: CGFloat
     let horizontalPadding: CGFloat
     let bottomPadding: CGFloat
+    let isDisabled: Bool
     let action: () -> Void
 
     init(
@@ -18,6 +19,7 @@ struct YBButton: View {
         cornerRadius: CGFloat = 12,
         horizontalPadding: CGFloat = 16,
         bottomPadding: CGFloat = 12,
+        isDisabled: Bool = false,
         action: @escaping () -> Void
     ) {
         self.title = title
@@ -27,18 +29,24 @@ struct YBButton: View {
         self.cornerRadius = cornerRadius
         self.horizontalPadding = horizontalPadding
         self.bottomPadding = bottomPadding
+        self.isDisabled = isDisabled
         self.action = action
     }
 
     var body: some View {
-        Button(action: action) {
+        Button(action: {
+            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+            impactMed.impactOccurred()
+            action()
+        }) {
             YBText(title, fontType: fontType, color: textColor)
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(backgroundColor)
+                .background(isDisabled ? backgroundColor.opacity(0.5) : backgroundColor)
                 .cornerRadius(cornerRadius)
                 .padding(.horizontal, horizontalPadding)
                 .padding(.bottom, bottomPadding)
         }
+        .disabled(isDisabled)
     }
 }
