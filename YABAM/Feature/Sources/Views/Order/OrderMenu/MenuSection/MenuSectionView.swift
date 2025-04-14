@@ -11,6 +11,12 @@ struct MenuSectionView: View {
 
             ForEach(section.items) { item in
                 MenuItemView(item: item)
+                
+                if item != section.items.last {
+                    YBDivider()
+                        .padding(.vertical, 6)
+                        .padding(.horizontal, 8)
+                }
             }
         }
     }
