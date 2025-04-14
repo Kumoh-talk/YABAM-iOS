@@ -6,6 +6,7 @@ struct OrderMenuView: View {
     @State private var selectedSectionID: String?
     @State private var isExitAlertPresented = false
     @State private var showCallStaffPopup = false
+    @StateObject private var cartManager = CartManager()
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -21,8 +22,18 @@ struct OrderMenuView: View {
                 
                 MenuSectionList(
                     sections: sections,
-                    selectedSectionID: $selectedSectionID
+                    selectedSectionID: $selectedSectionID,
+                    cartManager: cartManager
                 )
+                
+                Spacer()
+                
+                YBButton(
+                    title: "주문하기",
+                    backgroundColor: cartManager.hasItems ? Color.Semantic.info : Color.Neutral.neutral200
+                ) {
+                    YBLogger.info("주문하기 버튼 클릭")
+                }
             }
             
             if showCallStaffPopup {

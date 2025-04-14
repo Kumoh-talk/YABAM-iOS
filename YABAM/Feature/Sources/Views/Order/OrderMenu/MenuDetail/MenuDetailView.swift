@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MenuDetailView: View {
     let item: MenuItem
+    @StateObject var cartManager: CartManager
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -29,7 +30,8 @@ struct MenuDetailView: View {
             .padding(.horizontal, 24)
             
             YBButton(title: "메뉴 담기") {
-                print("메뉴 담기 버튼 클릭")
+                cartManager.add(item)
+                dismiss()
             }
         }
         .ignoresSafeArea(edges: .top)

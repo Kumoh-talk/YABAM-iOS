@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MenuSectionView: View {
     let section: MenuSection
+    @StateObject var cartManager: CartManager
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -10,7 +11,7 @@ struct MenuSectionView: View {
                 .id(section.id)
 
             ForEach(section.items) { item in
-                NavigationLink(destination: MenuDetailView(item: item)) {
+                NavigationLink(destination: MenuDetailView(item: item, cartManager: cartManager)) {
                     MenuItemView(item: item)
                 }
                 .buttonStyle(PlainButtonStyle())
