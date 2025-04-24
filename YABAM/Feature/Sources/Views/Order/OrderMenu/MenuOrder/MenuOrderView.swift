@@ -31,9 +31,10 @@ struct MenuOrderView: View {
         .navigationBarBackButtonHidden()
         .navigationBarTitleDisplayMode(.large)
         .withNavigationButtons(
-            leading: NavigationButtonConfig(systemName: "chevron.left") {
-                dismiss()
-            }
+            leading: NavigationButtonConfig(
+                image: Image(.popArrow),
+                action: { dismiss() }
+            )
         )
     }
 }

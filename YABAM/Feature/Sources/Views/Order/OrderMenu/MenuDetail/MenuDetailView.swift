@@ -38,7 +38,7 @@ struct MenuDetailView: View {
         .navigationBarBackButtonHidden()
         .withNavigationButtons(
             leading: NavigationButtonConfig(
-                image: Image(systemName: "chevron.left"),
+                image: Image(.popArrow),
                 action: { dismiss() }
             )
         )
