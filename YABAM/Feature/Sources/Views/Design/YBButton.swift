@@ -6,6 +6,7 @@ struct YBButton: View {
     let textColor: Color
     let backgroundColor: Color
     let cornerRadius: CGFloat
+    let verticalPadding: CGFloat
     let horizontalPadding: CGFloat
     let bottomPadding: CGFloat
     let isDisabled: Bool
@@ -17,7 +18,8 @@ struct YBButton: View {
         textColor: Color = .white,
         backgroundColor: Color = Color.Semantic.info,
         cornerRadius: CGFloat = 12,
-        horizontalPadding: CGFloat = 16,
+        verticalPadding: CGFloat = 8,
+        horizontalPadding: CGFloat = 20,
         bottomPadding: CGFloat = 12,
         isDisabled: Bool = false,
         action: @escaping () -> Void
@@ -27,6 +29,7 @@ struct YBButton: View {
         self.textColor = textColor
         self.backgroundColor = backgroundColor
         self.cornerRadius = cornerRadius
+        self.verticalPadding = verticalPadding
         self.horizontalPadding = horizontalPadding
         self.bottomPadding = bottomPadding
         self.isDisabled = isDisabled
@@ -44,6 +47,7 @@ struct YBButton: View {
                 .padding()
                 .background(isDisabled ? backgroundColor.opacity(0.5) : backgroundColor)
                 .cornerRadius(cornerRadius)
+                .padding(.vertical, verticalPadding)
                 .padding(.horizontal, horizontalPadding)
                 .padding(.bottom, bottomPadding)
         }
