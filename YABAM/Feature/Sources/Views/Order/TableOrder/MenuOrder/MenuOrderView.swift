@@ -13,10 +13,7 @@ struct MenuOrderView: View {
             VStack(spacing: 0) {
                 MenuChipScrollView(
                     sections: sections,
-                    selectedSectionID: $selectedSectionID,
-                    onCallStaffTapped: {
-                        
-                    }
+                    selectedSectionID: $selectedSectionID
                 )
                 
                 MenuSectionList(
