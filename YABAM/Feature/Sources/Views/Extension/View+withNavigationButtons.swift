@@ -10,7 +10,11 @@ extension View {
             if let leading = leading {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: leading.action) {
-                        leading.image
+                        if let image = leading.image {
+                            image
+                        } else if let text = leading.text {
+                            text
+                        }
                     }
                 }
             }
@@ -18,7 +22,11 @@ extension View {
             if let trailing = trailing {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: trailing.action) {
-                        trailing.image
+                        if let image = trailing.image {
+                            image
+                        } else if let text = trailing.text {
+                            text
+                        }
                     }
                 }
             }
@@ -27,16 +35,19 @@ extension View {
 }
 
 struct NavigationButtonConfig {
-    let image: Image
+    let image: Image?
+    let text: YBText?
     let action: () -> Void
-    
-    init(systemName: String, action: @escaping () -> Void) {
-        self.image = Image(systemName: systemName)
+
+    init(image: Image, action: @escaping () -> Void) {
+        self.image = image
+        self.text = nil
         self.action = action
     }
     
-    init(image: Image, action: @escaping () -> Void) {
-        self.image = image
+    init(text: YBText, action: @escaping () -> Void) {
+        self.image = nil
+        self.text = text
         self.action = action
     }
 }

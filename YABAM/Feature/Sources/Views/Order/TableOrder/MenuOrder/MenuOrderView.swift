@@ -4,7 +4,6 @@ import Core
 struct MenuOrderView: View {
     let sections: [MenuSection]
     @State private var selectedSectionID: String?
-    @State private var showCallStaffPopup = false
     @ObservedObject var cartManager: CartManager
     @Environment(\.dismiss) private var dismiss
     
@@ -15,7 +14,7 @@ struct MenuOrderView: View {
                     sections: sections,
                     selectedSectionID: $selectedSectionID,
                     onCallStaffTapped: {
-                        showCallStaffPopup = true
+                        
                     }
                 )
                 
@@ -37,9 +36,6 @@ struct MenuOrderView: View {
                 }
             }
             
-            if showCallStaffPopup {
-                CallStaffPopup(showPopup: $showCallStaffPopup)
-            }
         }
         .navigationTitle("메뉴 주문하기")
         .navigationBarBackButtonHidden()
