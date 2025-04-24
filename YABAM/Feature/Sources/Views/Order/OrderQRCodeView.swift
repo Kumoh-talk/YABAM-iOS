@@ -1,7 +1,7 @@
 import SwiftUI
 import Core
 
-struct OrderView: View {
+struct OrderQRCodeView: View {
     @State private var scannerError: String? = nil
     @State private var isLoading: Bool = false
     @State private var showOrderMenu = false
@@ -11,7 +11,7 @@ struct OrderView: View {
             YBCodeScannerTextSection()
             
 #if DEBUG
-            NavigationLink(destination: OrderMenuView(sections: SampleData.menuSections), isActive: $showOrderMenu) {
+            NavigationLink(destination: TableOrderMainView(), isActive: $showOrderMenu) {
                 EmptyView()
             }
             Button {

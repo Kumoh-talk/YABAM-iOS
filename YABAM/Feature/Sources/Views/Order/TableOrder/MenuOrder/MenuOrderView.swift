@@ -1,13 +1,11 @@
 import SwiftUI
 import Core
 
-struct OrderMenuView: View {
+struct MenuOrderView: View {
     let sections: [MenuSection]
     @State private var selectedSectionID: String?
-    @State private var isExitAlertPresented = false
-    @State private var isNavigatingToOrder = false
     @State private var showCallStaffPopup = false
-    @StateObject private var cartManager = CartManager()
+    @ObservedObject var cartManager: CartManager
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -28,18 +26,13 @@ struct OrderMenuView: View {
                 )
                 
                 Spacer()
-                
-                NavigationLink(destination: MenuOrderView(cartManager: cartManager), isActive: $isNavigatingToOrder) {
-                    EmptyView()
-                }
 
                 YBButton(
-                    title: "주문하기",
+                    title: "메뉴 담기",
                     backgroundColor: cartManager.hasItems ? Color.Semantic.info : Color.Neutral.neutral200
                 ) {
                     if cartManager.hasItems {
                         YBLogger.info("주문하기 버튼 클릭")
-                        isNavigatingToOrder = true
                     }
                 }
             }
@@ -48,23 +41,14 @@ struct OrderMenuView: View {
                 CallStaffPopup(showPopup: $showCallStaffPopup)
             }
         }
-        .navigationTitle("테이블 주문")
+        .navigationTitle("메뉴 주문하기")
         .navigationBarBackButtonHidden()
         .navigationBarTitleDisplayMode(.inline)
         .withNavigationButtons(
-            leading: NavigationButtonConfig(image: Image(.close)) {
-                isExitAlertPresented = true
-            },
-            trailing: NavigationButtonConfig(image: Image(.basket)) {
-                YBLogger.debug("장바구니 버튼 클릭")
-            }
-        )
-        .alert("지금 나가기를 누를 시 장바구니 정보가 사라집니다", isPresented: $isExitAlertPresented) {
-            Button("나가기", role: .destructive) {
+            leading: NavigationButtonConfig(image: Image(.popArrow)) {
                 dismiss()
             }
-            Button("취소", role: .cancel) { }
-        }
+        )
         .onAppear {
             if selectedSectionID == nil {
                 selectedSectionID = sections.first?.id
