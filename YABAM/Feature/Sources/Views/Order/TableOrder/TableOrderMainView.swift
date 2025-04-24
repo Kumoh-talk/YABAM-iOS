@@ -2,6 +2,7 @@ import SwiftUI
 import Core
 
 struct TableOrderMainView: View {
+    @State private var memberCount: Int = 2
     @State private var isExitAlertPresented = false
     @StateObject private var cartManager = CartManager()
     @Environment(\.dismiss) private var dismiss
@@ -9,17 +10,7 @@ struct TableOrderMainView: View {
     var body: some View {
         ZStack(alignment: .topLeading) {
             VStack(spacing: 0) {
-                YBText("담은 메뉴목록", fontType: .boldHeader2, color: .Neutral.neutral800)
-                    .padding(.leading, 20)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                HStack(spacing: 3) {
-                    YBText("멤버 2명과", fontType: .mediumBody2, color: .Neutral.neutral600)
-                        .padding(.leading, 20)
-                    
-                    YBText("함께 주문 중", fontType: .boldBody2, color: Color.Semantic.info)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
+                TableOrderHeaderView(memberCount: memberCount)
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
@@ -30,7 +21,7 @@ struct TableOrderMainView: View {
                         .padding(12)
                 }
                 .padding(.horizontal, 20)
-                .padding(.top, 12)
+                .padding(.top, 18)
                 .frame(height: 350)
                 
                 Button {
@@ -47,7 +38,6 @@ struct TableOrderMainView: View {
                 .padding(.top, 12)
                 
                 Spacer()
-                
                 
                 YBButton(
                     title: "\(cartManager.items.count)개 주문하기 - \(cartManager.totalPrice)원",
