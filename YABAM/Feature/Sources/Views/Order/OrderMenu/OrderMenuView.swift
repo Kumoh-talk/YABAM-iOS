@@ -5,6 +5,7 @@ struct OrderMenuView: View {
     let sections: [MenuSection]
     @State private var selectedSectionID: String?
     @State private var isExitAlertPresented = false
+    @State private var isNavigatingToOrder = false
     @State private var showCallStaffPopup = false
     @StateObject private var cartManager = CartManager()
     @Environment(\.dismiss) private var dismiss
@@ -28,11 +29,18 @@ struct OrderMenuView: View {
                 
                 Spacer()
                 
+                NavigationLink(destination: MenuOrderView(cartManager: cartManager), isActive: $isNavigatingToOrder) {
+                    EmptyView()
+                }
+
                 YBButton(
                     title: "주문하기",
                     backgroundColor: cartManager.hasItems ? Color.Semantic.info : Color.Neutral.neutral200
                 ) {
-                    YBLogger.info("주문하기 버튼 클릭")
+                    if cartManager.hasItems {
+                        YBLogger.info("주문하기 버튼 클릭")
+                        isNavigatingToOrder = true
+                    }
                 }
             }
             
