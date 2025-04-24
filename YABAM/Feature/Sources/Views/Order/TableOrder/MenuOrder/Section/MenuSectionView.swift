@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MenuSectionView: View {
     let section: MenuSection
-    @StateObject var cartManager: CartManager
+    @ObservedObject var cartManager: CartManager
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MenuDetailView: View {
     let item: MenuItem
-    @StateObject var cartManager: CartManager
+    @ObservedObject var cartManager: CartManager
     @Environment(\.dismiss) var dismiss
     
     var body: some View {

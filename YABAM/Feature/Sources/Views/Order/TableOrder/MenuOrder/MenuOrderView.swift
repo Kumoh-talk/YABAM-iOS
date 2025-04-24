@@ -5,6 +5,7 @@ struct MenuOrderView: View {
     let sections: [MenuSection]
     @State private var selectedSectionID: String?
     @ObservedObject var cartManager: CartManager
+    @StateObject private var temporaryCart = CartManager()
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -21,21 +22,23 @@ struct MenuOrderView: View {
                 MenuSectionList(
                     sections: sections,
                     selectedSectionID: $selectedSectionID,
-                    cartManager: cartManager
+                    cartManager: temporaryCart
                 )
                 
                 Spacer()
 
                 YBButton(
-                    title: "메뉴 담기",
-                    backgroundColor: cartManager.hasItems ? Color.Semantic.info : Color.Neutral.neutral200
+                    title: "\(temporaryCart.items.count)개 메뉴 담기",
+                    backgroundColor: temporaryCart.hasItems ? Color.Semantic.info : Color.Neutral.neutral200
                 ) {
-                    if cartManager.hasItems {
+                    if temporaryCart.hasItems {
+                        cartManager.merge(temporaryCart.items)
+                        temporaryCart.clear()
                         YBLogger.info("주문하기 버튼 클릭")
+                        dismiss()
                     }
                 }
             }
-            
         }
         .navigationTitle("메뉴 주문하기")
         .navigationBarBackButtonHidden()

@@ -5,6 +5,7 @@ struct TableOrderMainView: View {
     @State private var memberCount: Int = 2
     @State private var isExitAlertPresented = false
     @State private var showCallStaffPopup = false
+    @State private var isNavigatingToMenuOrder = false
     @StateObject private var cartManager = CartManager()
     @Environment(\.dismiss) private var dismiss
     
@@ -23,9 +24,10 @@ struct TableOrderMainView: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 18)
-                .frame(height: 350)
+                .frame(height: 400)
                 
                 Button {
+                    isNavigatingToMenuOrder = true
                 } label: {
                     YBText("메뉴 추가", fontType: .boldBody2, color: .Neutral.neutral700)
                         .frame(maxWidth: .infinity)
@@ -66,6 +68,9 @@ struct TableOrderMainView: View {
                 dismiss()
             }
             Button("취소", role: .cancel) { }
+        }
+        .navigationDestination(isPresented: $isNavigatingToMenuOrder) {
+            MenuOrderView(sections: SampleData.menuSections, cartManager: cartManager)
         }
     }
 }

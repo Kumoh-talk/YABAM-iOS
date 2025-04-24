@@ -3,7 +3,7 @@ import SwiftUI
 struct MenuSectionList: View {
     let sections: [MenuSection]
     @Binding var selectedSectionID: String?
-    @StateObject var cartManager: CartManager
+    @ObservedObject var cartManager: CartManager
 
     var body: some View {
         ScrollViewReader { proxy in
