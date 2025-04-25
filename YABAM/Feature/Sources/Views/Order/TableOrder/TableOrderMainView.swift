@@ -44,7 +44,8 @@ struct TableOrderMainView: View {
                 
                 YBButton(
                     title: "\(cartManager.items.count)개 주문하기 - \(cartManager.totalPrice)원",
-                    backgroundColor: cartManager.hasItems ? Color.Semantic.info : Color.Neutral.neutral200
+                    backgroundColor: cartManager.hasItems ? Color.Semantic.info : Color.Neutral.neutral200,
+                    isDisabled: !cartManager.hasItems,
                 ) {
                     YBLogger.info("주문하기 버튼 클릭")
                 }

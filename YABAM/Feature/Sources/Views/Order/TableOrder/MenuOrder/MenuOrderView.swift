@@ -27,7 +27,8 @@ struct MenuOrderView: View {
                 
                 YBButton(
                     title: "\(temporaryCart.items.count)개 메뉴 담기",
-                    backgroundColor: temporaryCart.hasItems ? Color.Semantic.info : Color.Neutral.neutral200
+                    backgroundColor: temporaryCart.hasItems ? Color.Semantic.info : Color.Neutral.neutral200,
+                    isDisabled: !temporaryCart.hasItems
                 ) {
                     if temporaryCart.hasItems {
                         cartManager.merge(temporaryCart.items)
@@ -42,7 +43,7 @@ struct MenuOrderView: View {
         .navigationBarBackButtonHidden()
         .navigationBarTitleDisplayMode(.inline)
         .withNavigationButtons(
-            leading: NavigationButtonConfig(image: Image(.popArrow)) {
+            leading: NavigationButtonConfig(image: Image(.close)) {
                 if temporaryCart.hasItems {
                     showExitAlert = true
                 } else {
