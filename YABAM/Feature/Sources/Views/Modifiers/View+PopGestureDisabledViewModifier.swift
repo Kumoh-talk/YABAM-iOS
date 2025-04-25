@@ -7,7 +7,6 @@ extension View {
 }
 
 struct PopGestureDisabledViewModifier: ViewModifier {
-    
     func body(content: Content) -> some View {
         content
             .task {

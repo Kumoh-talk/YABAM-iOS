@@ -42,7 +42,16 @@ struct MenuOrderView: View {
         .navigationTitle("메뉴 주문하기")
         .navigationBarBackButtonHidden()
         .navigationBarTitleDisplayMode(.inline)
-        .popGestureDisabled()
+        .task {
+            if temporaryCart.items.isEmpty {
+                PopGestureManager.shared.updatePopGestureState(isEnabled: true)
+            } else {
+                PopGestureManager.shared.updatePopGestureState(isEnabled: false)
+            }
+        }
+        .onDisappear {
+            PopGestureManager.shared.updatePopGestureState(isEnabled: true)
+        }
         .withNavigationButtons(
             leading: NavigationButtonConfig(image: Image(.close)) {
                 if temporaryCart.hasItems {
