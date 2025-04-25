@@ -16,7 +16,7 @@ struct TableOrderMainView: View {
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.Neutral.neutral400, lineWidth: 1)
+                        .stroke(Color.Neutral.neutral500, lineWidth: 1)
                         .background(Color.white)
                     
                     MenuCartView(isTemporary: false, cartManager: cartManager)
@@ -29,12 +29,12 @@ struct TableOrderMainView: View {
                 Button {
                     isNavigatingToMenuOrder = true
                 } label: {
-                    YBText("메뉴 추가", fontType: .boldBody2, color: .Neutral.neutral700)
+                    YBText("메뉴 추가", fontType: .boldBody2, color: .Neutral.neutral800)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 12)
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.Neutral.neutral400, lineWidth: 1)
+                                .stroke(Color.Neutral.neutral500, lineWidth: 1)
                         )
                 }
                 .padding(.horizontal, 20)
