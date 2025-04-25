@@ -4,9 +4,10 @@ import Core
 struct MenuOrderView: View {
     let sections: [MenuSection]
     @State private var selectedSectionID: String?
-    @State private var showExitAlert = false
-    @ObservedObject var cartManager: CartManager
+    @State private var isExitAlert = false
+    @State private var isNavigatingToTemporaryCart = false
     @StateObject private var temporaryCart = CartManager()
+    @ObservedObject var cartManager: CartManager
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -53,15 +54,22 @@ struct MenuOrderView: View {
             PopGestureManager.shared.updatePopGestureState(isEnabled: true)
         }
         .withNavigationButtons(
-            leading: NavigationButtonConfig(image: Image(.close)) {
+            leading: NavigationButtonConfig {
+                Image(.close)
+            } action: {
                 if temporaryCart.hasItems {
-                    showExitAlert = true
+                    isExitAlert = true
                 } else {
                     dismiss()
                 }
+            },
+            trailing: NavigationButtonConfig {
+                Image(.basket)
+            } action: {
+                isNavigatingToTemporaryCart = true
             }
         )
-        .alert("메뉴가 저장되지 않고 사라집니다. 나가시겠어요?", isPresented: $showExitAlert) {
+        .alert("메뉴가 저장되지 않고 사라집니다. 나가시겠어요?", isPresented: $isExitAlert) {
             Button("나가기", role: .destructive) {
                 dismiss()
             }
@@ -71,6 +79,9 @@ struct MenuOrderView: View {
             if selectedSectionID == nil {
                 selectedSectionID = sections.first?.id
             }
+        }
+        .navigationDestination(isPresented: $isNavigatingToTemporaryCart) {
+            MenuCartView(cartManager: temporaryCart)
         }
     }
 }

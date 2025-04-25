@@ -4,7 +4,7 @@ import Core
 struct TableOrderMainView: View {
     @State private var memberCount: Int = 2
     @State private var isExitAlertPresented = false
-    @State private var showCallStaffPopup = false
+    @State private var isCallStaffPopup = false
     @State private var isNavigatingToMenuOrder = false
     @StateObject private var cartManager = CartManager()
     @Environment(\.dismiss) private var dismiss
@@ -51,17 +51,22 @@ struct TableOrderMainView: View {
                 }
             }
             
-            if showCallStaffPopup {
-                CallStaffPopup(showPopup: $showCallStaffPopup)
+            if isCallStaffPopup {
+                CallStaffPopup(showPopup: $isCallStaffPopup)
             }
         }
         .navigationBarBackButtonHidden()
         .withNavigationButtons(
-            leading: NavigationButtonConfig(image: Image(.close)) {
+            leading: NavigationButtonConfig {
+                Image(.close)
+            } action: {
                 isExitAlertPresented = true
             },
-            trailing: NavigationButtonConfig(text: YBText("직원호출", fontType: .mediumBody2, color: .Neutral.neutral800)) {
-                showCallStaffPopup = true
+            
+            trailing: NavigationButtonConfig {
+                YBText("직원호출", fontType: .mediumBody2, color: .Neutral.neutral800)
+            } action: {
+                isCallStaffPopup = true
             }
         )
         .alert("지금 나가기를 누를 시 장바구니 정보가 사라집니다", isPresented: $isExitAlertPresented) {
