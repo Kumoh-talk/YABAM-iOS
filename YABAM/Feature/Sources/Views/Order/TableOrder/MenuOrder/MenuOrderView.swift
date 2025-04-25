@@ -81,7 +81,7 @@ struct MenuOrderView: View {
             }
         }
         .navigationDestination(isPresented: $isNavigatingToTemporaryCart) {
-            MenuCartView(cartManager: temporaryCart)
+            MenuCartView(isTemporary: true, cartManager: temporaryCart)
         }
     }
 }

@@ -19,7 +19,7 @@ struct TableOrderMainView: View {
                         .stroke(Color.Neutral.neutral400, lineWidth: 1)
                         .background(Color.white)
                     
-                    MenuCartView(cartManager: cartManager)
+                    MenuCartView(isTemporary: false, cartManager: cartManager)
                         .padding(12)
                 }
                 .padding(.horizontal, 20)
