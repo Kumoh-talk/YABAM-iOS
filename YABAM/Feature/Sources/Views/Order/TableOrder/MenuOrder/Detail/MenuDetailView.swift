@@ -37,10 +37,19 @@ struct MenuDetailView: View {
         .ignoresSafeArea(edges: .top)
         .navigationBarBackButtonHidden()
         .withNavigationButtons(
-            leading: NavigationButtonConfig(
-                image: Image(.popArrow),
-                action: { dismiss() }
-            )
+            leading: NavigationButtonConfig {
+                Image(.popArrow)
+                    .resizable()
+                    .frame(width: 16, height: 16)
+                    .padding(6)
+                    .background(
+                        Circle()
+                            .fill(Color.white)
+                            .shadow(radius: 2)
+                    )
+            } action: {
+                dismiss()
+            }
         )
     }
 }
