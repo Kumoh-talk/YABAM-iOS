@@ -56,6 +56,12 @@ struct TableOrderMainView: View {
             }
         }
         .navigationBarBackButtonHidden()
+        .task {
+            PopGestureManager.shared.updatePopGestureState(isEnabled: false)
+        }
+        .onDisappear {
+            PopGestureManager.shared.updatePopGestureState(isEnabled: true)
+        }
         .withNavigationButtons(
             leading: NavigationButtonConfig {
                 Image(.close)
