@@ -64,7 +64,16 @@ struct MenuOrderView: View {
                 }
             },
             trailing: NavigationButtonConfig {
-                Image(.basket)
+                ZStack(alignment: .topTrailing) {
+                    Image(.basket)
+                    
+                    if temporaryCart.hasItems {
+                        Circle()
+                            .fill(Color.red)
+                            .frame(width: 6, height: 6)
+                            .offset(x: 2, y: -2)
+                    }
+                }
             } action: {
                 isNavigatingToTemporaryCart = true
             }
