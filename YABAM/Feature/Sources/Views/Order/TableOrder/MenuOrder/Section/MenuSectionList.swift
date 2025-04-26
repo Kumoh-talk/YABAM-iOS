@@ -12,7 +12,7 @@ struct MenuSectionList: View {
                     ForEach(sections) { section in
                         MenuSectionView(section: section, cartManager: cartManager)
                             .padding(8)
-                            .padding(.horizontal, 10)
+                            .padding(.horizontal, 6)
 
                         YBDivider(color: .Neutral.neutral300, height: 12)
                     }

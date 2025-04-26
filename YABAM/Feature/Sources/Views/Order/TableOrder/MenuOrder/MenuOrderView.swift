@@ -23,21 +23,7 @@ struct MenuOrderView: View {
                     selectedSectionID: $selectedSectionID,
                     cartManager: temporaryCart
                 )
-                
-                Spacer()
-                
-                YBButton(
-                    title: "\(temporaryCart.items.count)개 메뉴 담기",
-                    backgroundColor: temporaryCart.hasItems ? Color.Semantic.info : Color.Neutral.neutral200,
-                    isDisabled: !temporaryCart.hasItems
-                ) {
-                    if temporaryCart.hasItems {
-                        cartManager.merge(temporaryCart.items)
-                        temporaryCart.clear()
-                        YBLogger.info("주문하기 버튼 클릭")
-                        dismiss()
-                    }
-                }
+                .frame(maxHeight: .infinity)
             }
         }
         .navigationTitle("메뉴 주문하기")
