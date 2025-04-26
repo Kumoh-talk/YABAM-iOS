@@ -11,14 +11,14 @@ struct MenuItemView: View {
         let descriptionFont: YBFont = isCompact ? .mediumBody3 : .mediumBody2
         let priceFont: YBFont = isCompact ? .mediumBody2 : .mediumBody1
 
-        HStack(alignment: .center, spacing: 12) {
+        HStack(alignment: .top, spacing: 12) {
             Image(.yabamFillLogo) // TODO: item.image로 변경
                 .resizable()
                 .frame(width: imageSize, height: imageSize)
                 .cornerRadius(8)
             
             VStack(alignment: .leading, spacing: 2) {
-                if item.isRecommended {
+                if item.isRecommended && !isCompact {
                     YBBadge("주인장 추천!")
                 }
                 
