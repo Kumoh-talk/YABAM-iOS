@@ -13,14 +13,14 @@ struct MenuCartScrollView: View {
             if cartManager.hasItems {
                 ScrollView {
                     VStack(spacing: 0) {
-                        ForEach(cartManager.items) { item in
-                            MenuItemView(item: item, onDelete: {
-                                itemToDelete = item
+                        ForEach(cartManager.groupedItems, id: \.item.id) { grouped in
+                            MenuItemView(item: grouped.item, quantity: grouped.quantity, onDelete: {
+                                itemToDelete = grouped.item
                                 showDeleteAlert = true
                             })
                             .padding(.horizontal, 16)
                             
-                            if item != cartManager.items.last {
+                            if grouped.item != cartManager.groupedItems.last?.item {
                                 YBDivider()
                                     .padding(.vertical, 10)
                             }

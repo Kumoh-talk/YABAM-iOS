@@ -2,15 +2,30 @@ import SwiftUI
 
 struct MenuItemView: View {
     let item: MenuItem
+    var quantity: Int? = nil
     var onDelete: (() -> Void)? = nil
     
+    private var isCompact: Bool {
+        onDelete != nil
+    }
+    
+    private var imageSize: CGFloat {
+        isCompact ? 80 : 110
+    }
+    
+    private var nameFont: YBFont {
+        isCompact ? .boldBody1 : .boldHeader3
+    }
+    
+    private var descriptionFont: YBFont {
+        isCompact ? .mediumBody3 : .mediumBody2
+    }
+    
+    private var priceFont: YBFont {
+        isCompact ? .mediumBody2 : .mediumBody1
+    }
+    
     var body: some View {
-        let isCompact = onDelete != nil
-        let imageSize: CGFloat = isCompact ? 80 : 110
-        let nameFont: YBFont = isCompact ? .boldBody1 : .boldHeader3
-        let descriptionFont: YBFont = isCompact ? .mediumBody3 : .mediumBody2
-        let priceFont: YBFont = isCompact ? .mediumBody2 : .mediumBody1
-
         HStack(alignment: .top, spacing: 12) {
             Image(.yabamFillLogo) // TODO: item.image로 변경
                 .resizable()
@@ -23,10 +38,12 @@ struct MenuItemView: View {
                 }
                 
                 YBText(item.name, fontType: nameFont, color: .Neutral.neutral900)
+                
                 YBText(item.description, fontType: descriptionFont, color: .Neutral.neutral600)
                     .lineLimit(2)
                     .truncationMode(.tail)
-                YBText("\(item.price)원", fontType: priceFont, color: .Neutral.neutral900)
+                
+                priceSection.padding(.top, 2)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
@@ -38,6 +55,19 @@ struct MenuItemView: View {
                         .foregroundColor(.red)
                 }
             }
+        }
+    }
+    
+    @ViewBuilder
+    private var priceSection: some View {
+        if let quantity = quantity, isCompact {
+            HStack(spacing: 4) {
+                YBText("\(quantity)개", fontType: priceFont, color: .Neutral.neutral900)
+                YBText("-", fontType: priceFont, color: .Neutral.neutral900)
+                YBText("\(item.price * quantity)원", fontType: priceFont, color: .Neutral.neutral900)
+            }
+        } else {
+            YBText("\(item.price)원", fontType: priceFont, color: .Neutral.neutral900)
         }
     }
 }
