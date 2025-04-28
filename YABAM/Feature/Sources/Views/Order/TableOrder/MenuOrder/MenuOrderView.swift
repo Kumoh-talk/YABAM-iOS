@@ -29,6 +29,7 @@ struct MenuOrderView: View {
         .navigationTitle("메뉴 주문하기")
         .navigationBarBackButtonHidden()
         .navigationBarTitleDisplayMode(.inline)
+        .popGestureDisabled()
         .withNavigationButtons(
             leading: NavigationButtonConfig {
                 Image(.close)
