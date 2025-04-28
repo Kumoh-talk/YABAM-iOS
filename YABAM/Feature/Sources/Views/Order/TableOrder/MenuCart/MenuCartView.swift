@@ -3,7 +3,6 @@ import Core
 
 struct MenuCartView: View {
     @State private var memberCount: Int = 2
-    @State private var isExitAlertPresented = false
     @State private var isCallStaffPopup = false
     @ObservedObject var cartManager: CartManager
     @Environment(\.dismiss) private var dismiss
