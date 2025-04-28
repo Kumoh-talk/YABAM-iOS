@@ -18,7 +18,7 @@ struct MenuChipScrollView: View {
                 }
             }
         }
-        .padding(.leading, 8)
+        .padding(.leading, 14)
         .padding(.bottom, 6)
     }
 }

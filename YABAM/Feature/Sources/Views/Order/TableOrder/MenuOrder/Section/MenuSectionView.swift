@@ -18,7 +18,7 @@ struct MenuSectionView: View {
                 
                 if item != section.items.last {
                     YBDivider()
-                        .padding(.vertical, 6)
+                        .padding(.vertical, 2)
                         .padding(.horizontal, 8)
                 }
             }

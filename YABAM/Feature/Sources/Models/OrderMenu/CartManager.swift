@@ -3,6 +3,11 @@ import Combine
 final class CartManager: ObservableObject {
     @Published private(set) var items: [MenuItem] = []
     
+    var groupedItems: [(item: MenuItem, quantity: Int)] {
+        Dictionary(grouping: items, by: { $0 })
+            .map { (key, value) in (item: key, quantity: value.count) }
+    }
+    
     var hasItems: Bool {
         !items.isEmpty
     }

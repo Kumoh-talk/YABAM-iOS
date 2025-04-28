@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MenuDetailView: View {
     let item: MenuItem
+    @State private var quantity: Int = 1
     @ObservedObject var cartManager: CartManager
     @Environment(\.dismiss) var dismiss
     
@@ -24,13 +25,29 @@ struct MenuDetailView: View {
                 YBText(item.description, fontType: .mediumBody1, color: .Neutral.neutral700)
                     .padding(.top, 4)
 
-                Spacer()
             }
             .padding(.top, 24)
             .padding(.horizontal, 24)
             
-            YBButton(title: "메뉴 담기") {
-                cartManager.add(item)
+            YBDivider(color: .Neutral.neutral300, height: 12)
+                .padding(.top, 24)
+            
+            HStack {
+                YBText("주문 수량", fontType: .boldBody1, color: .Neutral.neutral800)
+                Spacer()
+                Stepper(value: $quantity, in: 1...10) {
+                    YBText("\(quantity)개", fontType: .mediumBody1, color: .Neutral.neutral800)
+                }
+            }
+            .padding(.horizontal, 24)
+            .padding(.vertical, 12)
+
+            Spacer()
+
+            YBButton(title: "메뉴 담기 (\(quantity)개)") {
+                for _ in 0..<quantity {
+                    cartManager.add(item)
+                }
                 dismiss()
             }
         }

@@ -5,9 +5,9 @@ struct MenuOrderView: View {
     let sections: [MenuSection]
     @State private var selectedSectionID: String?
     @State private var isExitAlert = false
-    @State private var isNavigatingToTemporaryCart = false
-    @StateObject private var temporaryCart = CartManager()
-    @ObservedObject var cartManager: CartManager
+    @State private var isNavigatingToCart = false
+    @State private var isCallStaffPopup = false
+    @StateObject private var cartManager = CartManager()
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -17,65 +17,65 @@ struct MenuOrderView: View {
                     sections: sections,
                     selectedSectionID: $selectedSectionID
                 )
+                .padding(.top, 2)
                 
                 MenuSectionList(
                     sections: sections,
                     selectedSectionID: $selectedSectionID,
-                    cartManager: temporaryCart
+                    cartManager: cartManager
                 )
-                
+                .frame(maxHeight: .infinity)
+            }
+            
+            VStack {
                 Spacer()
-                
-                YBButton(
-                    title: "\(temporaryCart.items.count)개 메뉴 담기",
-                    backgroundColor: temporaryCart.hasItems ? Color.Semantic.info : Color.Neutral.neutral200,
-                    isDisabled: !temporaryCart.hasItems
-                ) {
-                    if temporaryCart.hasItems {
-                        cartManager.merge(temporaryCart.items)
-                        temporaryCart.clear()
-                        YBLogger.info("주문하기 버튼 클릭")
-                        dismiss()
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        isNavigatingToCart = true
+                    }) {
+                        ZStack {
+                            Circle()
+                                .fill(Color.Semantic.info)
+                                .frame(width: 60, height: 60)
+                                .shadow(radius: 4)
+                            
+                            Image(systemName: "cart")
+                                .foregroundColor(.white)
+                                .font(.system(size: 24))
+                            
+                            if cartManager.hasItems {
+                                Circle()
+                                    .fill(Color.red)
+                                    .frame(width: 10, height: 10)
+                                    .offset(x: 13, y: -13)
+                            }
+                        }
                     }
+                    .padding(.bottom, 24)
+                    .padding(.trailing, 24)
                 }
+            }
+            
+            if isCallStaffPopup {
+                CallStaffPopup(showPopup: $isCallStaffPopup)
             }
         }
         .navigationTitle("메뉴 주문하기")
         .navigationBarBackButtonHidden()
         .navigationBarTitleDisplayMode(.inline)
-        .task {
-            if temporaryCart.items.isEmpty {
-                PopGestureManager.shared.updatePopGestureState(isEnabled: true)
-            } else {
-                PopGestureManager.shared.updatePopGestureState(isEnabled: false)
-            }
-        }
-        .onDisappear {
-            PopGestureManager.shared.updatePopGestureState(isEnabled: true)
-        }
+        .popGestureDisabled()
         .withNavigationButtons(
             leading: NavigationButtonConfig {
                 Image(.close)
             } action: {
-                if temporaryCart.hasItems {
-                    isExitAlert = true
-                } else {
-                    dismiss()
-                }
+                isExitAlert = true
             },
+            
             trailing: NavigationButtonConfig {
-                ZStack(alignment: .topTrailing) {
-                    Image(.basket)
-                    
-                    if temporaryCart.hasItems {
-                        Circle()
-                            .fill(Color.red)
-                            .frame(width: 6, height: 6)
-                            .offset(x: 2, y: -2)
-                    }
-                }
+                YBText("직원호출", fontType: .mediumBody2, color: .Neutral.neutral800)
             } action: {
-                isNavigatingToTemporaryCart = true
+                isCallStaffPopup = true
             }
         )
         .alert("메뉴가 저장되지 않고 사라집니다. 나가시겠어요?", isPresented: $isExitAlert) {
@@ -89,8 +89,8 @@ struct MenuOrderView: View {
                 selectedSectionID = sections.first?.id
             }
         }
-        .navigationDestination(isPresented: $isNavigatingToTemporaryCart) {
-            MenuCartView(isTemporary: true, cartManager: temporaryCart)
+        .navigationDestination(isPresented: $isNavigatingToCart) {
+            MenuCartView(cartManager: cartManager)
         }
     }
 }
