@@ -2,75 +2,55 @@ import SwiftUI
 import Core
 
 struct MenuCartView: View {
-    let isTemporary: Bool
-    @State private var itemToDelete: MenuItem? = nil
-    @State private var showDeleteAlert: Bool = false
+    @State private var memberCount: Int = 2
+    @State private var isExitAlertPresented = false
+    @State private var isCallStaffPopup = false
     @ObservedObject var cartManager: CartManager
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        Group {
-            if cartManager.hasItems {
-                ScrollView {
-                    VStack(spacing: 0) {
-                        ForEach(cartManager.items) { item in
-                            MenuItemView(item: item, onDelete: {
-                                itemToDelete = item
-                                showDeleteAlert = true
-                            })
-                            .padding(.horizontal, 16)
-                            
-                            if item != cartManager.items.last {
-                                YBDivider()
-                                    .padding(.vertical, 10)
-                            }
-                        }
-                    }
+        ZStack(alignment: .topLeading) {
+            VStack(spacing: 0) {
+                MenuCartHeaderView(memberCount: memberCount)
+                
+                MenuCartScrollView(isTemporary: false, cartManager: cartManager)
+                    .padding(12)
+                    .padding(.top, 18)
+                
+                Spacer()
+                
+                YBButton(
+                    title: "\(cartManager.items.count)개 주문하기 - \(cartManager.totalPrice)원",
+                    backgroundColor: cartManager.hasItems ? Color.Semantic.info : Color.Neutral.neutral200,
+                    isDisabled: !cartManager.hasItems
+                ) {
+                    YBLogger.info("주문하기 버튼 클릭")
                 }
-                .alert("해당 메뉴를 삭제하시겠어요?", isPresented: $showDeleteAlert, actions: {
-                    Button("삭제", role: .destructive) {
-                        if let item = itemToDelete {
-                            cartManager.remove(item)
-                            itemToDelete = nil
-                        }
-                    }
-                    Button("취소", role: .cancel) {
-                        itemToDelete = nil
-                    }
-                }, message: {
-                    Text(itemToDelete?.name ?? "")
-                })
-            } else {
-                YBText(
-                    "현재 담겨있는 메뉴가 없어요\n아래 메뉴추가를 눌러 메뉴를 담아주세요",
-                    fontType: .mediumBody1,
-                    color: .Neutral.neutral600
-                )
-                .multilineTextAlignment(.center)
+            }
+            
+            if isCallStaffPopup {
+                CallStaffPopup(showPopup: $isCallStaffPopup)
             }
         }
-        .navigationTitle("장바구니")
         .navigationBarBackButtonHidden()
-        .navigationBarTitleDisplayMode(.automatic)
-        .modifier(NavigationButtonModifier(isTemporary: isTemporary, dismiss: dismiss))
-    }
-}
-
-private struct NavigationButtonModifier: ViewModifier {
-    let isTemporary: Bool
-    let dismiss: DismissAction
-    
-    func body(content: Content) -> some View {
-        if isTemporary {
-            content.withNavigationButtons(
-                leading: NavigationButtonConfig {
-                    Image(.popArrow)
-                } action: {
-                    dismiss()
-                }
-            )
-        } else {
-            content
+        .task {
+            PopGestureManager.shared.updatePopGestureState(isEnabled: false)
         }
+        .onDisappear {
+            PopGestureManager.shared.updatePopGestureState(isEnabled: true)
+        }
+        .withNavigationButtons(
+            leading: NavigationButtonConfig {
+                Image(.popArrow)
+            } action: {
+                dismiss()
+            },
+            
+            trailing: NavigationButtonConfig {
+                YBText("직원호출", fontType: .mediumBody2, color: .Neutral.neutral800)
+            } action: {
+                isCallStaffPopup = true
+            }
+        )
     }
 }

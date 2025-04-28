@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TableOrderHeaderView: View {
+struct MenuCartHeaderView: View {
     let memberCount: Int
 
     var body: some View {

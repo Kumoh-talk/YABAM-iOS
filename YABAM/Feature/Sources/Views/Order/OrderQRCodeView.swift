@@ -11,7 +11,10 @@ struct OrderQRCodeView: View {
             YBCodeScannerTextSection()
             
 #if DEBUG
-            NavigationLink(destination: TableOrderMainView(), isActive: $showOrderMenu) {
+            NavigationLink(
+                destination: MenuOrderView(sections: SampleData.menuSections),
+                isActive: $showOrderMenu
+            ) {
                 EmptyView()
             }
             Button {

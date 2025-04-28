@@ -5,7 +5,8 @@ struct MenuOrderView: View {
     let sections: [MenuSection]
     @State private var selectedSectionID: String?
     @State private var isExitAlert = false
-    @ObservedObject var cartManager: CartManager
+    @State private var isNavigatingToCart = false
+    @StateObject private var cartManager = CartManager()
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -30,9 +31,23 @@ struct MenuOrderView: View {
         .navigationBarTitleDisplayMode(.inline)
         .withNavigationButtons(
             leading: NavigationButtonConfig {
-                Image(.popArrow)
+                Image(.close)
             } action: {
-                dismiss()
+                isExitAlert = true
+            },
+            trailing: NavigationButtonConfig {
+                ZStack(alignment: .topTrailing) {
+                    Image(.basket)
+                    
+                    if cartManager.hasItems {
+                        Circle()
+                            .fill(Color.red)
+                            .frame(width: 6, height: 6)
+                            .offset(x: 2, y: -2)
+                    }
+                }
+            } action: {
+                isNavigatingToCart = true
             }
         )
         .alert("메뉴가 저장되지 않고 사라집니다. 나가시겠어요?", isPresented: $isExitAlert) {
@@ -45,6 +60,9 @@ struct MenuOrderView: View {
             if selectedSectionID == nil {
                 selectedSectionID = sections.first?.id
             }
+        }
+        .navigationDestination(isPresented: $isNavigatingToCart) {
+            MenuCartView(cartManager: cartManager)
         }
     }
 }
