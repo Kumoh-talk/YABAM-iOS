@@ -1,20 +1,3 @@
-import Foundation
-
-struct MenuSection: Identifiable {
-    let id: String
-    let title: String
-    let items: [MenuItem]
-}
-
-struct MenuItem: Hashable, Identifiable {
-    let id: UUID = UUID()
-    let name: String
-    let description: String
-    let price: Int
-    let imageName: String
-    let isRecommended: Bool
-}
-
 struct SampleData {
     static let menuSections: [MenuSection] = [
         MenuSection(
