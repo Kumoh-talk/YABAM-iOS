@@ -4,7 +4,7 @@ extension YBFont {
     var size: CGFloat {
         switch self {
         case .boldHeader1:
-            return 34
+            return 30
         case .boldHeader2:
             return 24
         case .boldHeader3:
