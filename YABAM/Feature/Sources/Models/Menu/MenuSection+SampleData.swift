@@ -1,4 +1,4 @@
-struct SampleData {
+struct MenuSectionSampleData {
     static let menuSections: [MenuSection] = [
         MenuSection(
             id: "추천",

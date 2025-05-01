@@ -46,7 +46,7 @@ struct OrderQRCodeView: View {
             Spacer()
         }
         .navigationDestination(isPresented: $showOrderMenu) {
-            MenuOrderView(sections: SampleData.menuSections)
+            MenuOrderView(sections: MenuSectionSampleData.menuSections)
         }
     }
 }
