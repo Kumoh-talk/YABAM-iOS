@@ -7,7 +7,15 @@ struct StoreSampleData {
             logoImageUrl: "https://example.com/logo_kit.png",
             storeImageUrls: [
                 "https://example.com/kit_store1_1.jpg",
-                "https://example.com/kit_store1_2.jpg"
+                "https://example.com/kit_store1_2.jpg",
+                "https://example.com/kit_store1_3.jpg",
+                "https://example.com/kit_store1_4.jpg",
+                "https://example.com/kit_store1_5.jpg",
+                "https://example.com/kit_store1_6.jpg",
+                "https://example.com/kit_store1_7.jpg",
+                "https://example.com/kit_store1_8.jpg",
+                "https://example.com/kit_store1_9.jpg",
+                "https://example.com/kit_store1_10.jpg",
             ],
             reviewCount: 134,
             latitude: 36.1460,
