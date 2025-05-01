@@ -10,6 +10,7 @@ struct Store: Hashable, Identifiable {
     let reviewCount: Int
     let latitude: Double
     let longitude: Double
+    let isOpen: Bool
     
     var location: CLLocation {
         CLLocation(latitude: latitude, longitude: longitude)

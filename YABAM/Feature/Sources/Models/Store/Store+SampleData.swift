@@ -11,7 +11,8 @@ struct StoreSampleData {
             ],
             reviewCount: 134,
             latitude: 36.1460,
-            longitude: 128.3933
+            longitude: 128.3933,
+            isOpen: true
         ),
         Store(
             university: "경북대학교",
@@ -23,7 +24,8 @@ struct StoreSampleData {
             ],
             reviewCount: 242,
             latitude: 35.8908,
-            longitude: 128.6118
+            longitude: 128.6118,
+            isOpen: false
         ),
         Store(
             university: "구미대학교",
@@ -36,7 +38,8 @@ struct StoreSampleData {
             ],
             reviewCount: 89,
             latitude: 36.1189,
-            longitude: 128.3440
+            longitude: 128.3440,
+            isOpen: true
         ),
         Store(
             university: "안동대학교",
@@ -48,7 +51,8 @@ struct StoreSampleData {
             ],
             reviewCount: 178,
             latitude: 36.5645,
-            longitude: 128.7250
+            longitude: 128.7250,
+            isOpen: false
         ),
         Store(
             university: "대구가톨릭대학교",
@@ -61,7 +65,8 @@ struct StoreSampleData {
             ],
             reviewCount: 55,
             latitude: 35.7921,
-            longitude: 128.7745
+            longitude: 128.7745,
+            isOpen: true
         )
     ]
 }
