@@ -16,8 +16,6 @@ struct StoreLocationView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            YBText("가게 위치", fontType: .boldBody1, color: .Neutral.neutral900)
-
             Map(coordinateRegion: $region, annotationItems: [store]) { store in
                 MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: store.latitude, longitude: store.longitude)) {
                     VStack(spacing: 4) {
@@ -38,5 +36,6 @@ struct StoreLocationView: View {
             .frame(height: 240)
             .cornerRadius(12)
         }
+        .padding(.horizontal)
     }
 }

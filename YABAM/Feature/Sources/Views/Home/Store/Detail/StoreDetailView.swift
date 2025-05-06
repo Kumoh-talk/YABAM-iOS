@@ -33,7 +33,6 @@ struct StoreDetailView: View {
                         StoreLocationView(store: store)
                     }
                 }
-                .padding(.horizontal)
                 .padding(.top, 8)
             }
         }

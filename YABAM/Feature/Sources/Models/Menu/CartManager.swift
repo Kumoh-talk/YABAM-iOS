@@ -1,6 +1,6 @@
 import Combine
 
-final class CartManager: ObservableObject {
+class CartManager: ObservableObject {
     @Published private(set) var items: [MenuItem] = []
     
     var groupedItems: [(item: MenuItem, quantity: Int)] {

@@ -2,11 +2,28 @@ import SwiftUI
 
 struct StoreMenuView: View {
     let store: Store
-
+    
+    @State private var menuSections: [MenuSection] = MenuSectionSampleData.menuSections
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            YBText("메뉴 준비 중", fontType: .regularBody2, color: .Neutral.neutral600)
-            // TODO: store.menuItems 가 있다면 List로 구현
-        }
+        MenuSectionList(
+            sections: menuSections,
+            selectedSectionID: .constant(nil),
+            cartManager: DummyCartManager.shared
+        )
+        .frame(maxWidth: .infinity)
     }
+}
+
+final class DummyCartManager: CartManager {
+    static let shared = DummyCartManager()
+
+    private override init() {
+        super.init()
+    }
+
+    override func add(_ item: MenuItem) { }
+    override func merge(_ newItems: [MenuItem]) { }
+    override func remove(_ item: MenuItem) { }
+    override func clear() { }
 }
