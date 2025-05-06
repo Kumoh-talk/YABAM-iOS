@@ -23,7 +23,7 @@ struct StoreHeaderView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: isDetail ? 4 : 0) {
             YBText(store.name, fontType: nameFont, color: .Neutral.neutral900)
 
             YBText(store.description, fontType: descriptionFont, color: .Neutral.neutral600)
