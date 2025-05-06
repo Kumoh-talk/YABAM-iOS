@@ -7,20 +7,20 @@ struct StoreDetailView: View {
     @StateObject private var locationManager = LocationManager()
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            StoreImageSliderView(imageUrls: store.storeImageUrls)
-            
+        ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                StoreHeaderView(store: store, isDetail: true, userLocation: locationManager.userLocation).padding()
+                StoreImageSliderView(imageUrls: store.storeImageUrls)
                 
-                YBDivider(color: .Neutral.neutral300, height: 8)
-            }
+                StoreHeaderView(store: store, isDetail: true, userLocation: locationManager.userLocation)
+                    .padding()
 
-            StoreTabSelectorView(selectedTab: $selectedTab)
-            
-            YBDivider()
-            
-            ScrollView {
+                YBDivider(color: .Neutral.neutral300, height: 8)
+
+                StoreTabSelectorView(selectedTab: $selectedTab)
+                    .padding(.vertical, 12)
+
+                YBDivider()
+
                 VStack(alignment: .leading, spacing: 16) {
                     switch selectedTab {
                     case .info:
