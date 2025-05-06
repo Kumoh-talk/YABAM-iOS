@@ -5,6 +5,12 @@ enum YBFont {
     case boldHeader4
     case boldHeader5
     
+    case mediumHeader1
+    case mediumHeader2
+    case mediumHeader3
+    case mediumHeader4
+    case mediumHeader5
+    
     case mediumBody1
     case boldBody1
     

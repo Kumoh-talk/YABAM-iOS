@@ -11,7 +11,12 @@ extension YBFont {
                 .boldBody3:
             return FeatureFontFamily.Pretendard.bold.name
             
-        case .mediumBody1,
+        case .mediumHeader1,
+                .mediumHeader2,
+                .mediumHeader3,
+                .mediumHeader4,
+                .mediumHeader5,
+                .mediumBody1,
                 .mediumBody2,
                 .mediumBody3:
             return FeatureFontFamily.Pretendard.medium.name
