@@ -3,39 +3,51 @@ import SwiftUI
 struct StoreDetailView: View {
     let store: Store
     @Environment(\.dismiss) private var dismiss
-    @State private var selectedTab: StoreDetailTab = .info
     @StateObject private var locationManager = LocationManager()
     
+    @State private var selectedTab: StoreDetailTab = .info
+    @State private var isImageFullscreenPresented = false
+    @State private var selectedImageIndex = 0
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            StoreImageSliderView(imageUrls: store.storeImageUrls)
-            
+        ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                StoreHeaderView(store: store, isDetail: true, userLocation: locationManager.userLocation).padding()
+                StoreImageSliderView(
+                    imageUrls: store.storeImageUrls,
+                    selectedIndex: $selectedImageIndex,
+                    isPresented: $isImageFullscreenPresented
+                )
                 
-                YBDivider(color: .Neutral.neutral300, height: 8)
-            }
+                StoreHeaderView(store: store, isDetail: true, userLocation: locationManager.userLocation)
+                    .padding()
 
-            StoreTabSelectorView(selectedTab: $selectedTab)
-            
-            YBDivider()
-            
-            ScrollView {
+                YBDivider(color: .Neutral.neutral300, height: 8)
+
+                StoreTabSelectorView(selectedTab: $selectedTab)
+                    .padding(.vertical, 12)
+
+                YBDivider()
+
                 VStack(alignment: .leading, spacing: 16) {
                     switch selectedTab {
                     case .info:
                         StoreInfoView(store: store)
                     case .menu:
-                        StoreMenuView(store: store)
+                        StoreMenuView(store: store, menuSections: MenuSectionSampleData.menuSections)
                     case .review:
                         StoreReviewView(store: store)
                     case .location:
                         StoreLocationView(store: store)
                     }
                 }
-                .padding(.horizontal)
                 .padding(.top, 8)
             }
+        }
+        .fullScreenCover(isPresented: $isImageFullscreenPresented) {
+            YBFullscreenImageViewer(
+                imageUrls: store.storeImageUrls,
+                initialIndex: selectedImageIndex
+            )
         }
         .navigationTitle(store.name)
         .navigationBarTitleDisplayMode(.inline)

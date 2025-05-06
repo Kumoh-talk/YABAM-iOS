@@ -3,6 +3,7 @@ import SwiftUI
 struct MenuDetailView: View {
     let item: MenuItem
     @State private var quantity: Int = 1
+    @State private var isImageFullscreenPresented = false
     @ObservedObject var cartManager: CartManager
     @Environment(\.dismiss) var dismiss
     
@@ -13,6 +14,9 @@ struct MenuDetailView: View {
                 .scaledToFill()
                 .frame(height: 300)
                 .clipped()
+                .onTapGesture {
+                    isImageFullscreenPresented = true
+                }
             
             VStack(alignment: .leading, spacing: 2) {
                 if item.isRecommended {
@@ -50,6 +54,12 @@ struct MenuDetailView: View {
                 }
                 dismiss()
             }
+        }
+        .fullScreenCover(isPresented: $isImageFullscreenPresented) {
+            YBFullscreenImageViewer(
+                imageUrls: [item.imageName],
+                initialIndex: 0
+            )
         }
         .ignoresSafeArea(edges: .top)
         .navigationBarBackButtonHidden()
