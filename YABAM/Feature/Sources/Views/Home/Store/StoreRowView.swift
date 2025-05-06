@@ -14,27 +14,7 @@ struct StoreRowView: View {
                     .frame(width: 70, height: 70)
                     .clipShape(Circle())
                 
-                VStack(alignment: .leading, spacing: 0) {
-                    YBText(store.name, fontType: .boldHeader3, color: .Neutral.neutral900)
-                    
-                    YBText(store.description, fontType: .mediumBody2, color: .Neutral.neutral600)
-                                        
-                    HStack(spacing: 4) {
-                        YBText(store.isOpen ? "영업 중" : "영업 종료", fontType: .boldBody2, color: .Neutral.neutral800)
-                        
-                        YBText("·", fontType: .boldBody1, color: .Neutral.neutral600)
-                        
-                        YBText("리뷰 수 \(store.reviewCount)", fontType: .mediumBody2, color: .Neutral.neutral800)
-                        
-                        YBText("·", fontType: .boldBody1, color: .Neutral.neutral600)
-                        
-                        HStack(spacing: 0) {
-                            Image(.star).resizable().frame(width: 16, height: 16)
-                            
-                            YBText("\(store.review)", fontType: .mediumBody2, color: .Neutral.neutral800)
-                        }
-                    }
-                }
+                StoreHeaderView(store: store)
             }
             
             ScrollView(.horizontal, showsIndicators: false) {
