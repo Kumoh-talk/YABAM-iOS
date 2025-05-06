@@ -9,7 +9,7 @@ struct CallStaffPopup: View {
     
     var body: some View {
         VStack(spacing: 16) {
-            YBText("직원 호출하기", fontType: .boldHeader3, color: .Neutral.neutral800)
+            YBText("직원 호출하기", fontType: .boldHeader4, color: .Neutral.neutral800)
                 .padding(.top)
                 .padding(.bottom, 4)
             

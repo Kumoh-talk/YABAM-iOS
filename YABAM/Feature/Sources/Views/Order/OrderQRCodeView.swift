@@ -11,12 +11,6 @@ struct OrderQRCodeView: View {
             YBCodeScannerTextSection()
             
 #if DEBUG
-            NavigationLink(
-                destination: MenuOrderView(sections: SampleData.menuSections),
-                isActive: $showOrderMenu
-            ) {
-                EmptyView()
-            }
             Button {
                 showOrderMenu = true
             } label: {
@@ -50,6 +44,9 @@ struct OrderQRCodeView: View {
             YBCodeScannerStatusView(error: scannerError, isLoading: isLoading)
             
             Spacer()
+        }
+        .navigationDestination(isPresented: $showOrderMenu) {
+            MenuOrderView(sections: MenuSectionSampleData.menuSections)
         }
     }
 }

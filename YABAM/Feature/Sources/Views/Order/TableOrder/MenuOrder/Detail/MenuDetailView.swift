@@ -20,7 +20,7 @@ struct MenuDetailView: View {
                 }
                 
                 YBText(item.name, fontType: .boldHeader1, color: .Neutral.neutral900)
-                YBText("\(item.price)원", fontType: .boldHeader3, color: .Neutral.neutral900)
+                YBText("\(item.price)원", fontType: .boldHeader4, color: .Neutral.neutral900)
                 
                 YBText(item.description, fontType: .mediumBody1, color: .Neutral.neutral700)
                     .padding(.top, 4)

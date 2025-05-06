@@ -14,7 +14,7 @@ struct MenuItemView: View {
     }
     
     private var nameFont: YBFont {
-        isCompact ? .boldBody1 : .boldHeader3
+        isCompact ? .boldBody1 : .boldHeader4
     }
     
     private var descriptionFont: YBFont {

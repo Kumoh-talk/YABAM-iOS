@@ -3,13 +3,15 @@ import SwiftUI
 struct HomeView: View {
     var body: some View {
         VStack {
-            Spacer()
-            Text("🏠 Home View")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-            Spacer()
+            StoreListView(stores: StoreSampleData.storeList)
         }
-        .background(Color.yellow.opacity(0.1))
-        .edgesIgnoringSafeArea(.bottom)
+        .withNavigationButtons(
+            leading: NavigationButtonConfig(content: {
+                Image(.yabamEmptyLogo).resizable().frame(width: 24, height: 24)
+                YBText("내 주변 주막", fontType: .mediumHeader4, color: .Neutral.neutral900)
+            }, action: {
+                
+            })
+        )
     }
 }
