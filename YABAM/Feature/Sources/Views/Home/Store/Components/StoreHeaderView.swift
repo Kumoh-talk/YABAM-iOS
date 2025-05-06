@@ -1,8 +1,10 @@
 import SwiftUI
+import CoreLocation
 
 struct StoreHeaderView: View {
     let store: Store
     var isDetail: Bool = false
+    var userLocation: CLLocation? = nil
 
     private var nameFont: YBFont {
         isDetail ? .boldHeader2 : .boldHeader4
@@ -29,6 +31,12 @@ struct StoreHeaderView: View {
             HStack(spacing: 4) {
                 YBText(store.isOpen ? "영업 중" : "영업 종료", fontType: statusFont, color: .Neutral.neutral800)
 
+                if let userLocation, isDetail {
+                    YBText("·", fontType: .boldBody1, color: .Neutral.neutral600)
+                    
+                    YBText("\(store.distance(from: userLocation))", fontType: reviewFont, color: .Neutral.neutral800)
+                }
+                
                 YBText("·", fontType: .boldBody1, color: .Neutral.neutral600)
 
                 YBText("리뷰 수 \(store.reviewCount)", fontType: reviewFont, color: .Neutral.neutral800)
