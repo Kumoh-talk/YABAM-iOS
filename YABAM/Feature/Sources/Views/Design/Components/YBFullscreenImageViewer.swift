@@ -19,10 +19,7 @@ struct YBFullscreenImageViewer: View {
 
             TabView(selection: $currentIndex) {
                 ForEach(imageUrls.indices, id: \.self) { index in
-                    // TODO: URL 이미지로 변경
-                    Image(.yabamFillLogo)
-                        .resizable()
-                        .scaledToFit()
+                    ZoomableImageView(imageName: imageUrls[index])
                         .tag(index)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(Color.black)
