@@ -11,25 +11,28 @@ struct StoreRowView: View {
                 Image(.yabamFillLogo) // TODO: URL 기반 이미지로 교체
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 50, height: 50)
+                    .frame(width: 80, height: 80)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
                 
                 VStack(alignment: .leading, spacing: 0) {
-                    YBText(store.name, fontType: .boldHeader3, color: .Neutral.neutral900)
+                    YBText(store.name, fontType: .boldHeader2, color: .Neutral.neutral900)
                     
                     YBText(store.description, fontType: .mediumBody1, color: .Neutral.neutral800)
                     
-                    HStack(spacing: 3) {
-                        YBText(store.isOpen ? "영업 중" : "영업 종료", fontType: .mediumBody2, color: .Neutral.neutral800)
+                    HStack(spacing: 4) {
+                        YBText(store.isOpen ? "영업 중" : "영업 종료", fontType: .boldBody2, color: .Neutral.neutral800)
                         
                         YBText("·", fontType: .boldBody1, color: .Neutral.neutral600)
                         
-                        if let userLocation {
-                            YBText(store.distance(from: userLocation), fontType: .mediumBody2, color: .Neutral.neutral800)
-                            YBText("·", fontType: .boldBody1, color: .Neutral.neutral600)
-                        }
+                        YBText("방문자 리뷰 \(store.reviewCount)", fontType: .mediumBody2, color: .Neutral.neutral800)
                         
-                        YBText("리뷰 \(store.reviewCount)", fontType: .mediumBody2, color: .Neutral.neutral800)
+                        YBText("·", fontType: .boldBody1, color: .Neutral.neutral600)
+                        
+                        HStack(spacing: 0) {
+                            Image(.star)
+                            
+                            YBText("\(store.review)", fontType: .mediumBody2, color: .Neutral.neutral800)
+                        }
                     }
                 }
             }
@@ -40,7 +43,7 @@ struct StoreRowView: View {
                         Image(.yabamFillLogo) // TODO: URL 기반 이미지로 교체
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 100, height: 150)
+                            .frame(width: 100, height: 130)
                             .cornerRadius(6)
                     }
                 }

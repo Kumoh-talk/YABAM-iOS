@@ -17,6 +17,7 @@ struct StoreSampleData {
                 "https://example.com/kit_store1_9.jpg",
                 "https://example.com/kit_store1_10.jpg",
             ],
+            review: 3.3,
             reviewCount: 134,
             latitude: 36.1460,
             longitude: 128.3933,
@@ -30,6 +31,7 @@ struct StoreSampleData {
             storeImageUrls: [
                 "https://example.com/knu_store1_1.jpg"
             ],
+            review: 4.5,
             reviewCount: 242,
             latitude: 35.8908,
             longitude: 128.6118,
@@ -44,6 +46,7 @@ struct StoreSampleData {
                 "https://example.com/gumi_store1_1.jpg",
                 "https://example.com/gumi_store1_2.jpg"
             ],
+            review: 4.7,
             reviewCount: 89,
             latitude: 36.1189,
             longitude: 128.3440,
@@ -57,6 +60,7 @@ struct StoreSampleData {
             storeImageUrls: [
                 "https://example.com/andong_store1_1.jpg"
             ],
+            review: 4.4,
             reviewCount: 178,
             latitude: 36.5645,
             longitude: 128.7250,
@@ -71,6 +75,7 @@ struct StoreSampleData {
                 "https://example.com/dcu_store1_1.jpg",
                 "https://example.com/dcu_store1_2.jpg"
             ],
+            review: 4.6,
             reviewCount: 55,
             latitude: 35.7921,
             longitude: 128.7745,

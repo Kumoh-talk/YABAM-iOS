@@ -7,6 +7,7 @@ struct Store: Hashable, Identifiable {
     let description: String
     let logoImageUrl: String
     let storeImageUrls: [String]
+    let review: Double
     let reviewCount: Int
     let latitude: Double
     let longitude: Double
