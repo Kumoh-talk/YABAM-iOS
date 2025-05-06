@@ -2,8 +2,7 @@ import SwiftUI
 
 struct StoreMenuView: View {
     let store: Store
-    
-    @State private var menuSections: [MenuSection] = MenuSectionSampleData.menuSections
+    let menuSections: [MenuSection]
     
     var body: some View {
         MenuSectionList(

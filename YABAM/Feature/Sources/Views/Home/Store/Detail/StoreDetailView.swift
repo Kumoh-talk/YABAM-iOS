@@ -33,7 +33,7 @@ struct StoreDetailView: View {
                     case .info:
                         StoreInfoView(store: store)
                     case .menu:
-                        StoreMenuView(store: store)
+                        StoreMenuView(store: store, menuSections: MenuSectionSampleData.menuSections)
                     case .review:
                         StoreReviewView(store: store)
                     case .location:
