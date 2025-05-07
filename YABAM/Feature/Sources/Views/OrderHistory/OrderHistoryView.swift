@@ -2,7 +2,7 @@ import SwiftUI
 import Core
 
 struct OrderHistoryView: View {
-    let orders = OrderHistorySampleData.orders
+    @State private var orders: [OrderHistory] = []
     
     var body: some View {
         ScrollView {
@@ -24,5 +24,8 @@ struct OrderHistoryView: View {
                 
             })
         )
+        .onAppear {
+            orders = OrderHistorySampleData.orders
+        }
     }
 }

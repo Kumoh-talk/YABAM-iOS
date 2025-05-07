@@ -18,9 +18,7 @@ struct OrderHistoryCardView: View {
             
             OrderReviewButtonView(
                 canWriteReview: order.canWriteReview,
-                onTap: {
-                    showReviewSheet = true
-                }
+                onTap: { showReviewSheet = true }
             )
             .sheet(isPresented: $showReviewSheet) {
                 ReviewWriteView(isPresented: $showReviewSheet) { rating, content in
