@@ -5,7 +5,7 @@ struct OrderHistoryCardView: View {
     @State private var showReviewSheet = false
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 16) {
             OrderHistoryHeaderView(date: order.orderDate) {
                 // 주문 상세 이동
             }
@@ -13,7 +13,7 @@ struct OrderHistoryCardView: View {
             OrderHistoryStoreSummaryView(
                 imageName: .yabamFillLogo,
                 storeName: order.storeName,
-                menuSummary: "\(order.orderedMenus.first?.name ?? "") 외 \(order.totalMenuCount)개 \(order.totalPrice)원"
+                menuSummary: "\(order.totalMenuCount)개 메뉴 주문 - 총 \(order.totalPrice)원"
             )
             
             OrderReviewButtonView(
