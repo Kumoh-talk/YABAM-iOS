@@ -24,7 +24,7 @@ struct StoreDetailView: View {
                 YBDivider(color: .Neutral.neutral300, height: 8)
 
                 StoreTabSelectorView(selectedTab: $selectedTab)
-                    .padding(.vertical, 12)
+                    .padding(.vertical, 4)
 
                 YBDivider()
 
