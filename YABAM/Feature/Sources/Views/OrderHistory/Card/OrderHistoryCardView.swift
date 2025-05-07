@@ -2,7 +2,8 @@ import SwiftUI
 
 struct OrderHistoryCardView: View {
     let order: OrderHistory
-
+    @State private var showReviewSheet = false
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             OrderHistoryHeaderView(date: order.orderDate) {
@@ -18,9 +19,14 @@ struct OrderHistoryCardView: View {
             OrderReviewButtonView(
                 canWriteReview: order.canWriteReview,
                 onTap: {
-                    // 리뷰 작성 이동
+                    showReviewSheet = true
                 }
             )
+            .sheet(isPresented: $showReviewSheet) {
+                ReviewWriteView(isPresented: $showReviewSheet) { rating, content in
+                    print("저장된 리뷰 - 별점: \(rating), 내용: \(content)")
+                }
+            }
         }
         .padding()
         .background(Color.white)
