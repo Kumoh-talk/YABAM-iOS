@@ -48,5 +48,13 @@ struct OrderQRCodeView: View {
         .navigationDestination(isPresented: $showOrderMenu) {
             MenuOrderView(sections: MenuSectionSampleData.menuSections)
         }
+        .withNavigationButtons(
+            leading: NavigationButtonConfig(content: {
+                Image(.yabamEmptyLogo).resizable().frame(width: 24, height: 24)
+                YBText("주문하기", fontType: .mediumHeader5, color: .Neutral.neutral900)
+            }, action: {
+                
+            })
+        )
     }
 }
