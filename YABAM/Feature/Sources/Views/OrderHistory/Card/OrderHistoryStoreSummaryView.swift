@@ -7,7 +7,7 @@ struct OrderHistoryStoreSummaryView: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
-            Image(imageName)
+            Image(imageName) // TODO: URL 이미지로 변경
                 .resizable()
                 .frame(width: 50, height: 50)
                 .cornerRadius(6)
