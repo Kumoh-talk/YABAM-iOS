@@ -2,7 +2,7 @@ import Alamofire
 import Foundation
 
 enum StoreAPI {
-    case getStore(storeId: Int)
+    case fetchStore(storeId: Int)
 }
 
 extension StoreAPI: YBTargetType {
@@ -15,35 +15,35 @@ extension StoreAPI: YBTargetType {
     
     var path: String {
         switch self {
-        case .getStore:
+        case .fetchStore:
             return "/api/v1/store"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .getStore:
+        case .fetchStore:
             return .get
         }
     }
     
     var queryParameters: Parameters? {
         switch self {
-        case .getStore(let storeId):
+        case .fetchStore(let storeId):
             return ["storeId": storeId]
         }
     }
     
     var task: YBTask {
         switch self {
-        case .getStore:
+        case .fetchStore:
             return .requestPlain
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .getStore:
+        case .fetchStore:
             let headers: HTTPHeaders = [
                 .contentType("application/json")
             ]
