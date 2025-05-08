@@ -5,11 +5,14 @@ struct MyPageMenuItem: View {
     let isNavigable: Bool
     var color: Color = .Neutral.neutral900
     let action: () -> Void
-
+    
+    private var fontType: YBFont {
+        isNavigable ? .mediumBody1 : .mediumBody2
+    }
+    
     var body: some View {
         Button(action: action) {
             HStack {
-                let fontType: YBFont = isNavigable ? .mediumBody1 : .mediumBody2
                 YBText(title, fontType: fontType, color: color)
                 
                 Spacer()
