@@ -25,7 +25,7 @@ struct MyPageView: View {
                 case .editNickname:
                     EditNicknameView(nickname: $nickname)
                 case .privacyPolicy:
-                    EmptyView()
+                    PrivacyPolicyView()
                 case .termsOfService:
                     EmptyView()
                 }
