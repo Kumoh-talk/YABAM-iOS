@@ -1,11 +1,5 @@
 import SwiftUI
 
-enum MyPageRoute: Hashable {
-    case editNickname
-    case privacyPolicy
-    case termsOfService
-}
-
 struct MyPageView: View {
     @State private var nickname: String = "사용자 닉네임"
     @State private var path: NavigationPath = NavigationPath()
@@ -25,6 +19,7 @@ struct MyPageView: View {
                 .padding(.bottom, 40)
             }
             .padding(.horizontal, 16)
+            .navigationBarBackButtonHidden()
             .navigationDestination(for: MyPageRoute.self) { route in
                 switch route {
                 case .editNickname:
