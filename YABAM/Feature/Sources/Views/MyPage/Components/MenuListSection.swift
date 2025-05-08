@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MenuListSection: View {
     var onItemTap: (MyPageRoute) -> Void
+    var onActionTap: (MyPagePopupType) -> Void
 
     var body: some View {
         VStack(spacing: 1) {
@@ -23,15 +24,18 @@ struct MenuListSection: View {
                 MyPageMenuItem(
                     title: "로그아웃",
                     isNavigable: false,
-                    color: .Neutral.neutral800,
-                    action: { }
-                )
+                    color: .Neutral.neutral800
+                ) {
+                    onActionTap(.logout)
+                }
+
                 MyPageMenuItem(
                     title: "회원탈퇴",
                     isNavigable: false,
-                    color: .Neutral.neutral600,
-                    action: { }
-                )
+                    color: .Neutral.neutral800
+                ) {
+                    onActionTap(.withdraw)
+                }
             }
         }
         .background(Color(.systemBackground))
