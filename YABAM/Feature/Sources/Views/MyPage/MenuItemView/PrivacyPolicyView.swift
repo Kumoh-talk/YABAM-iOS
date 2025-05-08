@@ -58,7 +58,7 @@ struct PrivacyPolicyView: View {
 
                     section("8. 책임자 및 문의처", """
                     - 담당자: 개인정보 보호 책임자
-                    - 이메일: help@yabam.app
+                    - 이메일: gywns626@naver.com
                     - 문의 가능 시간: 평일 10:00 ~ 18:00
                     """)
                 }
