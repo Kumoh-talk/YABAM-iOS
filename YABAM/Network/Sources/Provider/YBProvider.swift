@@ -2,15 +2,15 @@ import Alamofire
 import Foundation
 import Core
 
-final class YBProvider<Target: YBTargetType> {
+public final class YBProvider<Target: YBTargetType> {
     private let session: Session
 
-    init(session: Session = .default) {
+    public init(session: Session = .default) {
         self.session = session
     }
 
     @discardableResult
-    func requestDecodable<T: Decodable>(
+    public func requestDecodable<T: Decodable>(
         _ target: Target,
         as type: T.Type
     ) async throws -> T {

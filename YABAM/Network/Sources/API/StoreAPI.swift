@@ -1,47 +1,47 @@
 import Alamofire
 import Foundation
 
-enum StoreAPI {
+public enum StoreAPI {
     case fetchStore(storeId: Int)
 }
 
 extension StoreAPI: YBTargetType {
-    var baseURL: URL {
+    public var baseURL: URL {
         guard let url = URL(string: APIConstant.baseURL) else {
             fatalError("Invalid base URL")
         }
         return url
     }
     
-    var path: String {
+    public var path: String {
         switch self {
         case .fetchStore:
             return "/api/v1/store"
         }
     }
     
-    var method: HTTPMethod {
+    public var method: HTTPMethod {
         switch self {
         case .fetchStore:
             return .get
         }
     }
     
-    var queryParameters: Parameters? {
+    public var queryParameters: Parameters? {
         switch self {
         case .fetchStore(let storeId):
             return ["storeId": storeId]
         }
     }
     
-    var task: YBTask {
+    public var task: YBTask {
         switch self {
         case .fetchStore:
             return .requestPlain
         }
     }
     
-    var headers: HTTPHeaders? {
+    public var headers: HTTPHeaders? {
         switch self {
         case .fetchStore:
             let headers: HTTPHeaders = [

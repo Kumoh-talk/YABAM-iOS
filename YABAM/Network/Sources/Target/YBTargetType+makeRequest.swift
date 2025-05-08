@@ -2,7 +2,7 @@ import Foundation
 import Alamofire
 
 extension YBTargetType {
-    func asURLRequest() throws -> URLRequest {
+    public func asURLRequest() throws -> URLRequest {
         var url = baseURL.appendingPathComponent(path)
         
         if let queryParams = queryParameters {

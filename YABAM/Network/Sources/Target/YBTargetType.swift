@@ -1,7 +1,7 @@
 import Foundation
 import Alamofire
 
-protocol YBTargetType: URLRequestConvertible {
+public protocol YBTargetType: URLRequestConvertible {
     /// The target's base `URL`.
     var baseURL: URL { get }
 
