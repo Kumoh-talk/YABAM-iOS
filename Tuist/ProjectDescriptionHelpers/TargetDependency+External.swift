@@ -1,6 +1,7 @@
 import ProjectDescription
 
 public enum External: String {
+    case Alamofire
     case CodeScanner
 }
 
