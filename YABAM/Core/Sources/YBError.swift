@@ -1,6 +1,7 @@
 import Foundation
 
 public enum YBError: Error {
+    case depedencyInjectionFailure
     case network
     case timeout
     case decoding
@@ -12,6 +13,8 @@ public enum YBError: Error {
 extension YBError: LocalizedError {
     public var errorDescription: String? {
         switch self {
+        case .depedencyInjectionFailure:
+            return "의존성 주입 실패"
         case .network:
             return "네트워크 오류"
         case .timeout:
@@ -29,6 +32,8 @@ extension YBError: LocalizedError {
 
     public var recoverySuggestion: String? {
         switch self {
+        case .depedencyInjectionFailure:
+            return "의존성 주입에 실패했습니다. 잠시 후 다시 시도해주세요."
         case .network:
             return "인터넷 연결 상태를 확인한 후 다시 시도해주세요."
         case .timeout:
