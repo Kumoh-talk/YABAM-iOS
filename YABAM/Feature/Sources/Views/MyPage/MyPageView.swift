@@ -27,7 +27,7 @@ struct MyPageView: View {
                 case .privacyPolicy:
                     PrivacyPolicyView()
                 case .termsOfService:
-                    EmptyView()
+                    TermsOfServiceView()
                 }
             }
             .withNavigationButtons(
