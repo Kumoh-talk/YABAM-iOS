@@ -6,7 +6,6 @@
 
     let packageSettings = PackageSettings(
         productTypes: [
-            "Moya": .framework,
             "CodeScanner": .framework,
         ]
     )
@@ -15,7 +14,6 @@
 let package = Package(
     name: "YABAM",
     dependencies: [
-        .package(url: "https://github.com/Moya/Moya", from: "15.0.3"),
         .package(url: "https://github.com/twostraws/CodeScanner.git", from: "2.5.2")
     ]
 )

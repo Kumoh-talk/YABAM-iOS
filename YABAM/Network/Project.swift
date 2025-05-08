@@ -11,7 +11,6 @@ let project = Project(
             sources: .sources,
             dependencies: [
                 .core(),
-                .external(dependency: .Moya)
             ]
         )
     ]
