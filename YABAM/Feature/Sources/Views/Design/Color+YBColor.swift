@@ -17,5 +17,6 @@ extension Color {
     enum Semantic {
         static let error = Color(asset: FeatureAsset.Colors.error)
         static let info = Color(asset: FeatureAsset.Colors.info)
+        static let yellow = Color(asset: FeatureAsset.Colors.yellow)
     }
 }
