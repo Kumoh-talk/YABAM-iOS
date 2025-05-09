@@ -1,4 +1,5 @@
 import Alamofire
+import Core
 import Foundation
 
 public enum StoreAPI {
@@ -7,7 +8,7 @@ public enum StoreAPI {
 
 extension StoreAPI: YBTargetType {
     public var baseURL: URL {
-        guard let url = URL(string: APIConstant.baseURL) else {
+        guard let url = URL(string: YBConstant.baseURL) else {
             fatalError("Invalid base URL")
         }
         return url

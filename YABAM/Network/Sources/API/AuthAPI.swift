@@ -1,4 +1,5 @@
 import Alamofire
+import Core
 import Foundation
 import YBData
 
@@ -8,7 +9,7 @@ public enum AuthAPI {
 
 extension AuthAPI: YBTargetType {
     public var baseURL: URL {
-        guard let url = URL(string: APIConstant.baseURL) else {
+        guard let url = URL(string: YBConstant.baseURL) else {
             fatalError("Invalid base URL")
         }
         return url
