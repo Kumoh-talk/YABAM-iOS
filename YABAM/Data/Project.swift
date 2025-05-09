@@ -11,10 +11,7 @@ let project = Project(
             sources: .sources,
             dependencies: [
                 // Module
-                .core(),
-                
-                // Third Party Library
-                .external(dependency: .KeyChainManager)
+                .core()
             ]
         )
     ]

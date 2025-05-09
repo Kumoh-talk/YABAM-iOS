@@ -15,7 +15,9 @@ let project = Project(
                 .data(),
                 
                 // Third Party Library
-                .external(dependency: .Alamofire)
+                .external(dependency: .Alamofire),
+                .external(dependency: .KakaoSDKAuth),
+                .external(dependency: .KakaoSDKUser)
             ]
         )
     ]
