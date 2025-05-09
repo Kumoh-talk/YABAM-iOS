@@ -15,7 +15,7 @@
 let package = Package(
     name: "YABAM",
     dependencies: [
-        .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.10.0")),
+        .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.10.2")),
         .package(url: "https://github.com/twostraws/CodeScanner.git", from: "2.5.2")
     ]
 )
