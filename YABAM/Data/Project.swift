@@ -12,6 +12,9 @@ let project = Project(
             dependencies: [
                 // Module
                 .core(),
+                
+                // Third Party Library
+                .external(dependency: .KeyChainManager)
             ]
         )
     ]

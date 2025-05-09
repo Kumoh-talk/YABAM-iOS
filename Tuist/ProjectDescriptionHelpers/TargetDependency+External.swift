@@ -3,6 +3,7 @@ import ProjectDescription
 public enum External: String {
     case Alamofire
     case CodeScanner
+    case KeyChainManager = "KeyChainManager-KJ"
 }
 
 extension TargetDependency {
