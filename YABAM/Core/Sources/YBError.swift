@@ -4,6 +4,7 @@ public enum YBError: Error {
     case dependencyInjectionFailure
     case network
     case invalidResponse
+    case oidcFailure
     case refreshTokenFailure
     case tokenFailure
     case timeout
@@ -22,6 +23,8 @@ extension YBError: LocalizedError {
             return "네트워크 오류"
         case .invalidResponse:
             return "잘못된 응답"
+        case .oidcFailure:
+            return "OIDC 오류"
         case .refreshTokenFailure:
             return "리프레시 토큰 오류"
         case .tokenFailure:
@@ -47,6 +50,8 @@ extension YBError: LocalizedError {
             return "인터넷 연결 상태를 확인한 후 다시 시도해주세요."
         case .invalidResponse:
             return "서버에서 잘못된 응답을 받았습니다. 잠시 후 다시 시도해주세요."
+        case .oidcFailure:
+            return "OIDC 인증에 실패했습니다. 잠시 후 다시 시도해주세요."
         case .refreshTokenFailure:
             return "리프레시 토큰이 만료되었습니다. 다시 로그인해주세요."
         case .tokenFailure:
