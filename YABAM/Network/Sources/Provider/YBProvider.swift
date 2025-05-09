@@ -14,6 +14,14 @@ public final class YBProvider<Target: YBTargetType> {
         _ target: Target,
         as type: T.Type
     ) async throws -> T {
+        let (value, _) = try await requestDecodableWithResponse(target, as: T.self)
+        return value
+    }
+    
+    public func requestDecodableWithResponse<T: Decodable>(
+        _ target: Target,
+        as type: T.Type
+    ) async throws -> (T, HTTPURLResponse) {
         let request = try target.asURLRequest()
         logRequest(request)
         
@@ -29,8 +37,12 @@ public final class YBProvider<Target: YBTargetType> {
             throw YBError.decoding
         }
         
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw YBError.invalidResponse
+        }
+        
         YBLogger.debug("✅ 디코딩 성공: \(String(describing: value))")
-        return value
+        return (value, httpResponse)
     }
     
     // MARK: - Private Methods
