@@ -12,6 +12,7 @@ let project = Project(
             dependencies: [
                 // Module
                 .core(),
+                .data(),
                 
                 // Third Party Library
                 .external(dependency: .Alamofire)

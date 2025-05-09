@@ -1,6 +1,4 @@
-public protocol AuthServiceInterface {
-    func loginOAuth(oauthProvider: OAuthProvider, oauthId: String, idToken: String) async throws
-}
+import YBData
 
 public struct AuthService: AuthServiceInterface {
     private let provider: YBProvider<AuthAPI>
@@ -9,10 +7,10 @@ public struct AuthService: AuthServiceInterface {
         self.provider = provider
     }
     
-    public func loginOAuth(oauthProvider: OAuthProvider, oauthId: String, idToken: String) async throws {
-        try await provider.requestDecodable(
+    public func loginOAuth(oauthProvider: String, oauthId: String, idToken: String) async throws {
+        let (oauthResponseDTO, response) = try await provider.requestDecodableWithResponse(
             .loginOAuth(provider: oauthProvider, oauthId: oauthId, idToken: idToken),
-            as: EmptyDecodable.self
+            as: OAuthResponseDTO.self
         )
     }
 }

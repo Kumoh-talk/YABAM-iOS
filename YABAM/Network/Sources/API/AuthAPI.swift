@@ -1,8 +1,9 @@
 import Alamofire
 import Foundation
+import YBData
 
 public enum AuthAPI {
-    case loginOAuth(provider: OAuthProvider, oauthId: String, idToken: String) // Oauth 로그인
+    case loginOAuth(provider: String, oauthId: String, idToken: String) // Oauth 로그인
 }
 
 extension AuthAPI: YBTargetType {
@@ -30,7 +31,7 @@ extension AuthAPI: YBTargetType {
     public var queryParameters: Parameters? {
         switch self {
         case .loginOAuth(let provider, _, _):
-            return ["provider": provider.rawValue]
+            return ["provider": provider]
         }
     }
     
