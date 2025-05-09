@@ -1,6 +1,7 @@
 import SwiftUI
 import Core
 import Feature
+import YBData
 import Network
 
 @main
@@ -13,12 +14,21 @@ struct YABAMApp: App {
     
     var body: some Scene {
         WindowGroup {
-            YBTabView()
+            AuthView()
         }
     }
     
     private func setupDependencyInjection() {
+        /// Auth
+        let authService = AuthService()
+        DIContainer.shared.register(AuthServiceInterface.self, object: authService)
+        let authRepository = AuthRepository(service: authService)
+        DIContainer.shared.register(AuthRepositoryInterface.self, object: authRepository)
+        
         /// Store Service
-        DIContainer.shared.register(StoreServiceInterface.self, object: StoreService())
+        let storeService = StoreService()
+        DIContainer.shared.register(StoreServiceInterface.self, object: storeService)
+        let storeRepository = StoreRepository(service: storeService)
+        DIContainer.shared.register(StoreRepositoryInterface.self, object: storeRepository)
     }
 }
