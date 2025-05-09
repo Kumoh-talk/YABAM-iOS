@@ -41,7 +41,15 @@ public final class YBProvider<Target: YBTargetType> {
 
     private func performRequest(_ request: URLRequest) async throws -> (Data, URLResponse) {
         do {
-            return try await session.session.data(for: request)
+            let dataTask = session.request(request)
+            let result = await dataTask.serializingData().result
+            
+            switch result {
+            case .success(let value):
+                return (value, dataTask.response ?? URLResponse())
+            case .failure(let error):
+                throw error
+            }
         } catch {
             YBLogger.error("❌ 네트워크 오류: \(error.localizedDescription)")
             throw error.asYBError
