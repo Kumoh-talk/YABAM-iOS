@@ -24,4 +24,10 @@ extension TargetDependency {
     }
 }
 
+// MARK: Data
 
+extension TargetDependency {
+    public static func data()-> TargetDependency {
+        .project(target: "YBData", path: .relativeToRoot("YABAM/Data"))
+    }
+}
