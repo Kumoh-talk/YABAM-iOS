@@ -10,8 +10,11 @@ let project = Project(
             bundleId: Project.bundleID + ".network",
             sources: .sources,
             dependencies: [
+                // Module
                 .core(),
-                .external(dependency: .Moya)
+                
+                // Third Party Library
+                .external(dependency: .Alamofire)
             ]
         )
     ]

@@ -11,7 +11,11 @@ let project = Project(
             sources: .sources,
             resources: .default,
             dependencies: [
+                // Module
                 .core(),
+                .network(),
+                
+                // Third Party Library
                 .external(dependency: .CodeScanner)
             ]
         )
