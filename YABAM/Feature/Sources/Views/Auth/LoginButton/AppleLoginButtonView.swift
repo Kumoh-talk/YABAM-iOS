@@ -15,5 +15,6 @@ struct AppleLoginButtonView: View {
         .signInWithAppleButtonStyle(.white)
         .frame(height: 48)
         .cornerRadius(10)
+        .shadow(color: .black.opacity(0.2), radius: 4, x: 1, y: 3)
     }
 }
