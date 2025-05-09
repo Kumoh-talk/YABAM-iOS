@@ -10,7 +10,10 @@ let project = Project(
             bundleId: Project.bundleID + ".network",
             sources: .sources,
             dependencies: [
+                // Module
                 .core(),
+                
+                // Third Party Library
                 .external(dependency: .Alamofire)
             ]
         )
