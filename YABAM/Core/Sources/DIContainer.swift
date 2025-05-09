@@ -13,7 +13,7 @@ public final class DIContainer {
         let key = String(describing: type)
         guard let object = objects[key] as? T else {
             YBLogger.error("\(#function): \(key)에 해당하는 object 없음")
-            throw YBError.depedencyInjectionFailure
+            throw YBError.dependencyInjectionFailure
         }
         return object
     }
