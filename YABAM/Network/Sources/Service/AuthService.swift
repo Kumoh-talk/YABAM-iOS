@@ -53,14 +53,7 @@ public struct AuthService: AuthServiceInterface {
         return oauthId
     }
 
-    private func saveToken(response: AuthTokenDTO) async throws {
-        let token = (response.accessToken, response.refreshToken, response.refreshTokenExpiredAt)
-        try await YBTokenManager.shared.saveToken(token)
-    }
-
-    // MARK: - Networking
-
-    public func loginOAuth(oauthProvider: String, oauthId: String, idToken: String) async throws -> AuthTokenDTO {
+    private func loginOAuth(oauthProvider: String, oauthId: String, idToken: String) async throws -> AuthTokenDTO {
         let (oauthResponseDTO, response) = try await provider.requestDecodableWithResponse(
             .loginOAuth(provider: oauthProvider, oauthId: oauthId, idToken: idToken),
             as: OAuthResponseDTO.self
@@ -75,6 +68,11 @@ public struct AuthService: AuthServiceInterface {
             refreshToken: refreshToken,
             refreshTokenExpiredAt: expiresAt
         )
+    }
+    
+    private func saveToken(response: AuthTokenDTO) async throws {
+        let token = (response.accessToken, response.refreshToken, response.refreshTokenExpiredAt)
+        try await YBTokenManager.shared.saveToken(token)
     }
 
     // MARK: - Kakao Login Helpers
