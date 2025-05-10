@@ -1,6 +1,10 @@
-import YBData
 import KakaoSDKUser
 import Core
+
+public protocol AuthServiceInterface {
+    func loginWithKakao() async throws
+    func loginWithApple(oauthId: String, idToken: String) async throws
+}
 
 public struct AuthService: AuthServiceInterface {
     private let provider: YBProvider<AuthAPI>
@@ -8,66 +12,98 @@ public struct AuthService: AuthServiceInterface {
     public init(provider: YBProvider<AuthAPI> = YBProvider<AuthAPI>()) {
         self.provider = provider
     }
+
+    // MARK: - Public Service Methods
     
+    public func loginWithKakao() async throws {
+        let idToken = try await requestKakaoIDToken()
+        let oauthId = try await decodeOAuthId(from: idToken)
+        let authTokenDTO = try await loginOAuth(
+            oauthProvider: YBConstant.oauthKakao,
+            oauthId: oauthId,
+            idToken: idToken
+        )
+        try await saveToken(response: authTokenDTO)
+    }
+
+    public func loginWithApple(oauthId: String, idToken: String) async throws {
+        let authTokenDTO = try await loginOAuth(
+            oauthProvider: YBConstant.oauthApple,
+            oauthId: oauthId,
+            idToken: idToken
+        )
+        try await saveToken(response: authTokenDTO)
+    }
+
+    // MARK: - Private Helper Methods
+    
+    private func requestKakaoIDToken() async throws -> String {
+        if UserApi.isKakaoTalkLoginAvailable() {
+            return try await loginWithKakaoApp()
+        } else {
+            return try await loginWithKakaoAccount()
+        }
+    }
+
+    private func decodeOAuthId(from idToken: String) async throws -> String {
+        guard let payload = await JWTDecoder.shared.decode(token: idToken),
+              let oauthId = payload["sub"] as? String else {
+            throw YBError.oidcFailure
+        }
+        return oauthId
+    }
+
+    private func saveToken(response: AuthTokenDTO) async throws {
+        let token = (response.accessToken, response.refreshToken, response.refreshTokenExpiredAt)
+        try await YBTokenManager.shared.saveToken(token)
+    }
+
+    // MARK: - Networking
+
     public func loginOAuth(oauthProvider: String, oauthId: String, idToken: String) async throws -> AuthTokenDTO {
         let (oauthResponseDTO, response) = try await provider.requestDecodableWithResponse(
             .loginOAuth(provider: oauthProvider, oauthId: oauthId, idToken: idToken),
             as: OAuthResponseDTO.self
         )
-        
+
         guard let (refreshToken, expiresAt) = response.extractRefreshTokenInfo() else {
             throw YBError.refreshTokenFailure
         }
-        
+
         return AuthTokenDTO(
             accessToken: oauthResponseDTO.accessToken,
             refreshToken: refreshToken,
             refreshTokenExpiredAt: expiresAt
         )
     }
-    
-    public func requestKakaoLogin() async throws -> String {
-        if UserApi.isKakaoTalkLoginAvailable() {
-            YBLogger.info("카카오톡 앱으로 로그인 인증")
-            return try await handleKakaoLoginWithApp()
-        } else {
-            YBLogger.info("카톡이 설치가 안 되어 웹뷰 실행")
-            return try await handleKakaoLoginWithAccount()
-        }
-    }
-    
-    private func handleKakaoLoginWithApp() async throws -> String {
+
+    // MARK: - Kakao Login Helpers
+
+    private func loginWithKakaoApp() async throws -> String {
         try await withCheckedThrowingContinuation { continuation in
             UserApi.shared.loginWithKakaoTalk { oauthToken, error in
-                if let error {
+                if let error = error {
                     continuation.resume(throwing: error)
-                    return
-                }
-                
-                guard let idToken = oauthToken?.idToken else {
+                } else if let idToken = oauthToken?.idToken {
+                    continuation.resume(returning: idToken)
+                } else {
                     continuation.resume(throwing: YBError.oidcFailure)
-                    return
                 }
-                
-                continuation.resume(returning: idToken)
             }
         }
     }
-    
-    private func handleKakaoLoginWithAccount() async throws -> String {
+
+    private func loginWithKakaoAccount() async throws -> String {
         try await withCheckedThrowingContinuation { continuation in
             UserApi.shared.loginWithKakaoAccount { oauthToken, error in
-                if let error {
+                if let error = error {
                     continuation.resume(throwing: error)
-                    return
-                }
-                guard let idToken = oauthToken?.idToken else {
+                } else if let idToken = oauthToken?.idToken {
+                    continuation.resume(returning: idToken)
+                } else {
                     continuation.resume(throwing: YBError.oidcFailure)
-                    return
                 }
-                continuation.resume(returning: idToken)
             }
         }
     }
-    
 }

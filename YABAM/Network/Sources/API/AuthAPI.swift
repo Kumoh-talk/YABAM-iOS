@@ -1,7 +1,6 @@
 import Alamofire
 import Core
 import Foundation
-import YBData
 
 public enum AuthAPI {
     case loginOAuth(provider: String, oauthId: String, idToken: String) // Oauth 로그인

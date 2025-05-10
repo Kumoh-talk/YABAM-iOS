@@ -5,4 +5,6 @@ public enum YBConstant {
     public static let accessToken = "accessToken"
     public static let refreshToken = "refreshToken"
     public static let refreshTokenExpiredAt = "refreshTokenExpiredAt"
+    public static let oauthKakao = "kakao"
+    public static let oauthApple = "apple"
 }

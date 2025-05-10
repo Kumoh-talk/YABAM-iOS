@@ -1,4 +1,6 @@
-import YBData
+public protocol StoreServiceInterface {
+    func fetchStore(storeId: Int) async throws -> StoreDTO
+}
 
 public final class StoreService: StoreServiceInterface {
     private let provider: YBProvider<StoreAPI>
