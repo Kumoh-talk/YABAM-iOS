@@ -30,7 +30,7 @@ struct MyPageView: View {
                 .padding(.horizontal, 16)
 
                 if let popup = activePopup, isPopupPresented {
-                    ConfirmationPopup(
+                    YBConfirmationPopup(
                         type: popup,
                         isPresented: $isPopupPresented,
                         onConfirm: {

@@ -19,7 +19,7 @@ struct YBFullscreenImageViewer: View {
 
             TabView(selection: $currentIndex) {
                 ForEach(imageUrls.indices, id: \.self) { index in
-                    ZoomableImageView(imageName: imageUrls[index])
+                    YBZoomableImageView(imageName: imageUrls[index])
                         .tag(index)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(Color.black)

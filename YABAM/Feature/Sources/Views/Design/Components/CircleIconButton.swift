@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct CircleIconButton: View {
+struct YBCircleIconButton: View {
     let icon: Image
 
     var body: some View {

@@ -65,7 +65,7 @@ struct MenuDetailView: View {
         .navigationBarBackButtonHidden()
         .withNavigationButtons(
             leading: NavigationButtonConfig {
-                CircleIconButton(icon: Image(.popArrow))
+                YBCircleIconButton(icon: Image(.popArrow))
             } action: {
                 dismiss()
             }
