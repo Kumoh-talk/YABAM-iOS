@@ -4,26 +4,30 @@ struct StoreTabSelectorView: View {
     @Binding var selectedTab: StoreDetailTab
 
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 12) {
-                ForEach(StoreDetailTab.allCases, id: \.self) { tab in
-                    Button(action: {
-                        selectedTab = tab
-                    }) {
+        HStack(spacing: 0) {
+            ForEach(StoreDetailTab.allCases, id: \.self) { tab in
+                Button(action: {
+                    selectedTab = tab
+                }) {
+                    VStack {
                         YBText(
                             tab.title,
                             fontType: .boldBody1,
-                            color: selectedTab == tab ? .blue : .gray
+                            color: selectedTab == tab ? .Semantic.info : .Neutral.neutral600
                         )
-                        .padding(.vertical, 8)
-                        .padding(.horizontal, 16)
-                        .background(selectedTab == tab ? Color.blue.opacity(0.1) : Color.clear)
-                        .cornerRadius(16)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
+                        
+                        Rectangle()
+                            .fill(selectedTab == tab ? Color.Semantic.info : Color.Neutral.neutral100)
+                            .frame(height: 2)
                     }
+                    .background(Color.white)
                 }
             }
-            .padding(.horizontal)
-            .padding(.vertical, 12)
         }
+        .frame(maxWidth: .infinity)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 0))
     }
 }

@@ -5,7 +5,7 @@ struct StoreDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var locationManager = LocationManager()
     
-    @State private var selectedTab: StoreDetailTab = .info
+    @State private var selectedTab: StoreDetailTab = .menu
     @State private var isImageFullscreenPresented = false
     @State private var selectedImageIndex = 0
     
@@ -26,12 +26,8 @@ struct StoreDetailView: View {
                 StoreTabSelectorView(selectedTab: $selectedTab)
                     .padding(.vertical, 4)
 
-                YBDivider()
-
                 VStack(alignment: .leading, spacing: 16) {
                     switch selectedTab {
-                    case .info:
-                        StoreInfoView(store: store)
                     case .menu:
                         StoreMenuView(store: store, menuSections: MenuSectionSampleData.menuSections)
                     case .review:
