@@ -96,7 +96,7 @@ public struct AuthService: AuthServiceInterface {
     private func loginWithKakaoAccount() async throws -> String {
         try await withCheckedThrowingContinuation { continuation in
             Task { @MainActor in
-                UserApi.shared.loginWithKakaoTalk { oauthToken, error in
+                UserApi.shared.loginWithKakaoAccount { oauthToken, error in
                     if let error = error {
                         continuation.resume(throwing: error)
                     } else if let idToken = oauthToken?.idToken {

@@ -32,18 +32,16 @@ final class AuthViewModel: ObservableObject {
     }
     
     @MainActor
-    func handleAppleLogin(oauthId: String, idToken: String) {
-        Task {
-            authState = .loading
+    func handleAppleLogin(oauthId: String, idToken: String) async {
+        authState = .loading
 
-            do {
-                try await authService.loginWithApple(oauthId: oauthId, idToken: idToken)
-                authState = .authenticated
-            } catch let error as YBError {
-                authState = .failure(error.displayFeedbackMessage)
-            } catch {
-                authState = .failure("예기치 않은 오류가 발생했어요.")
-            }
+        do {
+            try await authService.loginWithApple(oauthId: oauthId, idToken: idToken)
+            authState = .authenticated
+        } catch let error as YBError {
+            authState = .failure(error.displayFeedbackMessage)
+        } catch {
+            authState = .failure("예기치 않은 오류가 발생했어요.")
         }
     }
 }

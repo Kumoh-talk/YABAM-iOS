@@ -21,6 +21,7 @@ public struct RootView: View {
                 try await YBTokenManager.shared.loadTokenFromKC()
                 isAuthenticated = true
             } catch {
+                YBLogger.error("토큰 로딩 실패: \(error.localizedDescription)")
                 isAuthenticated = false
             }
         }

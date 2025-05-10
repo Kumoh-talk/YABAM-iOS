@@ -34,7 +34,7 @@ struct AuthView: View {
                     .disabled(viewModel.authState == .loading)
 
                     AppleLoginButtonView { oauthId, idToken in
-                        viewModel.handleAppleLogin(oauthId: oauthId, idToken: idToken)
+                        Task { await viewModel.handleAppleLogin(oauthId: oauthId, idToken: idToken) }
                     }
                     .disabled(viewModel.authState == .loading)
                 }
