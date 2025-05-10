@@ -12,7 +12,7 @@ struct StoreImageSliderView: View {
                 Image(.yabamFillLogo)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(height: 200)
+                    .frame(height: 300)
                     .clipped()
                     .onTapGesture {
                         isPresented = true
@@ -21,6 +21,6 @@ struct StoreImageSliderView: View {
             }
         }
         .tabViewStyle(PageTabViewStyle())
-        .frame(height: 200)
+        .frame(height: 300)
     }
 }

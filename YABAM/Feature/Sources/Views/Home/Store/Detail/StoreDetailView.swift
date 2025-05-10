@@ -49,12 +49,11 @@ struct StoreDetailView: View {
                 initialIndex: selectedImageIndex
             )
         }
-        .navigationTitle(store.name)
-        .navigationBarTitleDisplayMode(.inline)
+        .ignoresSafeArea(edges: .top)
         .navigationBarBackButtonHidden()
         .withNavigationButtons(
             leading: NavigationButtonConfig {
-                Image(.popArrow)
+                CircleIconButton(icon: Image(.popArrow))
             } action: {
                 dismiss()
             }
