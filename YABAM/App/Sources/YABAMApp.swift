@@ -2,6 +2,7 @@ import SwiftUI
 import Core
 import Feature
 import Network
+import KakaoSDKAuth
 
 @main
 struct YABAMApp: App {
@@ -14,6 +15,11 @@ struct YABAMApp: App {
     var body: some Scene {
         WindowGroup {
             AuthView()
+                .onOpenURL { url in
+                    if AuthApi.isKakaoTalkLoginUrl(url) {
+                        _ = AuthController.handleOpenUrl(url: url)
+                    }
+                }
         }
     }
     
