@@ -2,11 +2,15 @@ import SwiftUI
 import Network
 
 public struct AuthView: View {
-    @StateObject private var viewModel = AuthViewModel(authService: AuthService())
+    @StateObject private var viewModel: AuthViewModel
     @State private var navigateToHome = false
     @State private var showErrorAlert = false
     
-    public init() { }
+    public init(
+        viewModel: @autoclosure @escaping () -> AuthViewModel = AuthViewModelFactory.make()
+    ) {
+        _viewModel = StateObject(wrappedValue: viewModel())
+    }
 
     public var body: some View {
         ZStack {

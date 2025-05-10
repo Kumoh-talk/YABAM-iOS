@@ -2,7 +2,7 @@ import Core
 import Combine
 import Network
 
-final class AuthViewModel: ObservableObject {
+public final class AuthViewModel: ObservableObject {
     enum AuthState: Equatable {
         case idle
         case loading
