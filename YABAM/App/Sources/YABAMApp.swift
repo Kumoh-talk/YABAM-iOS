@@ -3,23 +3,27 @@ import Core
 import Feature
 import Network
 import KakaoSDKAuth
+import KakaoSDKCommon
 
 @main
 struct YABAMApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    init() {
+    init() {        
+        if let kakaoAppKey = Bundle.main.infoDictionary?["KAKAO_NATIVE_APP_KEY"] as? String {
+            KakaoSDK.initSDK(appKey: kakaoAppKey)
+        }
         setupDependencyInjection()
     }
     
     var body: some Scene {
         WindowGroup {
             AuthView()
-                .onOpenURL { url in
-                    if AuthApi.isKakaoTalkLoginUrl(url) {
-                        _ = AuthController.handleOpenUrl(url: url)
-                    }
+                .onOpenURL(perform: { url in
+                if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                    _ = AuthController.handleOpenUrl(url: url)
                 }
+            })
         }
     }
     
