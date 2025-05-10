@@ -14,9 +14,42 @@
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleAspectFill" image="authBackground" translatesAutoresizingMaskIntoConstraints="NO" id="sFW-9e-9A7">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="852" id="height-bg"/>
+                                    <constraint firstAttribute="width" constant="393" id="width-bg"/>
+                                </constraints>
+                            </imageView>
+                            <stackView contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="OML-a9-tQh">
+                                <rect key="frame" x="116.66666666666669" y="318" width="160" height="216"/>
+                                <subviews>
+                                    <imageView contentMode="scaleAspectFit" image="YABAMWhiteLogo" translatesAutoresizingMaskIntoConstraints="NO" id="SKM-8C-eAF">
+                                        <rect key="frame" x="10" y="0.0" width="140" height="140"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="140" id="height-logo"/>
+                                            <constraint firstAttribute="width" constant="140" id="width-logo"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView contentMode="scaleAspectFit" image="authYABAMText" translatesAutoresizingMaskIntoConstraints="NO" id="W9Y-ll-U0r">
+                                        <rect key="frame" x="0.0" y="156" width="160" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="height-text"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="sFW-9e-9A7" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="bg-leading"/>
+                            <constraint firstItem="sFW-9e-9A7" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="bg-top"/>
+                            <constraint firstItem="OML-a9-tQh" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="centerX"/>
+                            <constraint firstItem="OML-a9-tQh" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="centerY"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24,4 +57,9 @@
             <point key="canvasLocation" x="52.671755725190835" y="374.64788732394368"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="YABAMWhiteLogo" width="156" height="156.33332824707031"/>
+        <image name="authBackground" width="633" height="1198"/>
+        <image name="authYABAMText" width="160" height="71.333335876464844"/>
+    </resources>
 </document>

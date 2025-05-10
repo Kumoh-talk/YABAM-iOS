@@ -68,4 +68,8 @@ extension YBError: LocalizedError {
             return "예상치 못한 오류가 발생했습니다. 앱을 재시작해주세요."
         }
     }
+    
+    public var displayFeedbackMessage: String {
+        return self.recoverySuggestion ?? "다시 시도해주세요."
+    }
 }

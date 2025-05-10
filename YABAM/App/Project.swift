@@ -13,6 +13,7 @@ let appTarget = Target.target(
         .glob(pattern: .relativeToRoot("YABAM/App/Resources/**")),
         .glob(pattern: .relativeToRoot("YABAM/App/Resources/LaunchScreen.storyboard"))
     ],
+    entitlements: .file(path: .relativeToRoot("YABAM/App/SupportingFiles/yabam.entitlements")),
     dependencies: [
         // Module
         .core(),

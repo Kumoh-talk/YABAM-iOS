@@ -79,13 +79,15 @@ public struct AuthService: AuthServiceInterface {
 
     private func loginWithKakaoApp() async throws -> String {
         try await withCheckedThrowingContinuation { continuation in
-            UserApi.shared.loginWithKakaoTalk { oauthToken, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let idToken = oauthToken?.idToken {
-                    continuation.resume(returning: idToken)
-                } else {
-                    continuation.resume(throwing: YBError.oidcFailure)
+            Task { @MainActor in
+                UserApi.shared.loginWithKakaoTalk { oauthToken, error in
+                    if let error = error {
+                        continuation.resume(throwing: error)
+                    } else if let idToken = oauthToken?.idToken {
+                        continuation.resume(returning: idToken)
+                    } else {
+                        continuation.resume(throwing: YBError.oidcFailure)
+                    }
                 }
             }
         }
@@ -93,13 +95,15 @@ public struct AuthService: AuthServiceInterface {
 
     private func loginWithKakaoAccount() async throws -> String {
         try await withCheckedThrowingContinuation { continuation in
-            UserApi.shared.loginWithKakaoAccount { oauthToken, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let idToken = oauthToken?.idToken {
-                    continuation.resume(returning: idToken)
-                } else {
-                    continuation.resume(throwing: YBError.oidcFailure)
+            Task { @MainActor in
+                UserApi.shared.loginWithKakaoAccount { oauthToken, error in
+                    if let error = error {
+                        continuation.resume(throwing: error)
+                    } else if let idToken = oauthToken?.idToken {
+                        continuation.resume(returning: idToken)
+                    } else {
+                        continuation.resume(throwing: YBError.oidcFailure)
+                    }
                 }
             }
         }
