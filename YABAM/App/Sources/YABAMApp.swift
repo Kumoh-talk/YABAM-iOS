@@ -18,7 +18,7 @@ struct YABAMApp: App {
     
     var body: some Scene {
         WindowGroup {
-            AuthView()
+            RootView()
                 .onOpenURL(perform: { url in
                 if (AuthApi.isKakaoTalkLoginUrl(url)) {
                     _ = AuthController.handleOpenUrl(url: url)

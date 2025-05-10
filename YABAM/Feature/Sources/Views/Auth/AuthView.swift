@@ -1,18 +1,16 @@
 import SwiftUI
 import Network
 
-public struct AuthView: View {
+struct AuthView: View {
     @StateObject private var viewModel: AuthViewModel
     @State private var navigateToHome = false
     @State private var showErrorAlert = false
     
-    public init(
-        viewModel: @autoclosure @escaping () -> AuthViewModel = AuthViewModelFactory.make()
-    ) {
-        _viewModel = StateObject(wrappedValue: viewModel())
+    init(viewModel: AuthViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
 
-    public var body: some View {
+    var body: some View {
         ZStack {
             Image(.authBackground)
                 .resizable()
@@ -25,16 +23,7 @@ public struct AuthView: View {
             VStack {
                 Spacer()
 
-                VStack(spacing: 16) {
-                    Image(.yabamWhiteLogo)
-                        .resizable()
-                        .frame(width: 140, height: 140)
-
-                    Image(.authYABAMText)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 60)
-                }
+                YBLogoView()
 
                 Spacer()
 

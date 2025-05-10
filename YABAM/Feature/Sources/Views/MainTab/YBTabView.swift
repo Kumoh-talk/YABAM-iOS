@@ -1,11 +1,9 @@
 import SwiftUI
 
-public struct YBTabView: View {
+struct YBTabView: View {
     @State private var selectedTab: Int = 0
     
-    public init() { }
-    
-    public var body: some View {
+    var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
                 ZStack {
