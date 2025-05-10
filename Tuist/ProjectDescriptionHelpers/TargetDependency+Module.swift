@@ -23,5 +23,3 @@ extension TargetDependency {
         .project(target: "Feature", path: .relativeToRoot("YABAM/Feature"))
     }
 }
-
-

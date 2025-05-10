@@ -14,7 +14,9 @@ let project = Project(
                 .core(),
                 
                 // Third Party Library
-                .external(dependency: .Alamofire)
+                .external(dependency: .Alamofire),
+                .external(dependency: .KakaoSDKAuth),
+                .external(dependency: .KakaoSDKUser)
             ]
         )
     ]

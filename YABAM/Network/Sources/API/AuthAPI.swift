@@ -2,11 +2,11 @@ import Alamofire
 import Core
 import Foundation
 
-public enum StoreAPI {
-    case fetchStore(storeId: Int)
+public enum AuthAPI {
+    case loginOAuth(provider: String, oauthId: String, idToken: String) // Oauth 로그인
 }
 
-extension StoreAPI: YBTargetType {
+extension AuthAPI: YBTargetType {
     public var baseURL: URL {
         guard let url = URL(string: YBConstant.baseURL) else {
             fatalError("Invalid base URL")
@@ -16,35 +16,42 @@ extension StoreAPI: YBTargetType {
     
     public var path: String {
         switch self {
-        case .fetchStore:
-            return "/api/v1/store"
+        case .loginOAuth:
+            return "/v1/auth/oauth/register"
         }
     }
     
     public var method: HTTPMethod {
         switch self {
-        case .fetchStore:
-            return .get
+        case .loginOAuth:
+            return .post
         }
     }
     
     public var queryParameters: Parameters? {
         switch self {
-        case .fetchStore(let storeId):
-            return ["storeId": storeId]
+        case .loginOAuth(let provider, _, _):
+            return ["provider": provider]
         }
     }
     
     public var task: YBTask {
         switch self {
-        case .fetchStore:
-            return .requestPlain
+        case .loginOAuth(_, let oauthId, let idToken):
+            return .requestParameters(
+                parameters: [
+                    "oauthId": oauthId,
+                    "idToken": idToken,
+                    "nonce": "nonce"
+                ],
+                encoding: JSONEncoding.default
+            )
         }
     }
     
     public var headers: HTTPHeaders? {
         switch self {
-        case .fetchStore:
+        case .loginOAuth:
             let headers: HTTPHeaders = [
                 .contentType("application/json")
             ]

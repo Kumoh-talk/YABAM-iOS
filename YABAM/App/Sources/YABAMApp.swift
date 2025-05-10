@@ -13,12 +13,17 @@ struct YABAMApp: App {
     
     var body: some Scene {
         WindowGroup {
-            YBTabView()
+            AuthView()
         }
     }
     
     private func setupDependencyInjection() {
+        /// Auth
+        let authService = AuthService()
+        DIContainer.shared.register(AuthServiceInterface.self, object: authService)
+        
         /// Store Service
-        DIContainer.shared.register(StoreServiceInterface.self, object: StoreService())
+        let storeService = StoreService()
+        DIContainer.shared.register(StoreServiceInterface.self, object: storeService)
     }
 }

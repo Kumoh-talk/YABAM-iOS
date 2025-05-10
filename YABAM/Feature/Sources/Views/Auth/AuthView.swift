@@ -20,7 +20,6 @@ public struct AuthView: View {
                     Image(.yabamWhiteLogo)
                         .resizable()
                         .frame(width: 140, height: 140)
-                        .colorMultiply(.white)
 
                     Image(.authYABAMText)
                         .resizable()
