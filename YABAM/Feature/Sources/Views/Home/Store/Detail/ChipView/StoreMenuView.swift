@@ -7,6 +7,7 @@ struct StoreMenuView: View {
     var body: some View {
         MenuSectionList(
             sections: menuSections,
+            isNavigationEnabled: false,
             selectedSectionID: .constant(nil),
             cartManager: DummyCartManager.shared
         )

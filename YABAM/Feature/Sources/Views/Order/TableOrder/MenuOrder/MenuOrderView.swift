@@ -21,6 +21,7 @@ struct MenuOrderView: View {
                 
                 MenuSectionList(
                     sections: sections,
+                    isNavigationEnabled: true,
                     selectedSectionID: $selectedSectionID,
                     cartManager: cartManager
                 )
