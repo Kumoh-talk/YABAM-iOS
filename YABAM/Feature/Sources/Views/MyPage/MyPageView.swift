@@ -9,26 +9,26 @@ struct MyPageView: View {
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
-                ScrollView {
-                    VStack(spacing: 32) {
-                        ProfileSection(nickname: nickname)
-
-                        CouponButtonSection()
-
-                        MenuListSection(
-                            onItemTap: { route in
-                                path.append(route)
-                            },
-                            onActionTap: { popupType in
-                                activePopup = popupType
-                                isPopupPresented = true
-                            }
-                        )
-                    }
-                    .padding(.bottom, 40)
+                VStack(spacing: 32) {
+                    ProfileSection(nickname: nickname)
+                    
+                    CouponButtonSection()
+                    
+                    MenuListSection(
+                        onItemTap: { route in
+                            path.append(route)
+                        },
+                        onActionTap: { popupType in
+                            activePopup = popupType
+                            isPopupPresented = true
+                        }
+                    )
+                    
+                    Spacer()
                 }
+                .padding(.bottom, 40)
                 .padding(.horizontal, 16)
-
+                
                 if let popup = activePopup, isPopupPresented {
                     YBConfirmationPopup(
                         type: popup,
@@ -58,7 +58,7 @@ struct MyPageView: View {
             )
         }
     }
-
+    
     private func handlePopupAction(_ popup: MyPagePopupType) {
         switch popup {
         case .logout:
