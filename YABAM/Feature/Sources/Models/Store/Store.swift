@@ -13,6 +13,14 @@ struct Store: Hashable, Identifiable {
     let longitude: Double
     let isOpen: Bool
     
+    var logoURL: URL? {
+        URL(string: logoImageUrl)
+    }
+
+    var storeImageURLList: [URL] {
+        storeImageUrls.compactMap { URL(string: $0) }
+    }
+    
     var location: CLLocation {
         CLLocation(latitude: latitude, longitude: longitude)
     }

@@ -4,6 +4,7 @@ import Foundation
 
 public enum StoreAPI {
     case fetchStore(storeId: Int)
+    case fetchStoreList(storeCursorRequest: Int)
 }
 
 extension StoreAPI: YBTargetType {
@@ -20,12 +21,15 @@ extension StoreAPI: YBTargetType {
         switch self {
         case .fetchStore:
             return "/api/v1/store"
+        case .fetchStoreList:
+            return "/api/v1/stores"
         }
     }
     
     public var method: HTTPMethod {
         switch self {
-        case .fetchStore:
+        case .fetchStore,
+                .fetchStoreList:
             return .get
         }
     }
@@ -34,19 +38,23 @@ extension StoreAPI: YBTargetType {
         switch self {
         case .fetchStore(let storeId):
             return ["storeId": storeId]
+        case .fetchStoreList(let storeCursorRequest):
+            return ["storeCursorRequest": storeCursorRequest]
         }
     }
     
     public var task: YBTask {
         switch self {
-        case .fetchStore:
+        case .fetchStore,
+                .fetchStoreList:
             return .requestPlain
         }
     }
     
     public var headers: HTTPHeaders? {
         switch self {
-        case .fetchStore:
+        case .fetchStore,
+                .fetchStoreList:
             let headers: HTTPHeaders = [
                 .contentType("application/json")
             ]
