@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct MenuSectionList: View {
+struct MenuScrollView: View {
     let sections: [MenuSection]
     let isNavigationEnabled: Bool
     @Binding var selectedSectionID: String?

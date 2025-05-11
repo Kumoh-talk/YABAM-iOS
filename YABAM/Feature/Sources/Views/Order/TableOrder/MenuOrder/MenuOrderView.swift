@@ -19,7 +19,7 @@ struct MenuOrderView: View {
                 )
                 .padding(.top, 2)
                 
-                MenuSectionList(
+                MenuScrollView(
                     sections: sections,
                     isNavigationEnabled: true,
                     selectedSectionID: $selectedSectionID,

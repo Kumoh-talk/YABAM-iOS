@@ -5,7 +5,7 @@ struct StoreMenuView: View {
     let menuSections: [MenuSection]
     
     var body: some View {
-        MenuSectionList(
+        MenuScrollView(
             sections: menuSections,
             isNavigationEnabled: false,
             selectedSectionID: .constant(nil),
