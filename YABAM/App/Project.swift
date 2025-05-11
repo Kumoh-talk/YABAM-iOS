@@ -11,14 +11,18 @@ let appTarget = Target.target(
     sources: .sources,
     resources: [
         .glob(pattern: .relativeToRoot("YABAM/App/Resources/**")),
-        .glob(pattern: .relativeToRoot("YABAM/App/Resources/LaunchScreen.storyboard"))
+        .glob(pattern: .relativeToRoot("YABAM/App/Resources/LaunchScreen.storyboard")),
+        .glob(pattern: .relativeToRoot("YABAM/App/SupportingFiles/GoogleService-Info.plist")),
     ],
     entitlements: .file(path: .relativeToRoot("YABAM/App/SupportingFiles/yabam.entitlements")),
     dependencies: [
         // Module
         .core(),
         .feature(),
-        .network()
+        .network(),
+        
+        // Third Party Library
+        .external(dependency: .FirebaseAnalytics),
     ],
     settings: .settings(
         base: [
