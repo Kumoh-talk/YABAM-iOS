@@ -8,16 +8,16 @@ public enum AuthAPI {
 
 extension AuthAPI: YBTargetType {
     public var baseURL: URL {
-        guard let url = URL(string: YBConstant.baseURL) else {
+        guard let baseURL = URL(string: YBConstant.baseURL) else {
             fatalError("Invalid base URL")
         }
-        return url
+        return baseURL.appendingPathComponent(YBConstant.authPath)
     }
     
     public var path: String {
         switch self {
         case .loginOAuth:
-            return "/v1/auth/oauth/register"
+            return "/api/login"
         }
     }
     
@@ -30,16 +30,17 @@ extension AuthAPI: YBTargetType {
     
     public var queryParameters: Parameters? {
         switch self {
-        case .loginOAuth(let provider, _, _):
-            return ["provider": provider]
+        case .loginOAuth:
+            return nil
         }
     }
     
     public var task: YBTask {
         switch self {
-        case .loginOAuth(_, let oauthId, let idToken):
+        case .loginOAuth(let provider, let oauthId, let idToken):
             return .requestParameters(
                 parameters: [
+                    "provider": provider.uppercased(),
                     "oauthId": oauthId,
                     "idToken": idToken,
                     "nonce": "nonce"

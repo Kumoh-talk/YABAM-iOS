@@ -8,10 +8,12 @@ public enum StoreAPI {
 
 extension StoreAPI: YBTargetType {
     public var baseURL: URL {
-        guard let url = URL(string: YBConstant.baseURL) else {
-            fatalError("Invalid base URL")
-        }
-        return url
+        guard
+            let baseURL = URL(string: YBConstant.baseURL)
+        else { fatalError("Invalid base URL") }
+        let userURL = YBConstant.userURL
+        
+        return baseURL.appending(path: userURL)
     }
     
     public var path: String {
