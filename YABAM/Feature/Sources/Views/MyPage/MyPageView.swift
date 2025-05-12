@@ -9,7 +9,7 @@ struct MyPageView: View {
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
-                VStack(spacing: 32) {
+                VStack(spacing: 24) {
                     ProfileSection(nickname: nickname)
                     
                     CouponButtonSection()
@@ -42,8 +42,6 @@ struct MyPageView: View {
             .navigationBarBackButtonHidden()
             .navigationDestination(for: MyPageRoute.self) { route in
                 switch route {
-                case .editNickname:
-                    EditNicknameView(nickname: $nickname)
                 case .privacyPolicy:
                     PrivacyPolicyView()
                 case .termsOfService:
