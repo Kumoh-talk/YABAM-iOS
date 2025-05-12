@@ -59,19 +59,14 @@ public struct AuthService: AuthServiceInterface {
             as: OAuthResponseDTO.self
         )
 
-        guard let (refreshToken, expiresAt) = response.extractRefreshTokenInfo() else {
-            throw YBError.refreshTokenFailure
-        }
-
         return AuthTokenDTO(
             accessToken: oauthResponseDTO.accessToken,
-            refreshToken: refreshToken,
-            refreshTokenExpiredAt: expiresAt
+            refreshToken: oauthResponseDTO.refreshToken
         )
     }
     
     private func saveToken(response: AuthTokenDTO) async throws {
-        let token = (response.accessToken, response.refreshToken, response.refreshTokenExpiredAt)
+        let token = (response.accessToken, response.refreshToken)
         try await YBTokenManager.shared.saveToken(token)
     }
 

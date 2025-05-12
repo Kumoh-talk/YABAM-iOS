@@ -1,12 +1,12 @@
 public struct OAuthResponseDTO: Decodable {
     public let accessToken: String
-    public let userId: Int
+    public let refreshToken: String
     
     public init(
         accessToken: String,
-        userId: Int
+        refreshToken: String
     ) {
         self.accessToken = accessToken
-        self.userId = userId
+        self.refreshToken = refreshToken
     }
 }
