@@ -13,7 +13,13 @@ public struct RootView: View {
             } else if isAuthenticated == true {
                 YBTabView()
             } else {
-                AuthView(viewModel: AuthViewModelFactory.make())
+                AuthView(
+                    viewModel: AuthViewModelFactory.make(),
+                    isAuthenticated: Binding(
+                        get: { self.isAuthenticated ?? false },
+                        set: { self.isAuthenticated = $0 }
+                    )
+                )
             }
         }
         .task {
