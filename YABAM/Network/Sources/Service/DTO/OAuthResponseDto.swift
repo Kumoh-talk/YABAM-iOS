@@ -1,4 +1,4 @@
-public struct AuthTokenDTO: Decodable {
+public struct OAuthResponseDto: Decodable {
     public let accessToken: String
     public let refreshToken: String
     

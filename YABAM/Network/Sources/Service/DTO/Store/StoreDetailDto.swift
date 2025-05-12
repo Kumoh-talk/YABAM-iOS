@@ -1,4 +1,4 @@
-public struct StoreDTO: Decodable, Sendable {
+public struct StoreDetailDto: Decodable, Sendable {
     public let storeId: Int
     public let isOpen: Bool
     public let userId: Int
