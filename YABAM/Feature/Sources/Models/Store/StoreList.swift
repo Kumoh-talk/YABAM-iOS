@@ -5,7 +5,7 @@ struct StoreList {
     let hasNextPage: Bool
     let lastReviewCount: Int?
     let lastStoreId: Int?
-    let storeInfoDtos: [StoreInfo]
+    let storeInfos: [StoreInfo]
     
     init(
         totalCount: Int,
@@ -18,7 +18,7 @@ struct StoreList {
         self.hasNextPage = hasNextPage
         self.lastReviewCount = lastReviewCount
         self.lastStoreId = lastStoreId
-        self.storeInfoDtos = storeInfoDtos
+        self.storeInfos = storeInfoDtos
     }
     
     init(storeListDto: StoreListDto) {
@@ -26,7 +26,17 @@ struct StoreList {
         self.hasNextPage = storeListDto.hasNextPage
         self.lastReviewCount = storeListDto.lastReviewCount
         self.lastStoreId = storeListDto.lastStoreId
-        self.storeInfoDtos = storeListDto.storeInfoDtos.map { StoreInfo(storeInfoDto: $0) }
+        self.storeInfos = storeListDto.storeInfoDtos.map { StoreInfo(storeInfoDto: $0) }
+    }
+    
+    func appending(contentsOf other: StoreList) -> StoreList {
+        StoreList(
+            totalCount: self.totalCount + other.totalCount,
+            hasNextPage: other.hasNextPage,
+            lastReviewCount: other.lastReviewCount,
+            lastStoreId: other.lastStoreId,
+            storeInfoDtos: self.storeInfos + other.storeInfos
+        )
     }
 }
 

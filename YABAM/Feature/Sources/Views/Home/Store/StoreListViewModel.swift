@@ -10,8 +10,10 @@ final class StoreListViewModel: ObservableObject {
         case failure(String)
     }
     
-    @Published var state: StoreListState = .idle
-    @Published var storeList: StoreList = .empty
+    @Published private(set) var state: StoreListState = .idle
+    @Published private(set) var storeList: StoreList = .empty
+    @Published private(set) var isFetchingNextPage: Bool = false
+    @Published private(set) var errorMessage: String?
     private let service: StoreServiceInterface
     
     init(service: StoreServiceInterface) {
@@ -29,24 +31,34 @@ final class StoreListViewModel: ObservableObject {
             self.storeList = StoreList(storeListDto: storeListDto)
             state = .storeListLoaded
         } catch {
+            errorMessage = "가게 정보를 불러오는 데 실패했습니다."
             state = .failure("가게 정보를 불러오는 데 실패했습니다.")
         }
     }
-
+    
     @MainActor
-    func fetchNextPage() async throws {
+    func fetchNextPage() async {
+        guard storeList.hasNextPage,
+              state != .loading,
+              !isFetchingNextPage else { return }
+        
+        isFetchingNextPage = true
         state = .loading
         
         do {
-            let storeListDto = try await service.fetchStoreList(
+            let nextListDto = try await service.fetchStoreList(
                 lastReviewCount: storeList.lastReviewCount,
                 lastStoreId: storeList.lastStoreId,
                 size: 20
             )
-            self.storeList = StoreList(storeListDto: storeListDto)
+            let newList = StoreList(storeListDto: nextListDto)
+            storeList = storeList.appending(contentsOf: newList)
             state = .storeListLoaded
         } catch {
-            state = .failure("가게 정보를 불러오는 데 실패했습니다.")
+            errorMessage = "다음 페이지를 불러오는 데 실패했습니다."
+            state = .failure("다음 페이지를 불러오는 데 실패했습니다.")
         }
+        
+        isFetchingNextPage = false
     }
 }
