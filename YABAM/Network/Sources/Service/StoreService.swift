@@ -1,5 +1,6 @@
 public protocol StoreServiceInterface {
     func fetchStore(storeId: Int) async throws -> StoreDetailDto
+    func fetchStoreList(lastReviewCount: Int?, lastStoreId: Int?, size: Int) async throws -> StoreListDto
 }
 
 public final class StoreService: StoreServiceInterface {
@@ -10,6 +11,16 @@ public final class StoreService: StoreServiceInterface {
     }
     
     public func fetchStore(storeId: Int) async throws -> StoreDetailDto {
-        try await provider.requestDecodable(.fetchStore(storeId: storeId), as: StoreDetailDto.self)
+        try await provider.requestDecodable(
+            .fetchStore(storeId: storeId),
+            as: StoreDetailDto.self
+        )
+    }
+    
+    public func fetchStoreList(lastReviewCount: Int?, lastStoreId: Int?, size: Int) async throws -> StoreListDto {
+        try await provider.requestDecodable(
+            .fetchStoreList(lastReviewCount: lastReviewCount, lastStoreId: lastStoreId, size: size),
+            as: StoreListDto.self
+        )
     }
 }

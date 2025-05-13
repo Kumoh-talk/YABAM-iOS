@@ -4,17 +4,16 @@ import Foundation
 
 public enum StoreAPI {
     case fetchStore(storeId: Int)
-    case fetchStoreList(storeCursorRequest: Int)
+    case fetchStoreList(lastReviewCount: Int?, lastStoreId: Int?, size: Int)
 }
 
 extension StoreAPI: YBTargetType {
     public var baseURL: URL {
-        guard
-            let baseURL = URL(string: YBConstant.baseURL)
-        else { fatalError("Invalid base URL") }
-        let userURL = YBConstant.userURL
+        guard let baseURL = URL(string: YBConstant.baseURL) else {
+            fatalError("Invalid base URL")
+        }
         
-        return baseURL.appending(path: userURL)
+        return baseURL.appending(path: YBConstant.userURL)
     }
     
     public var path: String {
@@ -38,8 +37,12 @@ extension StoreAPI: YBTargetType {
         switch self {
         case .fetchStore(let storeId):
             return ["storeId": storeId]
-        case .fetchStoreList(let storeCursorRequest):
-            return ["storeCursorRequest": storeCursorRequest]
+        case .fetchStoreList(let lastReviewCount, let lastStoreId, let size):
+            return [
+                "lastReviewCount": lastReviewCount!,
+                "lastStoreId": lastStoreId!,
+                "size": size
+            ]
         }
     }
     

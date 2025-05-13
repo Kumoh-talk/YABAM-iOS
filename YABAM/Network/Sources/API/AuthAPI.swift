@@ -11,6 +11,7 @@ extension AuthAPI: YBTargetType {
         guard let baseURL = URL(string: YBConstant.baseURL) else {
             fatalError("Invalid base URL")
         }
+        
         return baseURL.appendingPathComponent(YBConstant.authPath)
     }
     
