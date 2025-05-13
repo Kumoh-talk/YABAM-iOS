@@ -12,6 +12,7 @@ struct StoreListView: View {
                         NavigationLink(destination: StoreDetailView(store: store)) {
                             StoreRowView(store: store, userLocation: locationManager.userLocation)
                                 .padding(.horizontal)
+                            
                         }
                     }
                 }

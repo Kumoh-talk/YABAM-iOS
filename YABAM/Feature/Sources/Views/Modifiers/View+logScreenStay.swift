@@ -19,6 +19,7 @@ enum YBScreen: String {
     case cart
     case reviewWrite
     case orderHistory
+    case callStaffPopup
     case myPage
 }
 
