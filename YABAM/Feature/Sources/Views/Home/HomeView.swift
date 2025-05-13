@@ -3,8 +3,7 @@ import SwiftUI
 struct HomeView: View {
     var body: some View {
         VStack {
-            StoreListView(stores: StoreSampleData.storeList)
-                .logScreenStay(screen: .storeList)
+            StoreListView(viewModel: StoreListViewModelFactory.make())
         }
         .withNavigationButtons(
             leading: NavigationButtonConfig(content: {

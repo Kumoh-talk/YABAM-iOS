@@ -7,9 +7,6 @@ struct MenuListSection: View {
     var body: some View {
         VStack(spacing: 1) {
             Group {
-                MyPageMenuItem(title: "닉네임 변경", isNavigable: true) {
-                    onItemTap(.editNickname)
-                }
                 MyPageMenuItem(title: "개인정보처리방침", isNavigable: true) {
                     onItemTap(.privacyPolicy)
                 }

@@ -1,6 +1,6 @@
 import CoreLocation
 
-struct Store: Hashable, Identifiable {
+struct StoreDetail: Hashable, Identifiable {
     let id: UUID = UUID()
     let university: String
     let name: String
@@ -22,4 +22,11 @@ struct Store: Hashable, Identifiable {
         let distanceInKilometers = distanceInMeters / 1000
         return String(format: "%.1fkm", distanceInKilometers)
     }
+}
+
+// MARK: - StoreDetail + StorePresentable
+extension StoreDetail: StorePresentable {
+    var storeTitle: String { name }
+    var storeDescription: String { description }
+    var reviewAverage: Double { review }
 }

@@ -3,6 +3,7 @@ import SwiftUI
 struct MenuSectionView: View {
     let section: MenuSection
     @ObservedObject var cartManager: CartManager
+    let isNavigationEnabled: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -11,10 +12,14 @@ struct MenuSectionView: View {
                 .id(section.id)
 
             ForEach(section.items) { item in
-                NavigationLink(destination: MenuDetailView(item: item, cartManager: cartManager)) {
+                if isNavigationEnabled {
+                    NavigationLink(destination: MenuDetailView(item: item, cartManager: cartManager)) {
+                        MenuItemView(item: item)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                } else {
                     MenuItemView(item: item)
                 }
-                .buttonStyle(PlainButtonStyle())
                 
                 if item != section.items.last {
                     YBDivider()

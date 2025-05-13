@@ -1,12 +1,13 @@
 import SwiftUI
 
 struct StoreMenuView: View {
-    let store: Store
+    let store: StoreDetail
     let menuSections: [MenuSection]
     
     var body: some View {
-        MenuSectionList(
+        MenuScrollView(
             sections: menuSections,
+            isNavigationEnabled: false,
             selectedSectionID: .constant(nil),
             cartManager: DummyCartManager.shared
         )

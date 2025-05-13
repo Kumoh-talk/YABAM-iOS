@@ -9,28 +9,28 @@ struct MyPageView: View {
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
-                ScrollView {
-                    VStack(spacing: 32) {
-                        ProfileSection(nickname: nickname)
-
-                        CouponButtonSection()
-
-                        MenuListSection(
-                            onItemTap: { route in
-                                path.append(route)
-                            },
-                            onActionTap: { popupType in
-                                activePopup = popupType
-                                isPopupPresented = true
-                            }
-                        )
-                    }
-                    .padding(.bottom, 40)
+                VStack(spacing: 24) {
+                    ProfileSection(nickname: nickname)
+                    
+                    CouponButtonSection()
+                    
+                    MenuListSection(
+                        onItemTap: { route in
+                            path.append(route)
+                        },
+                        onActionTap: { popupType in
+                            activePopup = popupType
+                            isPopupPresented = true
+                        }
+                    )
+                    
+                    Spacer()
                 }
+                .padding(.bottom, 40)
                 .padding(.horizontal, 16)
-
+                
                 if let popup = activePopup, isPopupPresented {
-                    ConfirmationPopup(
+                    YBConfirmationPopup(
                         type: popup,
                         isPresented: $isPopupPresented,
                         onConfirm: {
@@ -42,8 +42,6 @@ struct MyPageView: View {
             .navigationBarBackButtonHidden()
             .navigationDestination(for: MyPageRoute.self) { route in
                 switch route {
-                case .editNickname:
-                    EditNicknameView(nickname: $nickname)
                 case .privacyPolicy:
                     PrivacyPolicyView()
                 case .termsOfService:
@@ -58,7 +56,7 @@ struct MyPageView: View {
             )
         }
     }
-
+    
     private func handlePopupAction(_ popup: MyPagePopupType) {
         switch popup {
         case .logout:

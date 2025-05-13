@@ -18,7 +18,7 @@ let appTarget = Target.target(
         // Module
         .core(),
         .feature(),
-        .network()
+        .network(),
     ],
     settings: .settings(
         base: [

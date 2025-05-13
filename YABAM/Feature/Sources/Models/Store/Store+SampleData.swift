@@ -1,6 +1,6 @@
 struct StoreSampleData {
-    static let storeList: [Store] = [
-        Store(
+    static let storeList: [StoreDetail] = [
+        StoreDetail(
             university: "금오공과대학교",
             name: "공대김밥",
             description: "가성비 최고, 든든한 김밥 전문점",
@@ -23,7 +23,7 @@ struct StoreSampleData {
             longitude: 128.3933,
             isOpen: true
         ),
-        Store(
+        StoreDetail(
             university: "경북대학교",
             name: "북문떡볶이",
             description: "대학생 필수 맛집, 매운맛 조절 가능",
@@ -37,7 +37,7 @@ struct StoreSampleData {
             longitude: 128.6118,
             isOpen: false
         ),
-        Store(
+        StoreDetail(
             university: "구미대학교",
             name: "구미돈까스",
             description: "바삭한 수제 돈까스와 특제소스",
@@ -52,7 +52,7 @@ struct StoreSampleData {
             longitude: 128.3440,
             isOpen: true
         ),
-        Store(
+        StoreDetail(
             university: "안동대학교",
             name: "안동찜닭명가",
             description: "전통의 맛, 푸짐한 양",
@@ -66,7 +66,7 @@ struct StoreSampleData {
             longitude: 128.7250,
             isOpen: false
         ),
-        Store(
+        StoreDetail(
             university: "대구가톨릭대학교",
             name: "가톨릭커피",
             description: "조용한 분위기의 공부하기 좋은 카페",

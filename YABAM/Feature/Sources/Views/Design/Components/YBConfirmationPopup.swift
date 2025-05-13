@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ConfirmationPopup: View {
+struct YBConfirmationPopup: View {
     let type: MyPagePopupType
     @Binding var isPresented: Bool
     let onConfirm: () -> Void

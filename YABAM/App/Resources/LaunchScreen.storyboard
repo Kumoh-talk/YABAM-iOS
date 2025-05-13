@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleAspectFill" image="authBackground" translatesAutoresizingMaskIntoConstraints="NO" id="sFW-9e-9A7">
+                            <imageView contentMode="scaleAspectFill" image="LaunchAuthBackground" translatesAutoresizingMaskIntoConstraints="NO" id="sFW-9e-9A7">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="852" id="height-bg"/>
@@ -26,14 +26,14 @@
                             <stackView contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="OML-a9-tQh">
                                 <rect key="frame" x="116.66666666666669" y="318" width="160" height="216"/>
                                 <subviews>
-                                    <imageView contentMode="scaleAspectFit" image="YABAMWhiteLogo" translatesAutoresizingMaskIntoConstraints="NO" id="SKM-8C-eAF">
+                                    <imageView contentMode="scaleAspectFit" image="LaunchYABAMWhiteLogo" translatesAutoresizingMaskIntoConstraints="NO" id="SKM-8C-eAF">
                                         <rect key="frame" x="10" y="0.0" width="140" height="140"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="140" id="height-logo"/>
                                             <constraint firstAttribute="width" constant="140" id="width-logo"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView contentMode="scaleAspectFit" image="authYABAMText" translatesAutoresizingMaskIntoConstraints="NO" id="W9Y-ll-U0r">
+                                    <imageView contentMode="scaleAspectFit" image="LaunchAuthYABAMText" translatesAutoresizingMaskIntoConstraints="NO" id="W9Y-ll-U0r">
                                         <rect key="frame" x="0.0" y="156" width="160" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="height-text"/>
@@ -58,8 +58,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="YABAMWhiteLogo" width="156" height="156.33332824707031"/>
-        <image name="authBackground" width="633" height="1198"/>
-        <image name="authYABAMText" width="160" height="71.333335876464844"/>
+        <image name="LaunchAuthBackground" width="633" height="1198"/>
+        <image name="LaunchAuthYABAMText" width="160" height="71.333335876464844"/>
+        <image name="LaunchYABAMWhiteLogo" width="156" height="156.33332824707031"/>
     </resources>
 </document>

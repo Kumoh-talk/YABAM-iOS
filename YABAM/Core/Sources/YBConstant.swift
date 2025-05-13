@@ -1,10 +1,12 @@
 import Foundation
 
 public enum YBConstant {
-    public static let baseURL = Bundle.main.infoDictionary?["SERVER_URL"] as? String ?? "http://localhost:8080"
+    public static let baseURL = Bundle.main.infoDictionary?["BASE_SERVER_URL"] as? String ?? "http://localhost:8080"
+    public static let authPath = Bundle.main.infoDictionary?["AUTH_PATH"] as? String ?? "/pathError"
+    public static let userURL = Bundle.main.infoDictionary?["USER_PATH"] as? String ?? "/pathError"
     public static let accessToken = "accessToken"
     public static let refreshToken = "refreshToken"
     public static let refreshTokenExpiredAt = "refreshTokenExpiredAt"
-    public static let oauthKakao = "kakao"
-    public static let oauthApple = "apple"
+    public static let oauthKakao = "KAKAO"
+    public static let oauthApple = "APPLE"
 }

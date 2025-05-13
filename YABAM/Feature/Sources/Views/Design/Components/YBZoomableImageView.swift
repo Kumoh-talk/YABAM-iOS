@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ZoomableImageView: View {
+struct YBZoomableImageView: View {
     let imageName: String
     @State private var scale: CGFloat = 1.0
     @State private var lastScale: CGFloat = 1.0

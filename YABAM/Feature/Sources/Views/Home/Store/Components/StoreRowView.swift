@@ -1,14 +1,16 @@
 import SwiftUI
+import Kingfisher
 import CoreLocation
 
 struct StoreRowView: View {
-    let store: Store
+    let store: StoreInfo
     let userLocation: CLLocation?
     
     var body: some View {
         VStack(alignment: .leading, spacing: Constants.spacing) {
             HStack(alignment: .top, spacing: 12) {
-                Image(.yabamFillLogo) // TODO: URL 기반 이미지로 교체
+                KFImage(store.logoURL)
+                    .placeholder { Image(.yabamEmptyLogo) }
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 70, height: 70)
@@ -19,9 +21,16 @@ struct StoreRowView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 4) {
-                    ForEach(store.storeImageUrls, id: \.self) { _ in
-                        Image(.yabamFillLogo) // TODO: URL 기반 이미지로 교체
+                    ForEach(store.storeImageURLList, id: \.self) { url in
+                        KFImage(url)
+                            .placeholder { Image(.yabamFillLogo) }
                             .resizable()
+                            .setProcessor(
+                                DownsamplingImageProcessor(
+                                    size: CGSize(width: 90, height: 130)
+                                )
+                            )
+                            .cacheOriginalImage()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 90, height: 130)
                             .cornerRadius(6)

@@ -3,11 +3,12 @@ import Network
 
 struct AuthView: View {
     @StateObject private var viewModel: AuthViewModel
-    @State private var navigateToHome = false
+    @Binding var isAuthenticated: Bool
     @State private var showErrorAlert = false
     
-    init(viewModel: AuthViewModel) {
+    init(viewModel: AuthViewModel, isAuthenticated: Binding<Bool>) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        _isAuthenticated = isAuthenticated
     }
 
     var body: some View {
@@ -45,7 +46,7 @@ struct AuthView: View {
         .onChange(of: viewModel.authState) { state in
             switch state {
             case .authenticated:
-                navigateToHome = true
+                isAuthenticated = true
             case .failure:
                 showErrorAlert = true
             default:

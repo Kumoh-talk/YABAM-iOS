@@ -53,25 +53,20 @@ public struct AuthService: AuthServiceInterface {
         return oauthId
     }
 
-    private func loginOAuth(oauthProvider: String, oauthId: String, idToken: String) async throws -> AuthTokenDTO {
+    private func loginOAuth(oauthProvider: String, oauthId: String, idToken: String) async throws -> AuthTokenDto {
         let (oauthResponseDTO, response) = try await provider.requestDecodableWithResponse(
             .loginOAuth(provider: oauthProvider, oauthId: oauthId, idToken: idToken),
-            as: OAuthResponseDTO.self
+            as: OAuthResponseDto.self
         )
 
-        guard let (refreshToken, expiresAt) = response.extractRefreshTokenInfo() else {
-            throw YBError.refreshTokenFailure
-        }
-
-        return AuthTokenDTO(
+        return AuthTokenDto(
             accessToken: oauthResponseDTO.accessToken,
-            refreshToken: refreshToken,
-            refreshTokenExpiredAt: expiresAt
+            refreshToken: oauthResponseDTO.refreshToken
         )
     }
     
-    private func saveToken(response: AuthTokenDTO) async throws {
-        let token = (response.accessToken, response.refreshToken, response.refreshTokenExpiredAt)
+    private func saveToken(response: AuthTokenDto) async throws {
+        let token = (response.accessToken, response.refreshToken)
         try await YBTokenManager.shared.saveToken(token)
     }
 
