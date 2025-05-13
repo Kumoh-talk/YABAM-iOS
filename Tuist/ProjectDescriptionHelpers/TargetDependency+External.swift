@@ -7,6 +7,7 @@ public enum External: String {
     case KakaoSDKUser
     case FirebaseAnalytics
     case FirebaseCrashlytics
+    case FirebasePerformance
     case Kingfisher
     case KeyChainManager = "KeyChainManager-KJ"
 }

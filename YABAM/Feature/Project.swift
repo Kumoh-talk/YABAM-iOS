@@ -18,7 +18,6 @@ let project = Project(
                 // Third Party Library
                 .external(dependency: .CodeScanner),
                 .external(dependency: .Kingfisher),
-                .external(dependency: .FirebaseAnalytics),
             ]
         )
     ]

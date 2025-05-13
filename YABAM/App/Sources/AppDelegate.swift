@@ -1,7 +1,6 @@
 import UIKit
 import Core
 import Feature
-import FirebaseCore
 import Kingfisher
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
@@ -9,7 +8,6 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        FirebaseApp.configure()
         FeatureFontFamily.registerAllCustomFonts()
         
         configureKingfisherCacheLimit()

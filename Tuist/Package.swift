@@ -9,7 +9,6 @@
             "Alamofire": .framework,
             "CodeScanner": .framework,
             "KeyChainManager": .framework,
-            "FirebaseAnalytics": .framework,
             "Kingfisher": .framework,
         ]
     )
@@ -22,7 +21,6 @@ let package = Package(
         .package(url: "https://github.com/twostraws/CodeScanner.git", from: "2.5.2"),
         .package(url: "https://github.com/kakao/kakao-ios-sdk.git", from: "2.23.0"),
         .package(url: "https://github.com/Kyxxn/SPM-KeyChainManager-KJ.git", from: "1.0.1"),
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "11.12.0"),
         .package(url: "https://github.com/onevcat/Kingfisher.git", from: "8.3.2"),
     ]
 )
