@@ -58,7 +58,7 @@ struct MenuOrderView: View {
             }
             
             if isCallStaffPopup {
-                CallStaffPopup(showPopup: $isCallStaffPopup)
+                CallStaffPopup(showPopup: $isCallStaffPopup).logScreenStay(screen: .callStaffPopup)
             }
         }
         .navigationTitle("메뉴 주문하기")
@@ -91,6 +91,7 @@ struct MenuOrderView: View {
         }
         .navigationDestination(isPresented: $isNavigatingToCart) {
             MenuCartView(cartManager: cartManager)
+                .logScreenStay(screen: .cart)
         }
     }
 }

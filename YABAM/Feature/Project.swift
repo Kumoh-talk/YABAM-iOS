@@ -16,6 +16,7 @@ let project = Project(
                 .network(),
                 
                 // Third Party Library
+                .external(dependency: .FirebaseAnalytics),
                 .external(dependency: .CodeScanner)
             ]
         )
