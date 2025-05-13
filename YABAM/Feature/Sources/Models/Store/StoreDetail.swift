@@ -1,7 +1,7 @@
 import CoreLocation
 
 struct StoreDetail: Hashable, Identifiable {
-    let id: UUID = UUID()
+    let id: Int
     let university: String
     let name: String
     let description: String

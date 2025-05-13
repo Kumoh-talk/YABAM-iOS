@@ -32,6 +32,7 @@ struct StoreDetailView: View {
                         StoreMenuView(store: store, menuSections: MenuSectionSampleData.menuSections)
                     case .review:
                         StoreReviewView(
+                            storeId: store.id,
                             storeReviewCount: store.reviewCount,
                             viewModel: StoreReviewViewModelFactory.make()
                         )
