@@ -19,9 +19,6 @@ let appTarget = Target.target(
         .core(),
         .feature(),
         .network(),
-        
-        // Third Party Library
-        .external(dependency: .FirebaseAnalytics),
     ],
     settings: .settings(
         base: [
