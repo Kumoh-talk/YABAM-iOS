@@ -39,8 +39,8 @@ extension StoreAPI: YBTargetType {
             return ["storeId": storeId]
         case .fetchStoreList(let lastReviewCount, let lastStoreId, let size):
             return [
-                "lastReviewCount": lastReviewCount!,
-                "lastStoreId": lastStoreId!,
+                "lastReviewCount": lastReviewCount,
+                "lastStoreId": lastStoreId,
                 "size": size
             ]
         }

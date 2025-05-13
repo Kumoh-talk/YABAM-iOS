@@ -17,10 +17,15 @@ final class StoreListViewModel: ObservableObject {
     init(service: StoreServiceInterface) {
         self.service = service
     }
+    
     @MainActor
     func fetchInitialStoreList() async {
         do {
-            let storeListDto = try await service.fetchStoreList(lastReviewCount: nil, lastStoreId: nil, size: 20)
+            let storeListDto = try await service.fetchStoreList(
+                lastReviewCount: nil,
+                lastStoreId: nil,
+                size: 20
+            )
             self.storeList = StoreList(storeListDto: storeListDto)
             state = .storeListLoaded
         } catch {
