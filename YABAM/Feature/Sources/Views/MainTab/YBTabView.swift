@@ -8,10 +8,10 @@ struct YBTabView: View {
             VStack(spacing: 0) {
                 ZStack {
                     switch selectedTab {
-                    case 0: HomeView()
-                    case 1: OrderQRCodeView()
-                    case 2: OrderHistoryView()
-                    case 3: MyPageView()
+                    case 0: HomeView().logScreenStay(screen: .home)
+                    case 1: OrderQRCodeView().logScreenStay(screen: .orderQRCode)
+                    case 2: OrderHistoryView().logScreenStay(screen: .orderHistory)
+                    case 3: MyPageView().logScreenStay(screen: .myPage)
                     default: HomeView()
                     }
                 }
