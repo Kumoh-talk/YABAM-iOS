@@ -28,12 +28,28 @@ struct YABAMApp: App {
     }
     
     private func setupDependencyInjection() {
-        /// Auth
+        /// Auth Service
         let authService = AuthService()
         DIContainer.shared.register(AuthServiceInterface.self, object: authService)
         
         /// Store Service
         let storeService = StoreService()
         DIContainer.shared.register(StoreServiceInterface.self, object: storeService)
+        
+        /// Review Service
+        let reviewService = ReviewService()
+        DIContainer.shared.register(ReviewServiceInterface.self, object: reviewService)
+        
+        /// Cart Service
+        let cartService = CartService()
+        DIContainer.shared.register(CartServiceInterface.self, object: cartService)
+        
+        /// Order Service
+        let orderService = OrderService()
+        DIContainer.shared.register(OrderServiceInterface.self, object: orderService)
+        
+        /// Receipt Service
+        let receiptService = ReceiptService()
+        DIContainer.shared.register(ReceiptServiceInterface.self, object: receiptService)
     }
 }

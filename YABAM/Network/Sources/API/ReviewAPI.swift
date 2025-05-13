@@ -3,8 +3,8 @@ import Core
 import Foundation
 
 public enum ReviewAPI {
-    case createReview(dto: ReviewRequestDTO)
-    case fetchReviewList(storeId: Int, lastReviewId: Int?, size: Int)
+    case createReview(dto: ReviewRequestDTO) // 리뷰 생성
+    case fetchReviewList(storeId: Int, lastReviewId: Int?, size: Int) // 가게의 리뷰 목록 조회
 }
 
 extension ReviewAPI: YBTargetType {

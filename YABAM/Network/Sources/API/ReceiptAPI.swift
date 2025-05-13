@@ -2,14 +2,14 @@ import Alamofire
 import Core
 import Foundation
 
-public enum RecieptAPI {
-    case createReceipt(queryTableId: Int, querySaleId: Int) // 영수증 생성
+public enum ReceiptAPI {
+    case createReceipt(queryStoreId: Int, queryTableId: Int) // 영수증 생성
     case fetchReceiptId(tableId: Int) // 테이블에 미정산 된 영수증 id 조회
     case fetchReceiptList(customerId: Int, pageSize: Int, lastReceiptId: Int?) // 고객 별 영수증 내역 무한 스크롤 조회
     case fetchReceiptDetail(receiptId: Int) // 영수증 상세 조회
 }
 
-extension RecieptAPI: YBTargetType {
+extension ReceiptAPI: YBTargetType {
     public var baseURL: URL {
         guard let baseURL = URL(string: YBConstant.baseURL) else {
             fatalError("Invalid base URL")
@@ -44,10 +44,10 @@ extension RecieptAPI: YBTargetType {
     
     public var queryParameters: Parameters? {
         switch self {
-        case .createReceipt(let queryTableId, let querySaleId):
+        case .createReceipt(let queryStoreId, let queryTableId):
             return [
-                "queryTableId": queryTableId,
-                "querySaleId": querySaleId
+                "queryStoreId": queryStoreId,
+                "queryTableId": queryTableId
             ]
         case .fetchReceiptId(let tableId):
             return ["tableId": tableId]
