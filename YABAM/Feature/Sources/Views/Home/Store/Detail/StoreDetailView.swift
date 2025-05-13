@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct StoreDetailView: View {
-    let store: Store
+    let store: StoreDetail = StoreSampleData.storeList[0]
     @Environment(\.dismiss) private var dismiss
     @StateObject private var locationManager = LocationManager()
     
@@ -19,8 +19,6 @@ struct StoreDetailView: View {
                     isPresented: $isImageFullscreenPresented
                 )
                 
-                StoreHeaderView(store: store, isDetail: true, userLocation: locationManager.userLocation)
-                    .padding()
 
                 YBDivider(color: .Neutral.neutral300, height: 8)
 

@@ -3,7 +3,7 @@ import Kingfisher
 import CoreLocation
 
 struct StoreRowView: View {
-    let store: Store
+    let store: StoreInfo
     let userLocation: CLLocation?
     
     var body: some View {

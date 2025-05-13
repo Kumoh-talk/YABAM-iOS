@@ -3,14 +3,14 @@ public struct StoreListDto: Decodable {
     public let hasNextPage: Bool
     public let lastReviewCount: Int?
     public let lastStoreId: Int?
-    public let storeInfoDtos: [StoreInfoDtos]
+    public let storeInfoDtos: [StoreInfoDto]
     
     public init(
         totalCount: Int,
         hasNextPage: Bool,
         lastReviewCount: Int?,
         lastStoreId: Int?,
-        storeInfoDtos: [StoreInfoDtos]
+        storeInfoDtos: [StoreInfoDto]
     ) {
         self.totalCount = totalCount
         self.hasNextPage = hasNextPage

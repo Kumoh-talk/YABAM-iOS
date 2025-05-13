@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct StoreReviewView: View {
-    let store: Store
+    let store: StoreDetail
 
     @State private var reviews: [Review] = []
 

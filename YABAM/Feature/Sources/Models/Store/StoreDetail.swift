@@ -1,6 +1,6 @@
 import CoreLocation
 
-struct Store: Hashable, Identifiable {
+struct StoreDetail: Hashable, Identifiable {
     let id: UUID = UUID()
     let university: String
     let name: String
@@ -12,14 +12,6 @@ struct Store: Hashable, Identifiable {
     let latitude: Double
     let longitude: Double
     let isOpen: Bool
-    
-    var logoURL: URL? {
-        URL(string: logoImageUrl)
-    }
-
-    var storeImageURLList: [URL] {
-        storeImageUrls.compactMap { URL(string: $0) }
-    }
     
     var location: CLLocation {
         CLLocation(latitude: latitude, longitude: longitude)

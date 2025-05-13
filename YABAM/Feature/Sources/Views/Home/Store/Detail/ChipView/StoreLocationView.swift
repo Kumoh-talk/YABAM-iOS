@@ -2,11 +2,11 @@ import SwiftUI
 import MapKit
 
 struct StoreLocationView: View {
-    let store: Store
+    let store: StoreDetail
 
     @State private var region: MKCoordinateRegion
 
-    init(store: Store) {
+    init(store: StoreDetail) {
         self.store = store
         _region = State(initialValue: MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: store.latitude, longitude: store.longitude),
