@@ -1,6 +1,7 @@
 public protocol ReceiptServiceInterface {
     func createReceipt(queryStoreId: Int, queryTableId: Int) async throws
     func fetchReceiptId(tableId: Int) async throws -> Int?
+    func fetchReceiptList(customerId: Int, pageSize: Int, lastReceiptId: Int?) async throws -> ReceiptListResponseDto
     func fetchReceiptDetail(receiptId: Int) async throws -> ReceiptDetailDto
 }
 
@@ -23,6 +24,13 @@ public final class ReceiptService: ReceiptServiceInterface {
             .fetchReceiptId(tableId: tableId),
             as: ReceiptIdDto.self
         ).receiptId
+    }
+    
+    public func fetchReceiptList(customerId: Int, pageSize: Int, lastReceiptId: Int?) async throws -> ReceiptListResponseDto {
+        try await provider.requestDecodable(
+            .fetchReceiptList(customerId: customerId, pageSize: pageSize, lastReceiptId: lastReceiptId),
+            as: ReceiptListResponseDto.self
+        )
     }
     
     public func fetchReceiptDetail(receiptId: Int) async throws -> ReceiptDetailDto {
