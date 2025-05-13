@@ -23,7 +23,7 @@ struct OrderEntryView: View {
             .multilineTextAlignment(.center)
             
             YBText(
-                "QR 스캔이 어렵다면?\n홈에서 가게 주막들의 정보를 확인하거나\n메뉴를 직접 볼 수 있어요.",
+                "QR 스캔이 어렵다면\n홈에서 가게 주막들의 정보를 확인하거나\n메뉴를 직접 볼 수 있어요.",
                 fontType: .boldBody1,
                 color: .Neutral.neutral800
             )
