@@ -13,7 +13,7 @@ struct YBTabView: View {
                     case 0: HomeView()
                     case 1: OrderEntryView()
                     case 2: OrderHistoryView()
-                    case 3: MyPageView()
+                    case 3: MyPageView(viewModel: MyPageViewModelFactory.make())
                     default: HomeView()
                     }
                 }

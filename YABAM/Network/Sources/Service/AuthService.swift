@@ -4,6 +4,7 @@ import Core
 public protocol AuthServiceInterface {
     func loginWithKakao() async throws
     func loginWithApple(oauthId: String, idToken: String) async throws
+    func fetchUserInfo() async throws -> UserInfoDto
 }
 
 public struct AuthService: AuthServiceInterface {
@@ -54,7 +55,7 @@ public struct AuthService: AuthServiceInterface {
     }
 
     private func loginOAuth(oauthProvider: String, oauthId: String, idToken: String) async throws -> AuthTokenDto {
-        let (oauthResponseDTO, response) = try await provider.requestDecodableWithResponse(
+        let oauthResponseDTO = try await provider.requestDecodable(
             .loginOAuth(provider: oauthProvider, oauthId: oauthId, idToken: idToken),
             as: OAuthResponseDto.self
         )
@@ -102,5 +103,16 @@ public struct AuthService: AuthServiceInterface {
                 }
             }
         }
+    }
+    
+    // MARK: - User Info Fetching
+    
+    public func fetchUserInfo() async throws -> UserInfoDto {
+        let userInfoDTO = try await provider.requestDecodable(
+            .fetchUserInfo,
+            as: UserInfoDto.self
+        )
+        
+        return userInfoDTO
     }
 }

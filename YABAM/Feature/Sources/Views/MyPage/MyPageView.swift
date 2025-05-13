@@ -1,18 +1,20 @@
 import SwiftUI
 
 struct MyPageView: View {
-    @State private var nickname: String = "사용자 닉네임"
+    @StateObject private var viewModel: MyPageViewModel
     @State private var path: NavigationPath = NavigationPath()
     @State private var activePopup: MyPagePopupType?
     @State private var isPopupPresented = false
+    
+    init(viewModel: MyPageViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
                 VStack(spacing: 24) {
-                    ProfileSection(nickname: nickname)
-                    
-                    CouponButtonSection()
+                    ProfileSection(nickname: viewModel.userNickname ?? "금붕이")
                     
                     MenuListSection(
                         onItemTap: { route in
@@ -38,6 +40,9 @@ struct MyPageView: View {
                         }
                     )
                 }
+            }
+            .onAppear {
+                Task { await viewModel.fetchUserInfo() }
             }
             .navigationBarBackButtonHidden()
             .navigationDestination(for: MyPageRoute.self) { route in

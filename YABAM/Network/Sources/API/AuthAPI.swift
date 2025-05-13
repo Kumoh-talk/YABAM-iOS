@@ -4,6 +4,7 @@ import Foundation
 
 public enum AuthAPI {
     case loginOAuth(provider: String, oauthId: String, idToken: String) // Oauth 로그인
+    case fetchUserInfo // 사용자 정보 조회
 }
 
 extension AuthAPI: YBTargetType {
@@ -19,6 +20,8 @@ extension AuthAPI: YBTargetType {
         switch self {
         case .loginOAuth:
             return "/api/login"
+        case .fetchUserInfo:
+            return "/api/user"
         }
     }
     
@@ -26,12 +29,15 @@ extension AuthAPI: YBTargetType {
         switch self {
         case .loginOAuth:
             return .post
+        case .fetchUserInfo:
+            return .get
         }
     }
     
     public var queryParameters: Parameters? {
         switch self {
-        case .loginOAuth:
+        case .loginOAuth,
+                .fetchUserInfo:
             return nil
         }
     }
@@ -48,6 +54,8 @@ extension AuthAPI: YBTargetType {
                 ],
                 encoding: JSONEncoding.default
             )
+        case .fetchUserInfo:
+            return .requestPlain
         }
     }
     
@@ -57,6 +65,12 @@ extension AuthAPI: YBTargetType {
             let headers: HTTPHeaders = [
                 .contentType("application/json")
             ]
+            return headers
+        case .fetchUserInfo:
+            let headers: HTTPHeaders = [
+                .contentType("application/json"),
+                .authorization(bearerToken: YBTokenManager.shared.accessToken ?? "")
+                ]
             return headers
         }
     }
