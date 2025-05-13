@@ -1,10 +1,8 @@
 import SwiftUI
-import CoreLocation
 
-struct StoreHeaderView: View {
-    let store: StoreDetail
+struct StoreHeaderView<T: StorePresentable>: View {
+    let store: T
     var isDetail: Bool = false
-    var userLocation: CLLocation? = nil
 
     private var nameFont: YBFont {
         isDetail ? .boldHeader2 : .boldHeader4
@@ -24,9 +22,9 @@ struct StoreHeaderView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: isDetail ? 4 : 0) {
-            YBText(store.name, fontType: nameFont, color: .Neutral.neutral900)
+            YBText(store.storeTitle, fontType: nameFont, color: .Neutral.neutral900)
 
-            YBText(store.description, fontType: descriptionFont, color: .Neutral.neutral600)
+            YBText(store.storeDescription, fontType: descriptionFont, color: .Neutral.neutral600)
 
             HStack(spacing: 4) {
                 YBText(store.isOpen ? "영업 중" : "영업 종료", fontType: statusFont, color: .Neutral.neutral800)
@@ -41,7 +39,7 @@ struct StoreHeaderView: View {
                     Image(.star)
                         .resizable()
                         .frame(width: 16, height: 16)
-                    YBText("\(store.reviewCount)", fontType: reviewFont, color: .Neutral.neutral800)
+                    YBText(String(format: "%.1f", store.reviewAverage), fontType: reviewFont, color: .Neutral.neutral800)
                 }
             }
         }

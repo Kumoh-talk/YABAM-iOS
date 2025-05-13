@@ -23,3 +23,10 @@ struct StoreDetail: Hashable, Identifiable {
         return String(format: "%.1fkm", distanceInKilometers)
     }
 }
+
+// MARK: - StoreDetail + StorePresentable
+extension StoreDetail: StorePresentable {
+    var storeTitle: String { name }
+    var storeDescription: String { description }
+    var reviewAverage: Double { review }
+}

@@ -46,3 +46,11 @@ struct StoreInfo: Equatable, Identifiable {
         self.storeDetailImageUrls = storeInfoDto.storeDetailImageUrls
     }
 }
+
+// MARK: - StoreInfo + StorePresentable
+extension StoreInfo: StorePresentable {
+    var storeTitle: String { storeName }
+    var storeDescription: String { description }
+    var isOpen: Bool { isOpened }
+    var reviewAverage: Double { 4.5 }
+}
