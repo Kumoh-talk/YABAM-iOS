@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseAnalytics
 
 struct StoreDetailView: View {
     let store: Store
@@ -8,6 +9,7 @@ struct StoreDetailView: View {
     @State private var selectedTab: StoreDetailTab = .menu
     @State private var isImageFullscreenPresented = false
     @State private var selectedImageIndex = 0
+    @State private var tabEnterTime: Date?
     
     var body: some View {
         ScrollView {
@@ -38,6 +40,31 @@ struct StoreDetailView: View {
                 }
                 .padding(.top, 8)
             }
+        }
+        .onAppear {
+            Analytics.logEvent("screen_view", parameters: [
+                "screen_name": "store_detail",
+                "store_id": store.id,
+                "store_name": store.name
+            ])
+            tabEnterTime = Date()
+        }
+        .onChange(of: selectedTab) { newTab in
+            if let enterTime = tabEnterTime {
+                let duration = Date().timeIntervalSince(enterTime)
+                Analytics.logEvent("store_detail_tab_duration", parameters: [
+                    "tab": newTab.rawValue,
+                    "duration_sec": duration,
+                    "store_id": store.id
+                ])
+            }
+            
+            Analytics.logEvent("store_detail_tab_changed", parameters: [
+                "tab": newTab.rawValue,
+                "store_id": store.id
+            ])
+            
+            tabEnterTime = Date() // 새로운 탭 체류 시작 시간 갱신
         }
         .fullScreenCover(isPresented: $isImageFullscreenPresented) {
             YBFullscreenImageViewer(

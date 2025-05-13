@@ -9,8 +9,8 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        FeatureFontFamily.registerAllCustomFonts()
         FirebaseApp.configure()
+        FeatureFontFamily.registerAllCustomFonts()
         
         configureKingfisherCacheLimit()
         

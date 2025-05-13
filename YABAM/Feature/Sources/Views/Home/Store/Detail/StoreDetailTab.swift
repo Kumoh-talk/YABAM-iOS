@@ -1,4 +1,4 @@
-enum StoreDetailTab: CaseIterable {
+enum StoreDetailTab: String, CaseIterable {
     case menu, review, location
 
     var title: String {
