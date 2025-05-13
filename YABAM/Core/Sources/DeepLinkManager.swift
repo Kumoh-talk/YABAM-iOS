@@ -8,7 +8,7 @@ public final class DeepLinkManager: ObservableObject {
     @Published var tableId: String? = nil
     
     public init() { }
-
+    
     public func handleDeepLink(url: URL) {
         YBLogger.info("DeepLink URL: \(url)")
         
@@ -16,7 +16,9 @@ public final class DeepLinkManager: ObservableObject {
             let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
             components.host == "yabam.com"
         else { return }
-
+        
+        var hasOrderInfo = false
+        
         for queryItem in components.queryItems ?? [] {
             switch queryItem.name {
             case "tab":
@@ -25,11 +27,18 @@ public final class DeepLinkManager: ObservableObject {
                 }
             case "storeId":
                 storeId = queryItem.value
+                hasOrderInfo = true
             case "tableId":
                 tableId = queryItem.value
+                hasOrderInfo = true
             default:
                 break
             }
+        }
+        
+        if hasOrderInfo {
+            targetTabIndex = 1
+            shouldNavigateToMenu = true
         }
     }
 }

@@ -11,7 +11,7 @@ struct YBTabView: View {
                 ZStack {
                     switch selectedTab {
                     case 0: HomeView()
-                    case 1: OrderQRCodeView()
+                    case 1: OrderEntryView()
                     case 2: OrderHistoryView()
                     case 3: MyPageView()
                     default: HomeView()
