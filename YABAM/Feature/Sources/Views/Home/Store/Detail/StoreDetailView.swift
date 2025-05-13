@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct StoreDetailView: View {
+    // TODO: 가게 정보를 서버에서 받아오는 로직으로 변경
     let store: StoreDetail = StoreSampleData.storeList[0]
     @Environment(\.dismiss) private var dismiss
     @StateObject private var locationManager = LocationManager()
