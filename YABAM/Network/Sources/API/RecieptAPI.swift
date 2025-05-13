@@ -22,8 +22,8 @@ extension RecieptAPI: YBTargetType {
         switch self {
         case .createReceipt:
             return "/api/v1/receipts"
-        case .fetchReceiptId:
-            return "/api/v1/table/{tableId}/receipts/non-adjust"
+        case .fetchReceiptId(let tableId):
+            return "/api/v1/table/\(tableId)/receipts/non-adjust"
         case .fetchReceiptList(let customerId, _, _):
             return "/api/v1/customers/\(customerId)/receipts"
         case .fetchReceiptDetail(let receiptId):
