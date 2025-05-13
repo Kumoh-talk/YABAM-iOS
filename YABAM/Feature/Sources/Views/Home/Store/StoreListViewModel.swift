@@ -30,7 +30,9 @@ final class StoreListViewModel: ObservableObject {
             )
             self.storeList = StoreList(storeListDto: storeListDto)
             state = .storeListLoaded
+            errorMessage = nil
         } catch {
+            YBLogger.debug("가게 정보를 불러오는 데 실패했습니다: \(error)")
             errorMessage = "가게 정보를 불러오는 데 실패했습니다."
             state = .failure("가게 정보를 불러오는 데 실패했습니다.")
         }
@@ -54,7 +56,9 @@ final class StoreListViewModel: ObservableObject {
             let newList = StoreList(storeListDto: nextListDto)
             storeList = storeList.appending(contentsOf: newList)
             state = .storeListLoaded
+            errorMessage = nil
         } catch {
+            YBLogger.debug("다음 페이지를 불러오는 데 실패했습니다: \(error)")
             errorMessage = "다음 페이지를 불러오는 데 실패했습니다."
             state = .failure("다음 페이지를 불러오는 데 실패했습니다.")
         }
