@@ -5,7 +5,7 @@ public final class YBTokenManager {
     public static let shared = YBTokenManager()
     public private(set) var accessToken: String?
     public private(set) var refreshToken: String?
-       
+    
     private init() {}
     
     public func loadTokenFromKC() async throws {
@@ -13,6 +13,8 @@ public final class YBTokenManager {
             let accessToken = try await KeyChainManagerWithActor.shared.loadString(account: YBConstant.accessToken),
             let refreshToken = try await KeyChainManagerWithActor.shared.loadString(account: YBConstant.refreshToken)
         else { throw YBError.tokenFailure }
+        
+        YBLogger.debug("AccessToken Load\n: \(accessToken)")
         
         self.accessToken = accessToken
         self.refreshToken = refreshToken
