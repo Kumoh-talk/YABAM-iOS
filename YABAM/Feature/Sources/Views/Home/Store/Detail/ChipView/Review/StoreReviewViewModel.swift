@@ -37,6 +37,7 @@ final class StoreReviewViewModel: ObservableObject {
             hasNextPage = dto.hasNextPage
             lastReviewId = dto.lastReviewId
             state = .storeReviewLoaded
+            errorMessage = nil
         } catch {
             YBLogger.debug("리뷰 초기 로딩 실패: \(error)")
             errorMessage = "리뷰를 불러오는 데 실패했습니다."
@@ -59,6 +60,7 @@ final class StoreReviewViewModel: ObservableObject {
             hasNextPage = dto.hasNextPage
             lastReviewId = dto.lastReviewId
             state = .storeReviewLoaded
+            errorMessage = nil
         } catch {
             YBLogger.debug("리뷰 다음 페이지 로딩 실패: \(error)")
             errorMessage = "리뷰 더 불러오는 데 실패했습니다."
