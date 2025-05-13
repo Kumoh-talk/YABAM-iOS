@@ -8,8 +8,9 @@ import KakaoSDKCommon
 @main
 struct YABAMApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var deepLinkManager = DeepLinkManager()
     
-    init() {        
+    init() {
         if let kakaoAppKey = Bundle.main.infoDictionary?["KAKAO_NATIVE_APP_KEY"] as? String {
             KakaoSDK.initSDK(appKey: kakaoAppKey)
         }
@@ -20,11 +21,13 @@ struct YABAMApp: App {
         WindowGroup {
             RootView()
                 .preferredColorScheme(.light)
+                .environmentObject(deepLinkManager)
                 .onOpenURL(perform: { url in
-                if (AuthApi.isKakaoTalkLoginUrl(url)) {
-                    _ = AuthController.handleOpenUrl(url: url)
-                }
-            })
+                    deepLinkManager.handleDeepLink(url: url)
+                    if AuthApi.isKakaoTalkLoginUrl(url) {
+                        _ = AuthController.handleOpenUrl(url: url)
+                    }
+                })
         }
     }
     

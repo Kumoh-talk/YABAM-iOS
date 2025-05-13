@@ -1,8 +1,10 @@
 import SwiftUI
+import Core
 
 struct YBTabView: View {
     @State private var selectedTab: Int = 0
-    
+    @EnvironmentObject var deepLinkManager: DeepLinkManager
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
@@ -57,6 +59,9 @@ struct YBTabView: View {
                 }
                 .padding(.vertical, 10)
                 .background(Color.white)
+            }
+            .onReceive(deepLinkManager.$targetTabIndex.compactMap { $0 }) { tab in
+                selectedTab = tab
             }
         }
     }
