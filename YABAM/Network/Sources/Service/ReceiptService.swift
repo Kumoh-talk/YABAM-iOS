@@ -15,7 +15,7 @@ public final class ReceiptService: ReceiptServiceInterface {
     public func createReceipt(queryStoreId: Int, queryTableId: Int) async throws {
         try await provider.requestDecodable(
             .createReceipt(queryStoreId: queryStoreId, queryTableId: queryTableId),
-            as: EmptyDecodable.self
+            as: AnyDecodable.self
         )
     }
     

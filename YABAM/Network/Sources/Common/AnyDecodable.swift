@@ -1,1 +1,0 @@
-struct EmptyDecodable: Decodable { }

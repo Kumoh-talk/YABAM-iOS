@@ -13,7 +13,7 @@ public final class OrderService: OrderServiceInterface {
     public func createOrder(receiptId: Int) async throws {
         try await provider.requestDecodable(
             .createOrder(receiptId: receiptId),
-            as: EmptyDecodable.self
+            as: AnyDecodable.self
         )
     }
     

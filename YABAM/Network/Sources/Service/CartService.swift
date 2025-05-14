@@ -18,7 +18,7 @@ public final class CartService: CartServiceInterface {
                 menuId: menuId,
                 quantity: quantity
             ),
-            as: EmptyDecodable.self
+            as: AnyDecodable.self
         )
     }
     
@@ -35,7 +35,7 @@ public final class CartService: CartServiceInterface {
                 receiptId: receiptId,
                 menuId: menuId
             ),
-            as: EmptyDecodable.self
+            as: AnyDecodable.self
         )
     }
 }

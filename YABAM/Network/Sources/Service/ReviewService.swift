@@ -13,7 +13,7 @@ public final class ReviewService: ReviewServiceInterface {
     public func createReview(review: ReviewRequestDTO) async throws {
         try await provider.requestDecodable(
             .createReview(dto: review),
-            as: EmptyDecodable.self
+            as: AnyDecodable.self
         )
     }
     
