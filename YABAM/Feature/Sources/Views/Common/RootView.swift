@@ -2,22 +2,22 @@ import SwiftUI
 import Core
 
 public struct RootView: View {
-    @State private var isAuthenticated: Bool? = nil
-    
+    @StateObject private var appState = AppState()
+
     public init() {}
 
     public var body: some View {
         Group {
-            if isAuthenticated == nil {
+            if appState.isAuthenticated == nil {
                 SplashView()
-            } else if isAuthenticated == true {
+            } else if appState.isAuthenticated == true {
                 YBTabView()
             } else {
                 AuthView(
                     viewModel: AuthViewModelFactory.make(),
                     isAuthenticated: Binding(
-                        get: { self.isAuthenticated ?? false },
-                        set: { self.isAuthenticated = $0 }
+                        get: { appState.isAuthenticated ?? false },
+                        set: { appState.isAuthenticated = $0 }
                     )
                 )
             }
@@ -25,10 +25,10 @@ public struct RootView: View {
         .task {
             do {
                 try await YBTokenManager.shared.loadTokenFromKC()
-                isAuthenticated = true
+                appState.isAuthenticated = true
             } catch {
                 YBLogger.error("토큰 로딩 실패: \(error.localizedDescription)")
-                isAuthenticated = false
+                appState.isAuthenticated = false
             }
         }
     }

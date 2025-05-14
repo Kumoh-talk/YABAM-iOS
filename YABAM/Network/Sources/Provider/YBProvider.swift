@@ -48,7 +48,7 @@ public final class YBProvider<Target: YBTargetType> {
         } catch let error as YBError {
             switch error {
             case .api(let code, _):
-                if code == "SECURITY_0006" {
+                if code == "SECURITY_0003" || code == "SECURITY_0006" {
                     // 액세스 토큰 만료 → 토큰 리프레시 시도
                     let refreshed = await refreshTokenIfNeeded()
                     if refreshed {
@@ -109,11 +109,8 @@ public final class YBProvider<Target: YBTargetType> {
     }
     
     private func validateResponse(_ response: URLResponse) throws {
-        guard let httpResponse = response as? HTTPURLResponse else {
+        guard let _ = response as? HTTPURLResponse else {
             throw YBError.network
-        }
-        guard (200..<300).contains(httpResponse.statusCode) else {
-            throw YBError.server(statusCode: httpResponse.statusCode)
         }
     }
     
@@ -129,7 +126,7 @@ public final class YBProvider<Target: YBTargetType> {
     private func validateAPIResponse<T>(_ response: YBResponse<T>) throws {
         guard response.isSuccess else {
             let code = response.code ?? "알 수 없는 코드"
-            let message = response.message ?? "알 수 없는 오류"
+            let message = response.msg ?? "알 수 없는 오류"
             YBLogger.error("❌ API 실패 응답: \(code) / \(message)")
             throw YBError.api(code: code, message: message)
         }
