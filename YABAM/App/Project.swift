@@ -10,8 +10,7 @@ let appTarget = Target.target(
     infoPlist: .file(path: .relativeToRoot("YABAM/App/SupportingFiles/Info.plist")),
     sources: .sources,
     resources: [
-        .glob(pattern: .relativeToRoot("YABAM/App/Resources/**")),
-        .glob(pattern: .relativeToRoot("YABAM/App/SupportingFiles/GoogleService-Info.plist"))
+        .glob(pattern: .relativeToRoot("YABAM/App/Resources/**"))
     ],
     entitlements: .file(path: .relativeToRoot("YABAM/App/SupportingFiles/yabam.entitlements")),
     dependencies: [
