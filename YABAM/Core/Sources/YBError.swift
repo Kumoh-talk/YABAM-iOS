@@ -53,7 +53,7 @@ extension YBError: LocalizedError {
         case .oidcFailure:
             return "OIDC 인증에 실패했습니다. 잠시 후 다시 시도해주세요."
         case .refreshTokenFailure:
-            return "리프레시 토큰이 만료되었습니다. 다시 로그인해주세요."
+            return "토큰이 만료되었습니다. 다시 로그인해주세요."
         case .tokenFailure:
             return "토큰이 만료되었습니다. 다시 로그인해주세요."
         case .timeout:

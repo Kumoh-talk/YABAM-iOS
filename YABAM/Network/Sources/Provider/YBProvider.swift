@@ -30,19 +30,49 @@ public final class YBProvider<Target: YBTargetType> {
         
         try validateResponse(response)
         
-        let wrapper = try decodeWrapper(YBResponse<T>.self, from: data)
-        try validateAPIResponse(wrapper)
-        
-        guard let value = wrapper.data else {
-            throw YBError.decoding
+        do {
+            let wrapper = try decodeWrapper(YBResponse<T>.self, from: data)
+            try validateAPIResponse(wrapper)
+            
+            guard let value = wrapper.data else {
+                throw YBError.decoding
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw YBError.invalidResponse
+            }
+            
+            YBLogger.debug("✅ 디코딩 성공: \(String(describing: value))")
+            return (value, httpResponse)
+            
+        } catch let error as YBError {
+            switch error {
+            case .api(let code, _):
+                if code == "SECURITY_0006" {
+                    // 액세스 토큰 만료 → 토큰 리프레시 시도
+                    let refreshed = await refreshTokenIfNeeded()
+                    if refreshed {
+                        return try await requestDecodableWithResponse(target, as: T.self)
+                    } else {
+                        NotificationCenter.default.post(
+                            name: .userRefreshTokenExpired,
+                            object: nil
+                        )
+                        throw YBError.refreshTokenFailure
+                    }
+                } else if code == "SECURITY_0007" {
+                    // 리프레시 토큰 만료 → 로그인 화면으로 이동 노티
+                    NotificationCenter.default.post(
+                        name: .userRefreshTokenExpired,
+                        object: nil
+                    )
+                    throw YBError.refreshTokenFailure
+                }
+            default:
+                break
+            }
+            throw error
         }
-        
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw YBError.invalidResponse
-        }
-        
-        YBLogger.debug("✅ 디코딩 성공: \(String(describing: value))")
-        return (value, httpResponse)
     }
     
     // MARK: - Private Methods
@@ -103,5 +133,37 @@ public final class YBProvider<Target: YBTargetType> {
             YBLogger.error("❌ API 실패 응답: \(code) / \(message)")
             throw YBError.api(code: code, message: message)
         }
+    }
+    
+    // MARK: - Token Refresh
+    
+    private func refreshTokenIfNeeded() async -> Bool {
+        do {
+            let provider = YBProvider<AuthAPI>()
+            guard YBTokenManager.shared.refreshToken != nil else {
+                YBLogger.error("❌ 리프레시 토큰 없음")
+                return false
+            }
+            let tokenDto = try await provider.requestDecodable(
+                .refreshToken,
+                as: JWTTokenDto.self
+            )
+            
+            let (accessToken, refreshToken) = (tokenDto.accessToken, tokenDto.refreshToken)
+            
+            try await saveToken(accessToken: accessToken, refreshToken: refreshToken)
+            
+            return true
+        } catch {
+            YBLogger.error("❌ 토큰 갱신 실패: \(error.localizedDescription)")
+            return false
+        }
+    }
+    
+    private func saveToken(accessToken: String, refreshToken: String) async throws {
+        try await YBTokenManager.shared.saveToken(
+            accessToken: accessToken,
+            refreshToken: refreshToken
+        )
     }
 }
