@@ -5,6 +5,8 @@ import Foundation
 public enum AuthAPI {
     case loginOAuth(provider: String, oauthId: String, idToken: String) // Oauth 로그인
     case fetchUserInfo // 사용자 정보 조회
+    case logout // 로그아웃
+    case refreshToken // 토큰 갱신
 }
 
 extension AuthAPI: YBTargetType {
@@ -13,7 +15,15 @@ extension AuthAPI: YBTargetType {
             fatalError("Invalid base URL")
         }
         
-        return baseURL.appendingPathComponent(YBConstant.authPath)
+        switch self {
+        case .loginOAuth,
+                .fetchUserInfo:
+            return baseURL.appendingPathComponent(YBConstant.authPath)
+        case .logout,
+                .refreshToken:
+            return baseURL.appendingPathComponent(YBConstant.gatewayURL)
+        }
+        
     }
     
     public var path: String {
@@ -22,12 +32,18 @@ extension AuthAPI: YBTargetType {
             return "/api/login"
         case .fetchUserInfo:
             return "/api/user"
+        case .logout:
+            return "/api/v1/logout"
+        case .refreshToken:
+            return "/api/v1/refresh"
         }
     }
     
     public var method: HTTPMethod {
         switch self {
-        case .loginOAuth:
+        case .loginOAuth,
+                .logout,
+                .refreshToken:
             return .post
         case .fetchUserInfo:
             return .get
@@ -37,7 +53,9 @@ extension AuthAPI: YBTargetType {
     public var queryParameters: Parameters? {
         switch self {
         case .loginOAuth,
-                .fetchUserInfo:
+                .fetchUserInfo,
+                .logout,
+                .refreshToken:
             return nil
         }
     }
@@ -54,7 +72,9 @@ extension AuthAPI: YBTargetType {
                 ],
                 encoding: JSONEncoding.default
             )
-        case .fetchUserInfo:
+        case .fetchUserInfo,
+                .logout,
+                .refreshToken:
             return .requestPlain
         }
     }
@@ -66,11 +86,18 @@ extension AuthAPI: YBTargetType {
                 .contentType("application/json")
             ]
             return headers
-        case .fetchUserInfo:
+        case .fetchUserInfo,
+                .logout:
             let headers: HTTPHeaders = [
                 .contentType("application/json"),
                 .authorization(bearerToken: YBTokenManager.shared.accessToken ?? "")
                 ]
+            return headers
+        case .refreshToken:
+            let headers: HTTPHeaders = [
+                .contentType("application/json"),
+                .authorization(bearerToken: YBTokenManager.shared.refreshToken ?? "")
+            ]
             return headers
         }
     }

@@ -23,16 +23,14 @@ public final class YBTokenManager {
     // 1. AccessToken이 만료되어 RefreshToken을 사용해 Token정보를 갱신할 때 사용
     // 2. 로그인 성공할 때 사용
     public func saveToken(
-        _ token: (
-            accessToken: String,
-            refreshToken: String
-        )
+        accessToken: String,
+        refreshToken: String
     ) async throws {
-        try await KeyChainManagerWithActor.shared.save(string: token.accessToken, account: YBConstant.accessToken)
-        try await KeyChainManagerWithActor.shared.save(string: token.refreshToken, account: YBConstant.refreshToken)
+        try await KeyChainManagerWithActor.shared.save(string: accessToken, account: YBConstant.accessToken)
+        try await KeyChainManagerWithActor.shared.save(string: refreshToken, account: YBConstant.refreshToken)
         
-        accessToken = token.accessToken
-        refreshToken = token.refreshToken
+        self.accessToken = accessToken
+        self.refreshToken = refreshToken
     }
     
     public func removeToken() async throws {

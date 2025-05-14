@@ -5,6 +5,8 @@ public protocol AuthServiceInterface {
     func loginWithKakao() async throws
     func loginWithApple(oauthId: String, idToken: String) async throws
     func fetchUserInfo() async throws -> UserInfoDto
+    func logout() async throws
+    func refreshToken() async throws
 }
 
 public struct AuthService: AuthServiceInterface {
@@ -24,7 +26,9 @@ public struct AuthService: AuthServiceInterface {
             oauthId: oauthId,
             idToken: idToken
         )
-        try await saveToken(response: authTokenDTO)
+        
+        let (accessToken, refreshToken) = (authTokenDTO.accessToken, authTokenDTO.refreshToken)
+        try await saveToken(accessToken: accessToken, refreshToken: refreshToken)
     }
 
     public func loginWithApple(oauthId: String, idToken: String) async throws {
@@ -33,7 +37,9 @@ public struct AuthService: AuthServiceInterface {
             oauthId: oauthId,
             idToken: idToken
         )
-        try await saveToken(response: authTokenDTO)
+        
+        let (accessToken, refreshToken) = (authTokenDTO.accessToken, authTokenDTO.refreshToken)
+        try await saveToken(accessToken: accessToken, refreshToken: refreshToken)
     }
 
     // MARK: - Private Helper Methods
@@ -66,9 +72,11 @@ public struct AuthService: AuthServiceInterface {
         )
     }
     
-    private func saveToken(response: AuthTokenDto) async throws {
-        let token = (response.accessToken, response.refreshToken)
-        try await YBTokenManager.shared.saveToken(token)
+    private func saveToken(accessToken: String, refreshToken: String) async throws {
+        try await YBTokenManager.shared.saveToken(
+            accessToken: accessToken,
+            refreshToken: refreshToken
+        )
     }
 
     // MARK: - Kakao Login Helpers
@@ -114,5 +122,24 @@ public struct AuthService: AuthServiceInterface {
         )
         
         return userInfoDTO
+    }
+    
+    // MARK: - Logout and Refresh Token
+    
+    public func logout() async throws {
+        try await provider.requestDecodable(
+            .logout,
+            as: AnyDecodable.self
+        )
+    }
+    
+    public func refreshToken() async throws {
+        let tokenDto = try await provider.requestDecodable(
+            .refreshToken,
+            as: JWTTokenDto.self
+        )
+        
+        let (accessToken, refreshToken) = (tokenDto.accessToken, tokenDto.refreshToken)
+        try await saveToken(accessToken: accessToken, refreshToken: refreshToken)
     }
 }
