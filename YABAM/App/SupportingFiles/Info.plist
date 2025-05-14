@@ -47,6 +47,8 @@
         <string>https://$(BASE_SERVER_URL)</string>
         <key>AUTH_PATH</key>
         <string>$(AUTH_PATH)</string>
+        <key>GATEWAY_PATH</key>
+        <string>$(GATEWAY_PATH)</string>
         <key>USER_PATH</key>
         <string>$(USER_PATH)</string>
         <key>UIApplicationSceneManifest</key>
