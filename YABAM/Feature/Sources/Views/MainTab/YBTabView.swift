@@ -1,17 +1,19 @@
 import SwiftUI
+import Core
 
 struct YBTabView: View {
     @State private var selectedTab: Int = 0
-    
+    @EnvironmentObject var deepLinkManager: DeepLinkManager
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
                 ZStack {
                     switch selectedTab {
                     case 0: HomeView()
-                    case 1: OrderQRCodeView()
+                    case 1: OrderEntryView()
                     case 2: OrderHistoryView()
-                    case 3: MyPageView()
+                    case 3: MyPageView(viewModel: MyPageViewModelFactory.make())
                     default: HomeView()
                     }
                 }
@@ -57,6 +59,9 @@ struct YBTabView: View {
                 }
                 .padding(.vertical, 10)
                 .background(Color.white)
+            }
+            .onReceive(deepLinkManager.$targetTabIndex.compactMap { $0 }) { tab in
+                selectedTab = tab
             }
         }
     }

@@ -38,11 +38,17 @@ extension StoreAPI: YBTargetType {
         case .fetchStore(let storeId):
             return ["storeId": storeId]
         case .fetchStoreList(let lastReviewCount, let lastStoreId, let size):
-            return [
-                "lastReviewCount": lastReviewCount,
-                "lastStoreId": lastStoreId,
-                "size": size
-            ]
+            var params: [String: Any] = ["size": size]
+            
+            if let lastReviewCount = lastReviewCount {
+                params["lastReviewCount"] = lastReviewCount
+            }
+            
+            if let lastStoreId = lastStoreId {
+                params["lastStoreId"] = lastStoreId
+            }
+            
+            return params
         }
     }
     
